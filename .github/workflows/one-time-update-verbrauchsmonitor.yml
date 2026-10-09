@@ -1,0 +1,60 @@
+name: One-time update VerbrauchsMonitor status
+
+on:
+  push:
+    paths:
+      - '.github/update-verbrauchsmonitor.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  update-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update homepage copy
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = [
+              (
+                  '<h2 class="section-title">Aktuelle Entwicklungen.</h2>',
+                  '<h2 class="section-title">Unsere Produkte.</h2>'
+              ),
+              (
+                  'Unsere Produkte befinden sich in unterschiedlichen Entwicklungsphasen und werden vor Veröffentlichung gezielt geprüft und weiterentwickelt.',
+                  'Unsere Produkte befinden sich in unterschiedlichen Phasen. VerbrauchsMonitor DE ist bereits öffentlich verfügbar; weitere Produkte werden vor Veröffentlichung gezielt geprüft und weiterentwickelt.'
+              ),
+              (
+                  '<article class="project reverse reveal"><div class="visual"><span class="product-mark">Utilities & Monitoring</span><span class="product-name">VerbrauchsMonitor DE</span><span class="big-num">02</span></div><div class="copy"><span class="status">In Entwicklung</span><h3>VerbrauchsMonitor DE</h3><p>Eine übersichtliche Anwendung zur strukturierten Erfassung und Auswertung von Verbrauchsdaten im Alltag.</p></div></article>',
+                  '<article class="project reverse reveal"><div class="visual"><span class="product-mark">Utilities & Monitoring</span><span class="product-name">VerbrauchsMonitor DE</span><span class="big-num">02</span></div><div class="copy"><span class="status">Veröffentlicht · Google Play</span><h3>VerbrauchsMonitor DE</h3><p>Eine übersichtliche Anwendung zur strukturierten Erfassung und Auswertung von Verbrauchsdaten im Alltag. VerbrauchsMonitor DE ist öffentlich im Google Play Store verfügbar.</p><p><a href="https://play.google.com/store/apps/details?id=de.mpdigitallabs.verbrauchsmonitorde" target="_blank" rel="noopener noreferrer">Bei Google Play ansehen →</a></p></div></article>'
+              ),
+              (
+                  '<div class="stat"><strong>3</strong><span>aktive Produktentwicklungen</span></div>',
+                  '<div class="stat"><strong>3</strong><span>Produkte im Portfolio</span></div>'
+              ),
+          ]
+
+          for old, new in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one match, found {count}: {old[:80]}')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding='utf-8')
+
+      - name: Commit homepage update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --check
+          git commit -m "Mark VerbrauchsMonitor DE as publicly available"
+          git push
