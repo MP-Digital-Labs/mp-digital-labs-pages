@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -45,9 +45,10 @@ jobs:
           }
 
           for old, new in replacements.items():
-              if old not in s:
+              if old in s:
+                  s = s.replace(old, new, 1)
+              elif new not in s:
                   raise SystemExit("Refusing to deploy: expected homepage text not found: " + old[:90])
-              s = s.replace(old, new, 1)
 
           p.write_text(s, encoding="utf-8")
           PY
@@ -81,6 +82,19 @@ jobs:
           s = s.replace('</body>', js + '\n</body>', 1)
           p.write_text(s, encoding='utf-8')
           PY
+
+      - name: Persist homepage fixes in repository
+        shell: bash
+        run: |
+          git config user.name "MP Digital Labs"
+          git config user.email "327221761+Manuel-Digital-Labs@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Homepage already persisted"
+          else
+            git commit -m "Persist homepage navigation and published app status"
+            git push origin HEAD:main
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
