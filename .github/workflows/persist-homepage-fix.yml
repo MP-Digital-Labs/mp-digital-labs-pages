@@ -1,0 +1,82 @@
+name: Persist homepage fixes
+
+on:
+  push:
+    branches: ["fix/persist-homepage-v2"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  persist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/persist-homepage-v2
+
+      - name: Patch original homepage in repository
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          replacements = [
+              (
+                  'Unsere Produkte befinden sich in unterschiedlichen Phasen. VerbrauchsMonitor DE ist bereits öffentlich verfügbar; weitere Produkte werden vor Veröffentlichung gezielt geprüft und weiterentwickelt.',
+                  'BauRechner DE und VerbrauchsMonitor DE sind bereits öffentlich bei Google Play verfügbar. Weitere Produkte werden vor Veröffentlichung gezielt geprüft und weiterentwickelt.'
+              ),
+              (
+                  '<div class="copy"><span class="status">In Entwicklung</span><h3>BauRechner DE</h3><p>Eine praxisorientierte Anwendung für den digitalen Arbeitsalltag im Handwerk und baunahen Umfeld.</p></div>',
+                  '<div class="copy"><span class="status">Veröffentlicht · Google Play</span><h3>BauRechner DE</h3><p>Eine praxisorientierte Anwendung für Aufmaß, Berechnungen, Material, Einkauf, Kosten und Projektdokumentation im Bau- und Handwerksalltag.</p><p><a href="https://play.google.com/store/apps/details?id=de.mpdigitallabs.baurechner" target="_blank" rel="noopener noreferrer">Bei Google Play ansehen →</a></p></div>'
+              ),
+              (
+                  '<a class="contact-mail" href="mailto:mpdigitallabs.contact@gmail.com">mpdigitallabs.contact@gmail.com</a>',
+                  '<a class="contact-mail" href="mailto:contact@mp-digital-labs.de">contact@mp-digital-labs.de</a>'
+              ),
+              (
+                  '<a href="#impressum" data-legal="impressum">Impressum</a><a href="#datenschutz" data-legal="datenschutz">Datenschutz</a>',
+                  '<a href="/impressum/">Impressum</a><a href="/datenschutz.html">Datenschutz</a>'
+              ),
+          ]
+
+          for old, new in replacements:
+              if old in s:
+                  s = s.replace(old, new, 1)
+              elif new not in s:
+                  raise SystemExit('Expected homepage fragment missing: ' + old[:80])
+
+          marker = '<!-- MPDL-SIDEBAR-V1 -->'
+          if marker not in s:
+              css = r'''/* MPDL-SIDEBAR-V1 */
+.mpdl-side-toggle{position:fixed;left:18px;top:96px;z-index:70;width:46px;height:46px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(5,11,21,.84);backdrop-filter:blur(18px);color:#f7fbff;display:none;place-items:center;cursor:pointer;box-shadow:0 12px 35px rgba(0,0,0,.28);gap:4px}.mpdl-side-toggle span{display:block;width:18px;height:2px;background:#38ddff;border-radius:2px}.mpdl-side-nav{position:fixed;left:24px;top:108px;z-index:60;width:226px;padding:18px 16px 18px 18px;background:rgba(5,11,21,.72);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.09);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.24);font-size:13px;color:#c9d3e6}.mpdl-side-nav:before{content:"";position:absolute;left:-1px;top:22px;bottom:22px;width:2px;border-radius:2px;background:linear-gradient(180deg,#38ddff,#4b74ff 65%,transparent)}.mpdl-side-head{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#6f829e;margin:0 0 11px 9px}.mpdl-side-nav>a,.mpdl-side-nav details a,.mpdl-side-nav summary{display:flex;align-items:center;gap:10px;min-height:36px;padding:8px 9px;border-radius:10px;color:#c9d3e6}.mpdl-side-nav>a:hover,.mpdl-side-nav details a:hover,.mpdl-side-nav summary:hover{color:#fff;background:rgba(255,255,255,.045)}.mpdl-side-nav>a{font-weight:720;color:#fff}.mpdl-side-nav details{margin-top:2px}.mpdl-side-nav summary{list-style:none;cursor:pointer;font-weight:760;position:relative;padding-right:27px}.mpdl-side-nav summary::-webkit-details-marker{display:none}.mpdl-side-nav summary:after{content:"›";position:absolute;right:10px;color:#6f829e;font-size:16px;transition:.18s}.mpdl-side-nav details[open] summary:after{transform:rotate(90deg);color:#38ddff}.mpdl-side-sub{display:grid;gap:1px;padding:1px 0 5px 12px}.mpdl-side-nav details a{min-height:31px;font-size:12px;color:#9cadc4}.mpdl-side-nav .mpdl-side-app{color:#dbe6f5}.mpdl-side-dot{width:6px;height:6px;border:1px solid #38ddff;border-radius:50%;box-shadow:0 0 10px rgba(56,221,255,.35);flex:0 0 auto}.mpdl-side-sep{height:1px;background:rgba(255,255,255,.08);margin:9px 8px}.mpdl-side-foot{padding:8px 9px 0;color:#61738f;font-size:10px;line-height:1.45}@media(max-width:1499px){.mpdl-side-toggle{display:grid}.mpdl-side-nav{left:18px;top:154px;transform:translateX(calc(-100% - 44px));transition:transform .22s ease}.mpdl-side-nav.open{transform:translateX(0)}}@media(max-width:720px){.mpdl-side-toggle{display:none}.mpdl-side-nav{display:none}html{scroll-padding-top:96px}section[id]{scroll-margin-top:96px}}'''
+              html = r'''<!-- MPDL-SIDEBAR-V1 --><button class="mpdl-side-toggle" id="mpdlSideToggle" type="button" aria-label="Navigation öffnen" aria-expanded="false" aria-controls="mpdlSideNav"><span></span><span></span><span></span></button><aside class="mpdl-side-nav" id="mpdlSideNav" aria-label="Seitennavigation"><div class="mpdl-side-head">Direktzugriff</div><a href="#top"><span class="mpdl-side-dot"></span>Start</a><details><summary>Apps</summary><nav class="mpdl-side-sub" aria-label="Apps"><a href="/apps/">Alle Apps</a><a class="mpdl-side-app" href="/apps/baurechner-de/">BauRechner DE</a><a class="mpdl-side-app" href="/apps/verbrauchsmonitor-de/">VerbrauchsMonitor DE</a></nav></details><details><summary>Service</summary><nav class="mpdl-side-sub" aria-label="Service"><a href="/support/">Support</a><a href="#kontakt">Kontakt</a></nav></details><details><summary>Rechtliches</summary><nav class="mpdl-side-sub" aria-label="Rechtliches"><a href="/impressum/">Impressum</a><a href="/datenschutz.html">Website-Datenschutz</a><a href="/datenschutz-baurechner.html">Datenschutz BauRechner</a><a href="/datenschutz-verbrauchsmonitor.html">Datenschutz VerbrauchsMonitor</a></nav></details><div class="mpdl-side-sep"></div><div class="mpdl-side-foot">MP Digital Labs · Bielefeld</div></aside>'''
+              js = r'''<script>(()=>{const b=document.getElementById('mpdlSideToggle'),n=document.getElementById('mpdlSideNav');if(!b||!n)return;const c=()=>{n.classList.remove('open');b.setAttribute('aria-expanded','false')};b.addEventListener('click',()=>{const o=!n.classList.contains('open');n.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))});n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<1500)c()}));addEventListener('keydown',e=>{if(e.key==='Escape')c()})})();</script>'''
+              required = ('</style></head>', '<body><div class="ambient"></div>', '</body>')
+              missing = [x for x in required if x not in s]
+              if missing:
+                  raise SystemExit('Refusing to patch homepage; marker missing: ' + ', '.join(missing))
+              s = s.replace('</style></head>', css + '\n</style></head>', 1)
+              s = s.replace('<body><div class="ambient"></div>', '<body>' + html + '<div class="ambient"></div>', 1)
+              s = s.replace('</body>', js + '\n</body>', 1)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit patched homepage
+        shell: bash
+        run: |
+          git config user.name "MP Digital Labs"
+          git config user.email "327221761+Manuel-Digital-Labs@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No homepage changes needed"
+          else
+            git commit -m "Persist homepage navigation and published app status"
+            git push origin HEAD:fix/persist-homepage-v2
+          fi
