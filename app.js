@@ -79,6 +79,25 @@ addEventListener('keydown', event => {
   }
 });
 
+const imprint = document.querySelector('#legal-impressum .legal-sheet');
+if (imprint) {
+  const headings = [...imprint.querySelectorAll('h3')];
+  const vatHeading = headings.find(h => h.textContent.trim() === 'Umsatzsteuer');
+  if (vatHeading) {
+    vatHeading.textContent = 'Steuerliche Angaben';
+    const vatText = vatHeading.nextElementSibling;
+    if (vatText?.tagName === 'P') {
+      vatText.innerHTML = [
+        '<strong>Steuernummer:</strong> 305/5173/4081',
+        '<strong>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:</strong> DE465689244',
+        '<strong>Wirtschafts-Identifikationsnummer:</strong> DE465689244-00001'
+      ].join('<br>');
+    }
+  }
+  const note = imprint.querySelector('.legal-note');
+  if (note) note.textContent = 'Stand: 12. Oktober 2026';
+}
+
 const form = document.getElementById('contactForm');
 const contactNext = document.getElementById('contactNext');
 const contactUrl = document.getElementById('contactUrl');
