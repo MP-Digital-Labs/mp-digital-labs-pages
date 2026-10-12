@@ -1,6 +1,47 @@
 const menuButton=document.getElementById('menuButton');
 const mainNav=document.getElementById('mainNav');
 
+function isPath(prefix){return location.pathname===prefix||location.pathname.startsWith(prefix.endsWith('/')?prefix:`${prefix}/`)}
+
+function buildExplorerNav(){
+  if(!mainNav)return;
+  const onHome=location.pathname==='/';
+  const onApps=isPath('/apps');
+  const onSupport=isPath('/support');
+  const onPrivacy=location.pathname.includes('datenschutz');
+  const onImprint=isPath('/impressum');
+  mainNav.innerHTML=`
+    <div class="nav-caption">Navigation</div>
+    <a href="/" class="${onHome?'is-active':''}">Start</a>
+    <details class="nav-folder" ${onApps||onHome?'open':''}>
+      <summary>Apps</summary>
+      <div class="nav-children">
+        <a class="nav-child ${location.pathname==='/apps/'?'is-active':''}" href="/apps/">Alle Apps</a>
+        <a class="nav-child ${isPath('/apps/baurechner-de')?'is-active':''}" href="/apps/baurechner-de/">BauRechner DE</a>
+        <a class="nav-child ${isPath('/apps/verbrauchsmonitor-de')?'is-active':''}" href="/apps/verbrauchsmonitor-de/">VerbrauchsMonitor DE</a>
+      </div>
+    </details>
+    <details class="nav-folder" ${onSupport?'open':''}>
+      <summary>Service</summary>
+      <div class="nav-children">
+        <a class="nav-child ${onSupport?'is-active':''}" href="/support/">Support</a>
+        <a class="nav-child" href="/#kontakt">Kontakt</a>
+      </div>
+    </details>
+    <details class="nav-folder" ${onPrivacy||onImprint?'open':''}>
+      <summary>Rechtliches</summary>
+      <div class="nav-children">
+        <a class="nav-child ${location.pathname==='/datenschutz.html'?'is-active':''}" href="/datenschutz.html">Website-Datenschutz</a>
+        <a class="nav-child ${location.pathname==='/datenschutz-baurechner.html'?'is-active':''}" href="/datenschutz-baurechner.html">Datenschutz BauRechner</a>
+        <a class="nav-child ${location.pathname==='/datenschutz-verbrauchsmonitor.html'?'is-active':''}" href="/datenschutz-verbrauchsmonitor.html">Datenschutz VerbrauchsMonitor</a>
+        <a class="nav-child ${onImprint?'is-active':''}" href="/impressum/">Impressum</a>
+      </div>
+    </details>
+  `;
+}
+
+buildExplorerNav();
+
 function closeMenu(){
   mainNav?.classList.remove('open');
   document.body.classList.remove('menu-open');
