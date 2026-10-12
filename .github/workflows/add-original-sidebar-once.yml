@@ -1,0 +1,40 @@
+name: Add original homepage sidebar once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/add-original-sidebar-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add sidebar only
+        shell: python
+        run: |
+          from pathlib import Path
+          import sys
+          p=Path('index.html'); s=p.read_text(encoding='utf-8')
+          if '<!-- MPDL-SIDEBAR-V1 -->' in s: sys.exit(0)
+          css='''/* MPDL-SIDEBAR-V1 */
+.mpdl-side-toggle{position:fixed;left:18px;top:96px;z-index:70;width:46px;height:46px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(5,11,21,.84);backdrop-filter:blur(18px);color:#f7fbff;display:none;place-items:center;cursor:pointer;box-shadow:0 12px 35px rgba(0,0,0,.28);gap:4px}.mpdl-side-toggle span{display:block;width:18px;height:2px;background:#38ddff;border-radius:2px}.mpdl-side-nav{position:fixed;left:24px;top:108px;z-index:60;width:226px;padding:18px 16px 18px 18px;background:rgba(5,11,21,.72);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.09);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.24);font-size:13px;color:#c9d3e6}.mpdl-side-nav:before{content:"";position:absolute;left:-1px;top:22px;bottom:22px;width:2px;border-radius:2px;background:linear-gradient(180deg,#38ddff,#4b74ff 65%,transparent)}.mpdl-side-head{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#6f829e;margin:0 0 11px 9px}.mpdl-side-nav>a,.mpdl-side-nav details a,.mpdl-side-nav summary{display:flex;align-items:center;gap:10px;min-height:36px;padding:8px 9px;border-radius:10px;color:#c9d3e6}.mpdl-side-nav>a:hover,.mpdl-side-nav details a:hover,.mpdl-side-nav summary:hover{color:#fff;background:rgba(255,255,255,.045)}.mpdl-side-nav>a{font-weight:720;color:#fff}.mpdl-side-nav details{margin-top:2px}.mpdl-side-nav summary{list-style:none;cursor:pointer;font-weight:760;position:relative;padding-right:27px}.mpdl-side-nav summary::-webkit-details-marker{display:none}.mpdl-side-nav summary:after{content:"›";position:absolute;right:10px;color:#6f829e;font-size:16px;transition:.18s}.mpdl-side-nav details[open] summary:after{transform:rotate(90deg);color:#38ddff}.mpdl-side-sub{display:grid;gap:1px;padding:1px 0 5px 12px}.mpdl-side-nav details a{min-height:31px;font-size:12px;color:#9cadc4}.mpdl-side-nav .mpdl-side-app{color:#dbe6f5}.mpdl-side-dot{width:6px;height:6px;border:1px solid #38ddff;border-radius:50%;box-shadow:0 0 10px rgba(56,221,255,.35);flex:0 0 auto}.mpdl-side-sep{height:1px;background:rgba(255,255,255,.08);margin:9px 8px}.mpdl-side-foot{padding:8px 9px 0;color:#61738f;font-size:10px;line-height:1.45}@media(max-width:1499px){.mpdl-side-toggle{display:grid}.mpdl-side-nav{left:18px;top:154px;transform:translateX(calc(-100% - 44px));transition:transform .22s ease}.mpdl-side-nav.open{transform:translateX(0)}}@media(max-width:720px){.mpdl-side-toggle{left:12px;top:88px;width:42px;height:42px}.mpdl-side-nav{left:12px;top:140px;width:min(238px,calc(100vw - 24px))}}'''
+          html='''<!-- MPDL-SIDEBAR-V1 --><button class="mpdl-side-toggle" id="mpdlSideToggle" type="button" aria-label="Navigation öffnen" aria-expanded="false" aria-controls="mpdlSideNav"><span></span><span></span><span></span></button><aside class="mpdl-side-nav" id="mpdlSideNav" aria-label="Seitennavigation"><div class="mpdl-side-head">Direktzugriff</div><a href="#top"><span class="mpdl-side-dot"></span>Start</a><details open><summary>Apps</summary><nav class="mpdl-side-sub" aria-label="Apps"><a href="/apps/">Alle Apps</a><a class="mpdl-side-app" href="/apps/baurechner-de/">BauRechner DE</a><a class="mpdl-side-app" href="/apps/verbrauchsmonitor-de/">VerbrauchsMonitor DE</a></nav></details><details><summary>Service</summary><nav class="mpdl-side-sub" aria-label="Service"><a href="/support/">Support</a><a href="#kontakt">Kontakt</a></nav></details><details><summary>Rechtliches</summary><nav class="mpdl-side-sub" aria-label="Rechtliches"><a href="/impressum/">Impressum</a><a href="/datenschutz.html">Website-Datenschutz</a><a href="/datenschutz-baurechner.html">Datenschutz BauRechner</a><a href="/datenschutz-verbrauchsmonitor.html">Datenschutz VerbrauchsMonitor</a></nav></details><div class="mpdl-side-sep"></div><div class="mpdl-side-foot">MP Digital Labs · Bielefeld</div></aside>'''
+          js='''<script>(()=>{const b=document.getElementById('mpdlSideToggle'),n=document.getElementById('mpdlSideNav');if(!b||!n)return;const c=()=>{n.classList.remove('open');b.setAttribute('aria-expanded','false')};b.addEventListener('click',()=>{const o=!n.classList.contains('open');n.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))});n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<1500)c()}));addEventListener('keydown',e=>{if(e.key==='Escape')c()})})();</script>'''
+          for m in ('</style></head>','<body><div class="ambient"></div>','</body>'):
+              if m not in s: raise SystemExit('Expected marker missing: '+m)
+          s=s.replace('</style></head>',css+'\n</style></head>',1).replace('<body><div class="ambient"></div>','<body>'+html+'<div class="ambient"></div>',1).replace('</body>',js+'\n</body>',1)
+          p.write_text(s,encoding='utf-8')
+      - name: Commit
+        shell: bash
+        run: |
+          if git diff --quiet -- index.html; then exit 0; fi
+          git config user.name "MP Digital Labs"
+          git config user.email "327221761+Manuel-Digital-Labs@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add sidebar navigation to original homepage"
+          git push
