@@ -1,0 +1,16 @@
+{
+  "name": "mp-digital-labs-website",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Neubau der Unternehmenswebsite von MP Digital Labs – statischer Build ohne Laufzeitabhängigkeiten.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs && node scripts/serve.mjs",
+    "serve": "node scripts/serve.mjs",
+    "assets": "node scripts/render-assets.mjs"
+  }
+}

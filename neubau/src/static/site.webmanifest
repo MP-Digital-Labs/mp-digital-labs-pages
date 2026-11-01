@@ -1,0 +1,12 @@
+{
+  "name": "MP Digital Labs",
+  "short_name": "MP Digital Labs",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#f4f3ee",
+  "theme_color": "#0d0f12",
+  "icons": [
+    { "src": "/assets/img/logo-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
