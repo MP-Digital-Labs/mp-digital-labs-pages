@@ -47,7 +47,7 @@ export default {
     },
   ],
   body: `
-<section class="phero night" aria-labelledby="page-title">
+<section class="phero night phero--overlap" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
@@ -57,7 +57,7 @@ export default {
   </div>
 </section>
 
-<section class="section section--line" style="padding-top:clamp(48px,6vw,80px)" aria-label="Hilfe nach App">
+<section class="section section--overlap" aria-label="Hilfe nach App">
   <div class="wrap support-cards">
     ${cards
       .map(

@@ -1,5 +1,5 @@
 import { SITE, APPS, PRICES_AS_OF } from '../lib/site.mjs';
-import { icon, btn, link, sectionHead, status, appIcon, checklist, playButton, ctaBand, eyebrow, logo, shot } from '../lib/ui.mjs';
+import { icon, btn, link, sectionHead, appIcon, ctaBand, eyebrow, logo, shot } from '../lib/ui.mjs';
 
 const br = APPS.baurechner;
 const vm = APPS.verbrauchsmonitor;
@@ -9,8 +9,8 @@ function heroVisual() {
   return `<figure class="hshots">
   <div class="hshots__stage">
     <div class="rings" aria-hidden="true"></div>
-    <a class="hshots__phone hshots__phone--a" href="${br.path}" aria-label="${br.name} ansehen">${shot(br, 0, { sizes: '(max-width: 980px) 44vw, 250px', lazy: false })}</a>
-    <a class="hshots__phone hshots__phone--b" href="${vm.path}" aria-label="${vm.name} ansehen">${shot(vm, 0, { sizes: '(max-width: 980px) 44vw, 250px', lazy: false })}</a>
+    <a class="hshots__phone hshots__phone--a" href="${br.path}" aria-label="${br.name} ansehen">${shot(br, 0, { sizes: '(max-width: 980px) 44vw, 270px', lazy: false })}</a>
+    <a class="hshots__phone hshots__phone--b" href="${vm.path}" aria-label="${vm.name} ansehen">${shot(vm, 0, { sizes: '(max-width: 980px) 44vw, 270px', lazy: false })}</a>
     <span class="hshots__chip hshots__chip--3" aria-hidden="true"><i style="background:#3ee08f"></i>Offline nutzbar</span>
     <span class="hshots__chip hshots__chip--1" aria-hidden="true"><i style="background:#5cb5ff"></i>Kein Konto nötig</span>
     <span class="hshots__chip hshots__chip--2" aria-hidden="true"><i style="background:#f6a04d"></i>Pro ohne Abo</span>
@@ -19,25 +19,22 @@ function heroVisual() {
 </figure>`;
 }
 
-function fan(app, idx) {
-  return `<div class="fan" aria-hidden="true">${idx
-    .map((i, n) => `<div class="fan__item fan__item--${n}">${shot(app, i, { sizes: '(max-width: 900px) 40vw, 220px' })}</div>`)
-    .join('')}</div>`;
-}
-
-function product(app, { checks, idx, reverse = false }) {
-  return `<article class="show show--${app.key}${reverse ? ' show--reverse' : ''} reveal">
-      <div class="show__copy">
-        <div class="show__head">${appIcon(app, 60)}${status('live')}</div>
-        <p class="show__cat">${app.category}</p>
-        <h3 class="show__title">${app.name}</h3>
-        <p class="show__text">${app.summary}</p>
-        ${checklist(checks)}
-        <p class="show__price">Kostenlos bei Google Play · <strong>Pro einmalig ${app.pricing.proPrice}</strong>, kein Abo</p>
-        <div class="show__actions">${btn(app.path, 'Zur Produktseite', { variant: 'primary' })}${playButton(app, { variant: 'secondary' })}</div>
+// Kompakte Produktkachel: Screenshots, Kurzinfo, Fakten im Kontext, Aktionen
+function tile(app, { shots, meta }) {
+  return `<article class="tile tile--${app.key} reveal">
+    <div class="tile__media" aria-hidden="true">
+      <div class="tile__phones">${shots.map((i) => shot(app, i, { sizes: '(max-width: 860px) 36vw, 230px' })).join('')}</div>
+    </div>
+    <div class="tile__body">
+      <div class="tile__head">${appIcon(app, 52)}<div><p class="tile__cat">${app.category}</p><h3 class="tile__title"><a href="${app.path}">${app.name}</a></h3></div></div>
+      <p class="tile__text">${app.summary}</p>
+      <ul class="tile__meta">${meta.map(([ic, t]) => `<li>${icon(ic)}${t}</li>`).join('')}</ul>
+      <div class="tile__foot">
+        <p class="tile__price">Kostenlos · <strong>Pro einmalig ${app.pricing.proPrice}</strong></p>
+        <div class="tile__links">${link(app.path, 'Zur App')}${link(app.play, 'Google Play', 'tlink tlink--muted')}</div>
       </div>
-      <div class="show__visual">${fan(app, idx)}</div>
-    </article>`;
+    </div>
+  </article>`;
 }
 
 const principles = [
@@ -81,67 +78,42 @@ export default {
           ${btn('/apps/', 'Unsere Apps entdecken', { variant: 'primary', size: 'lg' })}
           ${btn('/studio/', 'Über das Studio', { variant: 'secondary', size: 'lg' })}
         </div>
-        <ul class="hero__meta">
-          <li>${appIcon(br, 26, { lazy: false })}${appIcon(vm, 26, { lazy: false })}<span>BauRechner DE &amp; VerbrauchsMonitor DE</span></li>
-          <li>${icon('pin')}Bielefeld, Deutschland</li>
-        </ul>
       </div>
       ${heroVisual()}
     </div>
-    <div class="stats" aria-label="Kennzahlen">
-      <div class="stats__row">
-        <div class="stat"><span class="stat__v">2</span><span class="stat__l">eigene Apps bei Google Play</span></div>
-        <div class="stat"><span class="stat__v">0</span><span class="stat__l">Benutzerkonten erforderlich</span></div>
-        <div class="stat"><span class="stat__v">15</span><span class="stat__l">Rechner &amp; Werkzeuge in BauRechner DE</span></div>
-        <div class="stat"><span class="stat__v">4</span><span class="stat__l">Zählerarten in VerbrauchsMonitor DE</span></div>
+    <div class="hero__foot">
+      <div>
+        ${eyebrow('', 'Produkte')}
+        <h2 id="produkte">Zwei Apps. Jede mit einer klaren Aufgabe.</h2>
       </div>
+      ${link('/apps/', 'Alle Apps im Vergleich')}
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="produkte">
+<section class="section duo-section" aria-labelledby="produkte">
   <div class="wrap">
-    ${sectionHead({
-      label: 'Produkte',
-      id: 'produkte',
-      title: 'Zwei Apps. Jede mit einer klaren Aufgabe.',
-      lead: 'Kostenlos starten, alles Wichtige ohne Konto und lokal auf dem Gerät – und wer mehr braucht, schaltet Pro einmalig frei.',
-    })}
-    <div class="showcase">
-      ${product(br, {
-        idx: [1, 3, 2],
-        checks: [
-          'Aufmaß erfassen und direkt in 15 Rechnern weiterverwenden',
-          'Materialplanung, Kalkulation, Fotos und Notizen am Projekt',
-          'Projekt-PDF, Variantenvergleich und Budget mit Pro',
-        ],
-      })}
-      ${product(vm, {
-        reverse: true,
-        idx: [1, 0, 2],
-        checks: [
-          'Bis zu 2 Zähler kostenlos – Strom, Gas, Wasser und Wärme',
-          'Zählerstände schnell erfassen, mit lokalen Ableseerinnerungen',
-          'Auswertungen, Trends und Kostenanalysen mit Pro',
-        ],
-      })}
+    <div class="duo">
+      ${tile(br, { shots: [1, 3], meta: [['calc', '15 Rechner'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
+      ${tile(vm, { shots: [1, 2], meta: [['gauge', 'Strom · Gas · Wasser · Wärme'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
     </div>
-    <p class="table-note" style="margin-top:20px">Preise laut Google Play, Stand ${PRICES_AS_OF}.</p>
+    <p class="duo-note">Kostenlos bei Google Play. Preise für Pro laut Google Play, Stand ${PRICES_AS_OF} – einmaliger Kauf, kein Abo.</p>
   </div>
 </section>
 
 <section class="section section--alt" aria-labelledby="prinzipien">
-  <div class="wrap">
+  <div class="wrap lay-aside">
     ${sectionHead({
       label: 'Prinzipien',
       id: 'prinzipien',
       title: 'Was alle unsere Apps gemeinsam haben.',
       lead: 'Technologie ist dann gut, wenn sie sich selbstverständlich anfühlt. Diese Grundsätze gelten für jedes Produkt, das unser Studio veröffentlicht.',
+      cls: 'shead--stack lay-aside__head',
     })}
-    <div class="principles">
+    <div class="principles principles--2">
       ${principles
         .map(
-          ([ic, t, d], i) => `<div class="principle reveal" style="--d:${i}">
+          ([ic, t, d], i) => `<div class="principle reveal" style="--d:${i % 2}">
         <span class="principle__ico">${icon(ic)}</span>
         <h3 class="principle__title">${t}</h3>
         <p>${d}</p>
@@ -181,12 +153,12 @@ export default {
     <div class="studio-teaser__logo reveal"><div class="rings" aria-hidden="true"></div>${logo(320, 'logo--xl')}</div>
     <div class="reveal" style="--d:1">
       ${eyebrow('', 'Studio')}
-      <h2 id="studio" class="h2" style="margin-bottom:24px">Ein unabhängiges Softwarestudio aus Bielefeld.</h2>
+      <h2 id="studio" class="h2" style="margin-bottom:22px">Ein unabhängiges Softwarestudio aus Bielefeld.</h2>
       <div class="body-copy">
         <p>MP Digital Labs ist das Softwareunternehmen von <strong>${SITE.owner}</strong>. Wir konzipieren, entwickeln und vertreiben eigene Apps mit klar definiertem Anwendungsnutzen.</p>
         <p>Neue Funktionen entstehen nicht als Selbstzweck. Sie werden priorisiert, getestet und an realistischen Nutzungsszenarien ausgerichtet – für Produkte, die verständlich, zuverlässig und langfristig nutzbar sind.</p>
       </div>
-      <div class="actions" style="margin-top:32px">${btn('/studio/', 'Mehr über das Studio', { variant: 'secondary' })}</div>
+      <div class="actions" style="margin-top:30px">${btn('/studio/', 'Mehr über das Studio', { variant: 'secondary' })}</div>
     </div>
   </div>
 </section>

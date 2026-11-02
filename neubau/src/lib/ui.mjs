@@ -63,7 +63,7 @@ export function mark(size = 40, cls = '', alt = '') {
 }
 
 export function brand() {
-  return `<a class="brand" href="/" aria-label="MP Digital Labs – zur Startseite">${mark(40, 'brand__mark')}<span class="brand__word"><b>MP</b> Digital Labs</span></a>`;
+  return `<a class="brand" href="/" aria-label="MP Digital Labs – zur Startseite">${mark(52, 'brand__mark')}<span class="brand__word"><b>MP</b> Digital Labs</span></a>`;
 }
 
 const isExternal = (href) => /^https?:\/\//.test(href);
@@ -167,7 +167,7 @@ export function checklist(items, cls = '') {
   return `<ul class="checks ${cls}">${items.map((i) => `<li>${icon('check')}<span>${i}</span></li>`).join('')}</ul>`;
 }
 
-export function featureGrid(items, cls = '') {
+export function featureGrid(items, cls = 'fgrid--plain') {
   return `<div class="fgrid ${cls}">${items
     .map(
       ([ic, t, d], i) => `<article class="fcard reveal" style="--d:${i % 3}">

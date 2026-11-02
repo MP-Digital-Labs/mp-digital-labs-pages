@@ -28,14 +28,14 @@ export default DOCS.map((doc) => {
       const stand = (raw.match(/Stand: ([^-]+?) -->/) || [])[1]?.trim() ?? '';
       const html = raw.replace(/^<!--.*?-->\s*/s, '');
       return `
-<section class="phero night" style="padding-bottom:clamp(32px,4vw,56px)" aria-labelledby="page-title">
+<section class="phero night phero--compact" aria-labelledby="page-title">
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
-    <p class="eyebrow"><span>Rechtliches</span></p>
+    <p class="eyebrow">Rechtliches</p>
     <h1 id="page-title" class="phero__title" style="max-width:16em">${doc.h1}</h1>
   </div>
 </section>
-<section class="section section--line" style="padding-top:clamp(40px,5vw,72px)">
+<section class="section section--alt" style="padding-top:clamp(2.5rem,4vw,4rem)">
   <div class="wrap legal">
     <aside class="legal__aside">
       ${stand ? `<p class="legal__stand">Stand: ${stand}</p>` : ''}

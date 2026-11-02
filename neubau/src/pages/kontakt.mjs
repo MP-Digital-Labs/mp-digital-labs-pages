@@ -19,7 +19,7 @@ export default [
     breadcrumbs: crumbs,
     jsonld: [{ '@type': 'ContactPage', name: 'Kontakt – MP Digital Labs', url: `${SITE.url}/kontakt/` }],
     body: `
-<section class="phero night" aria-labelledby="page-title" style="padding-bottom:clamp(40px,5vw,64px)">
+<section class="phero night phero--compact" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
@@ -29,7 +29,7 @@ export default [
   </div>
 </section>
 
-<section class="section section--line" style="padding-top:clamp(48px,6vw,80px)" aria-label="Kontaktmöglichkeiten">
+<section class="section" aria-label="Kontaktmöglichkeiten">
   <div class="wrap contact-grid">
     <div>
       ${eyebrow('', 'Direkt erreichen')}

@@ -70,9 +70,22 @@ Beide Schriften sind variabel, lokal gehostet und stehen unter der SIL Open Font
 | VerbrauchsMonitor | `#1060c8` / `#2f8cf0` | `#7cc0ff` |
 
 - **Formen**: Pillen-Buttons, Radien 18 / 28 / 32 px, Haarlinien, Schatten nur für Tiefe bei Produktbildern
-- **Raster**: maximal 1200 px, Rand 20–48 px, Sektionsabstand 88–144 px
+- **Raster**: 1240 px (wächst auf großen Bildschirmen bis 1640 px), Rand 20–56 px, Sektionsabstand 72–120 px
 - **Logo**: ausschließlich das offizielle Kreislogo. Die Vollversion steht im Footer, im Studio-Band, auf der Studio-Seite und im OG-Bild; die Kompaktversion (Original-Ring und -Monogramm) im Header und als Favicon
 - **Dark Mode**: automatisch über `prefers-color-scheme`
+
+### Verfeinerung Runde 3 (Komposition und Großbild)
+
+| Thema | Änderung |
+|---|---|
+| Große Bildschirme | Inhaltsbreite und Schriftgröße wachsen stufenweise mit (Basis 16 → 17 → 18 → 20 px ab 1600/1920/2400 px; Raster 1240 → 1360 → 1460 → 1640 px). Bilder skalieren proportional, die Lesebreite bleibt in `em` begrenzt. |
+| Produkte auf der Startseite | Statt zwei seitenfüllender Farbkarten ein kompaktes Duo gleichwertiger Kacheln: Original-Screenshots ragen aus einer getönten Bühne, darunter Kurzinfo, Fakten im Kontext und klar gewichtete Links. Die Kacheln überlappen den dunklen Hero. |
+| Kennzahlen | Die Statistikleiste (2 / 0 / 15 / 4) ist entfernt. Die Fakten stehen jetzt dort, wo sie etwas erklären: „15 Rechner“ und die Zählerarten in den Produktkacheln, „ohne Konto“ bei den Prinzipien. |
+| Hell/Dunkel-Übergänge | Dunkle Flächen sind abgerundete „Sheets“: Heros mit runden Unterkanten, Studio-Band und Galerien eingerückt mit Radius, der Footer mit runden Oberkanten. Auf Übersichts- und Support-Seite überlappen die Karten den Seitenkopf. |
+| Abwechslung | Prinzipien mit Seitenkopf links und 2×2-Raster rechts; Funktionen auf den Produktseiten ohne Kartenrahmen; Seitenköpfe mit dezentem Ring-Motiv rechts statt leerer Fläche; kompakteres Abschluss-Panel. |
+| Marke | Kreislogo im Header von 40 auf 52 px mit leichtem Leuchten (beim Scrollen 42 px), größere Wortmarke; Footer-Logo 144 px. |
+| Typografie | Leicht reduzierte Überschriftengrößen (H1 max. 3,8 rem, Seitenköpfe 3,3 rem, H2 2,35 rem), Lead-Text 1,16 rem mit begrenzter Zeilenlänge, Zeilenabstand 1,68. Der Hero-Satz bricht kontrolliert in zwei Zeilen. |
+| Rechtstexte | Inhalt unverändert; Darstellung auf ruhiger, weißer Lesefläche über grauem Grund mit klar markiertem aktivem Dokument. |
 
 ## 5. Informationsarchitektur
 
