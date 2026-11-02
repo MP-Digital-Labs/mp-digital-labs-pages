@@ -34,13 +34,13 @@
   --surface-2: #f8f9fc;
   --ink: #0a1020;
   --ink-2: #414b5f;
-  --ink-3: #69738a;
+  --ink-3: #667086; /* ≥ 4,5:1 auch auf --mist */
   --line: rgba(10, 16, 32, 0.08);
   --line-2: rgba(10, 16, 32, 0.14);
   --btn-fg: #ffffff;
 
   /* Marke (aus dem Logo) */
-  --blue: #1c6df2;
+  --blue: #1266f1; /* Markenblau, für Text auf --mist minimal abgedunkelt (≥ 4,5:1) */
   --signal: var(--blue);
   --accent: var(--blue);
   --accent-fill: var(--blue);
@@ -52,7 +52,7 @@
   --br: #c2410c;  --br-fill: #f26a21;  --br-soft: rgba(242, 106, 33, 0.09);  --br-glow: rgba(242, 106, 33, 0.45);
   --vm: #1060c8;  --vm-fill: #2f8cf0;  --vm-soft: rgba(47, 140, 240, 0.09);  --vm-glow: rgba(47, 140, 240, 0.5);
   --ok: #12a061;
-  --pro: #a8690f;
+  --pro: #8d580d; /* textsicher auch auf der eigenen Tag-Fläche */
 
   --max: 1240px;
   --gutter: clamp(20px, 4.2vw, 56px);

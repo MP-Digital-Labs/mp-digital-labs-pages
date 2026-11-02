@@ -168,7 +168,7 @@ Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originale
 ## 11. Barrierefreiheit (Ziel: WCAG 2.2 AA)
 
 - Skip-Link, Landmarks, `aria-current`, beschriftete Navigationen und sichtbare Fokus-Indikatoren
-- Kontraste: Text auf Papier ≥ 4,5 : 1; Produktfarben haben je eine textsichere Variante
+- Kontraste: Text ≥ 4,5 : 1 auf allen einfarbigen Flächen, auch auf `--mist` (gemessen 2. November 2026, hell und dunkel); Produktfarben haben je eine textsichere Variante
 - E-Mail-Kontakt: Adresse als markierbarer Text, Kopier-Button mit Statusmeldung über `aria-live` und Fallback (Adresse wird markiert), ohne JavaScript bleibt die Adresse kopierbar
 - Mega-Menü und Mobilmenü sind vollständig per Tastatur bedienbar (Escape, Fokusfalle)
 - `prefers-reduced-motion` schaltet alle Animationen ab. Ohne JavaScript bleiben alle Inhalte sichtbar
