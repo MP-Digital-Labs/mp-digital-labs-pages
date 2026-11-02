@@ -66,7 +66,7 @@ export default {
     },
   ],
   body: `
-<section class="hero night" aria-labelledby="hero-title">
+<section class="hero" aria-labelledby="hero-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero__grid">
@@ -81,18 +81,18 @@ export default {
       </div>
       ${heroVisual()}
     </div>
-    <div class="hero__foot">
-      <div>
-        ${eyebrow('', 'Produkte')}
-        <h2 id="produkte">Zwei Apps. Jede mit einer klaren Aufgabe.</h2>
-      </div>
-      ${link('/apps/', 'Alle Apps im Vergleich')}
-    </div>
   </div>
 </section>
 
 <section class="section duo-section" aria-labelledby="produkte">
   <div class="wrap">
+    <div class="duo-head">
+      <div>
+        ${eyebrow('', 'Produkte')}
+        <h2 id="produkte" class="shead__title">Zwei Apps. Jede mit einer klaren Aufgabe.</h2>
+      </div>
+      ${link('/apps/', 'Alle Apps im Vergleich')}
+    </div>
     <div class="duo">
       ${tile(br, { shots: [1, 3], meta: [['calc', '15 Rechner'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
       ${tile(vm, { shots: [1, 2], meta: [['gauge', 'Strom · Gas · Wasser · Wärme'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}

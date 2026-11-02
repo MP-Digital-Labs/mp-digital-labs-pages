@@ -47,7 +47,7 @@ export default {
     },
   ],
   body: `
-<section class="phero night phero--overlap" aria-labelledby="page-title">
+<section class="phero phero--overlap" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}

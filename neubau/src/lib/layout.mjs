@@ -76,7 +76,7 @@ function header(path) {
   </div>`;
 
   return `<a class="skip" href="#main">Zum Inhalt springen</a>
-<header class="hdr night" data-hdr>
+<header class="hdr" data-hdr>
   <div class="wrap hdr__row">
     ${brand()}
     <nav class="nav" aria-label="Hauptnavigation"><ul class="nav__list">${items}</ul></nav>

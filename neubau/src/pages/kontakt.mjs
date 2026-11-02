@@ -19,7 +19,7 @@ export default [
     breadcrumbs: crumbs,
     jsonld: [{ '@type': 'ContactPage', name: 'Kontakt – MP Digital Labs', url: `${SITE.url}/kontakt/` }],
     body: `
-<section class="phero night phero--compact" aria-labelledby="page-title">
+<section class="phero phero--compact" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
@@ -74,7 +74,7 @@ export default [
     description: 'Ihre Nachricht an MP Digital Labs wurde übermittelt.',
     noindex: true,
     body: `
-<section class="phero night err" aria-labelledby="page-title">
+<section class="phero err" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     <span class="err__code">${icon('check')} Nachricht übermittelt</span>

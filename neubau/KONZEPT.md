@@ -44,7 +44,7 @@ Als Referenz dienten etablierte Software-Marken. Übernommen wurden Prinzipien, 
 
 Die Gestaltung leitet sich direkt aus dem offiziellen Kreislogo ab: tiefes Nachtblau, Silber (das „M“) und leuchtendes Blau (das „P“ und der Ring).
 
-- **Rhythmus aus Nacht und Tag**: Header, Seiten-Heros, Studio-Band, Screenshot-Galerien und Footer liegen auf Nachtblau `#060a12`, die Inhaltsbereiche auf Weiß und kühlem Grau `#f4f6fa`. Logo und App-Screenshots wirken auf der dunklen Bühne wie im Store.
+- **Hell als Grundfläche, Nacht als Akzent**: Header, Heros und Inhalte sind hell (Weiß, kühles Grau `#f4f6fa`, zarte Verläufe). Nachtblau `#060a12` erscheint gezielt bei Studio-Band, Screenshot-Galerien, Pro-Karte und Footer.
 - **Markenmotiv Ring**: Konzentrische, feine Ringe mit einem blauen Lichtbogen greifen den Logo-Ring auf, hinter den Screenshots, dem Logo und im Abschluss-Panel. Weiche blaue Leuchtflächen ersetzen harte Effekte.
 - **Silberverlauf**: Nur ein Schlüsselsatz pro Seite trägt den Verlauf Silber → Blau, analog zu „M“ und „P“ im Logo.
 - **Produktfarben**: BauRechner Orange und VerbrauchsMonitor Blau, beide aus den App-Icons, als Akzent auf den jeweiligen Produktseiten.
@@ -86,6 +86,17 @@ Beide Schriften sind variabel, lokal gehostet und stehen unter der SIL Open Font
 | Marke | Kreislogo im Header von 40 auf 52 px mit leichtem Leuchten (beim Scrollen 42 px), größere Wortmarke; Footer-Logo 144 px. |
 | Typografie | Leicht reduzierte Überschriftengrößen (H1 max. 3,8 rem, Seitenköpfe 3,3 rem, H2 2,35 rem), Lead-Text 1,16 rem mit begrenzter Zeilenlänge, Zeilenabstand 1,68. Der Hero-Satz bricht kontrolliert in zwei Zeilen. |
 | Rechtstexte | Inhalt unverändert; Darstellung auf ruhiger, weißer Lesefläche über grauem Grund mit klar markiertem aktivem Dokument. |
+
+### Verfeinerung Runde 4 (helle Grundgestaltung, eigenständige Unterseiten)
+
+| Thema | Änderung |
+|---|---|
+| Dunkle Flächen | Heller Grundauftritt: Header weiß mit Glaseffekt, Start-Hero und alle Seitenköpfe hell mit sanftem Verlauf. Nachtblau bleibt gezielt für Akzente: Studio-Band, Screenshot-Galerien, Pro-Karte und Footer. Rundungen reduziert (20–32 px). |
+| Marke | Das schwarze Kreislogo steht im weißen Header (54 px, beim Scrollen 44 px) und hebt sich deutlich ab. Produktseiten tragen den Hinweis „Eine App von MP Digital Labs“ mit Kompaktlogo; die Studio-Seite stellt das Logo groß im Seitenkopf vor. |
+| Produktseiten | Seitenkopf zart in der Produktfarbe getönt (Orange bzw. Blau), weniger Höhe, Kennzahlenleiste direkt darunter. |
+| Arbeitsweise | Seitenkopf mit Übersicht der fünf Schritte als Sprungnavigation. Der Prozess ist ein Zeitstrahl; jeder Schritt hat ein belegbares Beispiel aus BauRechner DE oder VerbrauchsMonitor DE. |
+| Studio | Neue Komposition: Logo im Seitenkopf, „Was wir entwickeln“ mit beiden Apps, Haltung als ruhige nummerierte Liste, Leitsatz-Band mit den Eckdaten als dezente Merkmale statt Datenblatt. |
+| Erhalten | Typografie, Produkt-Duo, Original-Screenshots und Icons, Navigation, Produktinformationen, Demos und Galerien. |
 
 ## 5. Informationsarchitektur
 

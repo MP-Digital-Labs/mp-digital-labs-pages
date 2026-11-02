@@ -28,7 +28,7 @@ export default DOCS.map((doc) => {
       const stand = (raw.match(/Stand: ([^-]+?) -->/) || [])[1]?.trim() ?? '';
       const html = raw.replace(/^<!--.*?-->\s*/s, '');
       return `
-<section class="phero night phero--compact" aria-labelledby="page-title">
+<section class="phero phero--compact" aria-labelledby="page-title">
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
     <p class="eyebrow">Rechtliches</p>

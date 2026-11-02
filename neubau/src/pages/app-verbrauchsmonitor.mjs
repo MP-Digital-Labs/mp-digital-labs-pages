@@ -1,5 +1,5 @@
 import { SITE, APPS, PRICES_AS_OF } from '../lib/site.mjs';
-import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery, plans, proTag } from '../lib/ui.mjs';
+import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery, plans, proTag, mark } from '../lib/ui.mjs';
 
 const app = APPS.verbrauchsmonitor;
 const crumbs = [['Start', '/'], ['Apps', '/apps/'], [app.name, app.path]];
@@ -91,7 +91,7 @@ export default {
     },
   ],
   body: `
-<section class="phero night prodhero" aria-labelledby="page-title">
+<section class="phero prodhero" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
@@ -101,6 +101,7 @@ export default {
         <h1 id="page-title" class="phero__title">Verbrauch verstehen, ohne Tabellenchaos.</h1>
         <p class="lead"><strong>${app.name}</strong>: Zählerstände für Strom, Gas, Wasser und Wärme erfassen und die Verbrauchsentwicklung im Blick behalten – mit Pro inklusive Auswertungen und Kostenanalysen.</p>
         <div class="actions">${playButton(app, { size: 'lg' })}${btn(app.support, 'Hilfe & Support', { variant: 'secondary', size: 'lg' })}</div>
+        <p class="maker">${mark(26)}<span>Eine App von <a href="/studio/">MP Digital Labs</a> aus Bielefeld</span></p>
       </div>
       <figure class="pshots">
         <div class="pshots__stage">

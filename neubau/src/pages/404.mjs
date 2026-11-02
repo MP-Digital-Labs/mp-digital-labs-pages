@@ -6,7 +6,7 @@ export default {
   description: 'Die angeforderte Seite wurde nicht gefunden.',
   noindex: true,
   body: `
-<section class="phero night err" aria-labelledby="page-title">
+<section class="phero err" aria-labelledby="page-title">
   <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     <span class="err__code">Fehler 404</span>
