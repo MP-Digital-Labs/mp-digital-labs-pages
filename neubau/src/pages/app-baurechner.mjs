@@ -1,5 +1,5 @@
 import { SITE, APPS } from '../lib/site.mjs';
-import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput } from '../lib/ui.mjs';
+import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery } from '../lib/ui.mjs';
 
 const app = APPS.baurechner;
 const crumbs = [['Start', '/'], ['Apps', '/apps/'], [app.name, app.path]];
@@ -60,7 +60,7 @@ function demo() {
         <div class="demo__kpi"><span>Material inkl. Verschnitt</span><strong><span data-out="material">–</span><small>m²</small></strong></div>
         <div class="demo__kpi"><span>Raumvolumen</span><strong><span data-out="volumen">–</span><small>m³</small></strong></div>
       </div>
-      <p class="demo__note">${icon('sparkle')}<span>Vereinfachte Web-Demo ohne Öffnungen. In der App werden Aufmaße im Projekt gespeichert, Öffnungen berücksichtigt und die Werte in passenden Rechnern weiterverwendet.</span></p>
+      <p class="demo__note">${icon('sparkle')}<span>Vereinfachte Web-Demo ohne Öffnungen – keine Abbildung der App-Oberfläche. In der App werden Aufmaße im Projekt gespeichert, Öffnungen berücksichtigt und die Werte in passenden Rechnern weiterverwendet.</span></p>
     </div>
   </div>`;
 }
@@ -73,6 +73,7 @@ export default {
   theme: 'baurechner',
   priority: 0.9,
   breadcrumbs: crumbs,
+  ogImage: { src: '/assets/img/apps/br-feature.jpg', w: 1024, h: 500, alt: 'BauRechner DE – Vorstellungsgrafik' },
   jsonld: [
     {
       '@type': 'MobileApplication',
@@ -84,6 +85,8 @@ export default {
       downloadUrl: app.play,
       installUrl: app.play,
       inLanguage: 'de',
+      image: `${SITE.url}${app.icon}`,
+      screenshot: app.screenshots.map((_, i) => `${SITE.url}/assets/img/apps/br-shot-${i + 1}-941.webp`),
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
       publisher: { '@id': `${SITE.url}/#organization` },
     },
@@ -100,13 +103,15 @@ export default {
         <p class="lead"><strong style="color:var(--ink);font-weight:600">${app.name}</strong> bündelt Aufmaß, Berechnungen, Material, Einkauf, Kalkulation und Projektdokumentation in einer App – für Handwerk, Renovierung und Bauprojekte.</p>
         <div class="actions">${playButton(app, { size: 'lg' })}${btn(app.support, 'Hilfe & Support', { variant: 'secondary', size: 'lg' })}</div>
       </div>
-      <aside aria-label="Produktinformationen">
-        <div class="facts">
-          <div class="facts-card__head"><span>Produktinfo</span><span>${app.short}</span></div>
-          ${facts(app.facts)}
+      <figure class="pshots">
+        <div class="pshots__stage">
+          <div class="pshots__phone pshots__phone--a">${shot(app, 0, { sizes: '(max-width: 960px) 44vw, 250px', lazy: false })}</div>
+          <div class="pshots__phone pshots__phone--b">${shot(app, 3, { sizes: '(max-width: 960px) 44vw, 250px', lazy: false })}</div>
         </div>
-      </aside>
+        <figcaption>${icon('play', 'ico--fill')}Original-Screenshots aus Google Play</figcaption>
+      </figure>
     </div>
+    <div class="factstrip" aria-label="Produktinformationen">${facts(app.facts)}</div>
   </div>
 </section>
 
@@ -123,10 +128,23 @@ export default {
   </div>
 </section>
 
-<section class="section section--alt" aria-labelledby="demo-title">
+<section class="section section--alt" aria-labelledby="einblicke">
   <div class="wrap">
     ${sectionHead({
       index: '02',
+      label: 'Einblicke',
+      id: 'einblicke',
+      title: 'So sieht die App aus.',
+      lead: 'Die offiziellen Screenshots aus dem Google-Play-Eintrag. Zum Vergrößern einfach antippen – mit den Pfeiltasten blättern Sie durch alle Bilder.',
+    })}
+  </div>
+  <div class="wrap wrap--bleed">${gallery(app)}</div>
+</section>
+
+<section class="section section--line" aria-labelledby="demo-title">
+  <div class="wrap">
+    ${sectionHead({
+      index: '03',
       label: 'Ausprobieren',
       id: 'demo-title',
       title: 'Ein Raum, fünf Kennzahlen.',
@@ -140,10 +158,10 @@ export default {
   </div>
 </section>
 
-<section class="section" aria-labelledby="ablauf">
+<section class="section section--alt" aria-labelledby="ablauf">
   <div class="wrap">
     ${sectionHead({
-      index: '03',
+      index: '04',
       label: 'Arbeitsablauf',
       id: 'ablauf',
       title: 'Werte einmal erfassen. Überall weiterverwenden.',
@@ -156,7 +174,7 @@ export default {
 <section class="section section--line" aria-labelledby="preise">
   <div class="wrap">
     ${sectionHead({
-      index: '04',
+      index: '05',
       label: 'Free & Pro',
       id: 'preise',
       title: 'Die Basis bleibt nutzbar. Pro ergänzt Komfort.',
@@ -182,7 +200,7 @@ export default {
 <section class="section section--alt" aria-labelledby="daten">
   <div class="wrap split">
     <div class="reveal">
-      ${sectionHead({ index: '05', label: 'Offline & Daten', id: 'daten', title: 'Für den Einsatz vor Ort gedacht.', cls: 'shead--stack' })}
+      ${sectionHead({ index: '06', label: 'Offline & Daten', id: 'daten', title: 'Für den Einsatz vor Ort gedacht.', cls: 'shead--stack' })}
       <div class="body-copy">
         <p>BauRechner DE benötigt für seine Kernfunktionen <strong>kein MP-Digital-Labs-Konto</strong> und <strong>kein eigenes Cloud-Backend</strong>. Projekt-, Material-, Foto- und Eingabedaten werden lokal auf dem Gerät gespeichert.</p>
         <p class="note">${icon('shield')}<span>Backups und Exporte werden nur durch eine bewusste Aktion des Nutzers erstellt und an einen selbst gewählten Speicherort oder eine andere App übergeben.</span></p>

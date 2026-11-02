@@ -1,7 +1,7 @@
 // Seitengerüst: <head>, Header mit Navigation, Footer und strukturierte Daten.
 
 import { SITE, APPS, NAV } from './site.mjs';
-import { esc, icon, brand, logoMark, appIcon, status } from './ui.mjs';
+import { esc, icon, brand, logo, appIcon } from './ui.mjs';
 
 const abs = (p) => SITE.url + p;
 
@@ -35,14 +35,10 @@ function megaMenu() {
             </a>`
           )
           .join('')}
-        <div class="mega__app mega__app--dev">
-          ${appIcon(APPS.scootkompass, 44)}
-          <span><strong>${APPS.scootkompass.name} ${status('dev')}</strong><small>${APPS.scootkompass.tagline}</small></span>
-        </div>
       </div>
       <div class="mega__aside">
         <p class="mega__label">Produktportfolio</p>
-        <p>Werkzeuge für konkrete Aufgaben – offline-first und ohne Benutzerkonto.</p>
+        <p>Werkzeuge für konkrete Aufgaben – offline-first, ohne Benutzerkonto und bei Google Play verfügbar.</p>
         <a class="tlink" href="/apps/">Alle Apps ansehen${icon('arrow')}</a>
       </div>
     </div>
@@ -102,7 +98,7 @@ function footer() {
   <div class="wrap">
     <div class="ftr__top">
       <div class="ftr__brand">
-        ${brand()}
+        ${logo(132, 'ftr__logo')}
         <p>Unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln digitale Produkte mit klarem Zweck.</p>
         <a class="ftr__mail" href="mailto:${SITE.email}">${icon('mail')}${SITE.email}</a>
       </div>
@@ -132,7 +128,7 @@ function footer() {
       <p>© ${SITE.year} ${SITE.name} · ${SITE.owner} · ${SITE.address.city}</p>
       <p class="ftr__note">${icon('shield')}Keine Cookies. Kein Tracking. Schriften lokal gehostet.</p>
     </div>
-    <div class="ftr__mark" aria-hidden="true">${logoMark()}<span>MP Digital Labs</span></div>
+    <p class="ftr__slogan" aria-hidden="true">Ideas drive progress.</p>
   </div>
 </footer>`;
 }
@@ -149,6 +145,7 @@ export function layout({
   ogType = 'website',
   assetVersion = '',
   bodyClass = '',
+  ogImage = null,
 }) {
   const fullTitle = path === '/' ? title : `${title} – ${SITE.name}`;
   const canonical = abs(path);
@@ -186,13 +183,13 @@ ${noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robo
 <meta property="og:title" content="${esc(fullTitle)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE.url}/assets/img/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="MP Digital Labs – Software mit klarem Zweck">
+<meta property="og:image" content="${SITE.url}${ogImage?.src ?? '/assets/img/og-image.png'}">
+<meta property="og:image:width" content="${ogImage?.w ?? 1200}">
+<meta property="og:image:height" content="${ogImage?.h ?? 630}">
+<meta property="og:image:alt" content="${esc(ogImage?.alt ?? 'MP Digital Labs – Software mit klarem Zweck')}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.ico" sizes="32x32 48x48">
+<link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>

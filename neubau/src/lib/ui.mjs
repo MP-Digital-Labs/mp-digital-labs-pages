@@ -49,12 +49,21 @@ export function icon(name, cls = '') {
   return `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONS[name] || ''}</svg>`;
 }
 
-export function logoMark(cls = '') {
-  return `<svg class="logo-mark ${cls}" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="9" class="logo-mark__bg"/><rect x="8" y="8" width="7" height="7" rx="1.8" class="logo-mark__cell"/><rect x="8" y="17" width="7" height="7" rx="1.8" class="logo-mark__cell"/><rect x="17" y="17" width="7" height="7" rx="1.8" class="logo-mark__cell"/><circle cx="20.5" cy="11.5" r="3.6" class="logo-mark__dot"/></svg>`;
+// Offizielles MP-Digital-Labs-Logo (Kreisform). „mark“ ist die aus dem Original
+// abgeleitete Kompaktversion für kleine Größen (Ring + Monogramm, ohne Schriftzeilen).
+const LOGO = '/assets/img/brand/';
+
+export function logo(size = 160, cls = '', { lazy = true } = {}) {
+  const src = size > 160 ? 'mpdl-logo-640.webp' : 'mpdl-logo-320.webp';
+  return `<img class="logo ${cls}" src="${LOGO}${src}" srcset="${LOGO}mpdl-logo-320.webp 320w, ${LOGO}mpdl-logo-640.webp 640w" sizes="${size}px" width="${size}" height="${size}" alt="MP Digital Labs – Ideas drive progress"${lazy ? ' loading="lazy"' : ''} decoding="async">`;
+}
+
+export function mark(size = 40, cls = '', alt = '') {
+  return `<img class="mark ${cls}" src="${LOGO}${size > 48 ? 'mpdl-mark-160.webp' : 'mpdl-mark-96.webp'}" srcset="${LOGO}mpdl-mark-96.webp 96w, ${LOGO}mpdl-mark-160.webp 160w" sizes="${size}px" width="${size}" height="${size}" alt="${alt}" decoding="async">`;
 }
 
 export function brand() {
-  return `<a class="brand" href="/" aria-label="MP Digital Labs – zur Startseite">${logoMark()}<span class="brand__word">MP Digital<span> Labs</span></span></a>`;
+  return `<a class="brand" href="/" aria-label="MP Digital Labs – zur Startseite">${mark(40, 'brand__mark')}<span class="brand__word"><b>MP</b> Digital Labs</span></a>`;
 }
 
 const isExternal = (href) => /^https?:\/\//.test(href);
@@ -94,11 +103,45 @@ export function status(s) {
     : '<span class="status status--dev"><span class="status__dot"></span>In Entwicklung</span>';
 }
 
-export function appIcon(app, size = 56) {
-  if (!app.icon) {
-    return `<span class="appicon appicon--placeholder" style="--s:${size}px" aria-hidden="true">${icon('compass')}</span>`;
-  }
-  return `<img class="appicon" src="${app.icon}" width="${size}" height="${size}" alt="" loading="lazy" decoding="async">`;
+export function appIcon(app, size = 56, { lazy = true } = {}) {
+  return `<img class="appicon" src="${app.icon}" width="${size}" height="${size}" alt=""${lazy ? ' loading="lazy"' : ''} decoding="async">`;
+}
+
+// Original-Screenshot aus dem Google-Play-Eintrag
+export function shot(app, i, { sizes = '260px', lazy = true, cls = '' } = {}) {
+  const base = `/assets/img/apps/${app.img}-shot-${i + 1}`;
+  return `<img class="shot ${cls}" src="${base}-480.webp" srcset="${base}-480.webp 480w, ${base}-941.webp 941w" sizes="${sizes}" width="480" height="853" alt="${esc(app.name)} – ${esc(app.screenshots[i])}"${lazy ? ' loading="lazy"' : ''} decoding="async">`;
+}
+
+export function feature(app, { sizes = '(max-width: 700px) 100vw, 560px', lazy = true, cls = '' } = {}) {
+  const base = `/assets/img/apps/${app.img}-feature`;
+  return `<img class="feature ${cls}" src="${base}-640.webp" srcset="${base}-640.webp 640w, ${base}-1024.webp 1024w" sizes="${sizes}" width="1024" height="500" alt="${esc(app.name)} – Vorstellungsgrafik aus Google Play"${lazy ? ' loading="lazy"' : ''} decoding="async">`;
+}
+
+// Screenshot-Galerie mit Vergrößerung (Lightbox in site.js)
+export function gallery(app) {
+  return `<div class="gallery" data-gallery>
+    <ul class="gallery__track" aria-label="Screenshots ${esc(app.name)}" tabindex="0">
+      ${app.screenshots
+        .map(
+          (t, i) => `<li class="gallery__item">
+        <button class="gallery__btn" type="button" data-full="/assets/img/apps/${app.img}-shot-${i + 1}-941.webp" data-caption="${esc(t)}" aria-label="Screenshot vergrößern: ${esc(t)}">
+          ${shot(app, i, { sizes: '(max-width: 600px) 64vw, 250px' })}
+          <span class="gallery__zoom" aria-hidden="true">${icon('search')}</span>
+        </button>
+        <p class="gallery__cap"><span>${String(i + 1).padStart(2, '0')}</span>${t}</p>
+      </li>`
+        )
+        .join('')}
+    </ul>
+    <div class="gallery__bar">
+      <p class="gallery__src">${icon('play', 'ico--fill')}Originalbilder aus dem Google-Play-Eintrag · ${app.screenshots.length} Screenshots</p>
+      <div class="gallery__nav">
+        <button class="gallery__arrow" type="button" data-dir="-1" aria-label="Vorherige Screenshots">${icon('arrow', 'ico--flip')}</button>
+        <button class="gallery__arrow" type="button" data-dir="1" aria-label="Weitere Screenshots">${icon('arrow')}</button>
+      </div>
+    </div>
+  </div>`;
 }
 
 export function facts(list) {
@@ -169,22 +212,22 @@ export function ctaBand({ title, text, actions = '', id, cls = '' }) {
   </section>`;
 }
 
-// Kompakte App-Karte (Übersichten, Mega-Menü, Querverweise)
+// App-Karte mit Original-Vorstellungsgrafik (Übersichten)
 export function appCard(app, { headingLevel = 3 } = {}) {
   const h = `h${headingLevel}`;
-  const live = app.status === 'live';
   return `<article class="acard acard--${app.key} reveal">
-    <div class="acard__top">${appIcon(app, 56)}${status(app.status)}</div>
-    <p class="acard__cat">${app.category}</p>
-    <${h} class="acard__title">${live ? `<a href="${app.path}">${app.name}</a>` : app.name}</${h}>
-    <p class="acard__text">${app.summary}</p>
-    <div class="acard__links">
-      ${live ? link(app.path, 'Mehr erfahren') + link(app.play, 'Google Play', 'tlink tlink--muted') : link('/kontakt/?thema=ScootKompass', 'Über Updates informieren')}
+    <div class="acard__media">${feature(app, { sizes: '(max-width: 760px) 100vw, 600px' })}</div>
+    <div class="acard__body">
+      <div class="acard__top">${appIcon(app, 56)}${status(app.status)}</div>
+      <p class="acard__cat">${app.category}</p>
+      <${h} class="acard__title"><a href="${app.path}">${app.name}</a></${h}>
+      <p class="acard__text">${app.summary}</p>
+      <div class="acard__links">${link(app.path, 'Mehr erfahren')}${link(app.play, 'Google Play', 'tlink tlink--muted')}</div>
     </div>
   </article>`;
 }
 
-export const allApps = () => [APPS.baurechner, APPS.verbrauchsmonitor, APPS.scootkompass];
+export const allApps = () => Object.values(APPS).filter((a) => a.status === 'live');
 
 // Zahleneingabe mit optionalem Schieberegler (Mini-Demos)
 export function numInput({ name, label, min, max, step, value, unit, range = true, dataUnit = false }) {

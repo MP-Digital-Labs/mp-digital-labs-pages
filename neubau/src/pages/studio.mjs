@@ -1,5 +1,5 @@
 import { SITE } from '../lib/site.mjs';
-import { btn, sectionHead, breadcrumbs, facts, ctaBand, logoMark, eyebrow } from '../lib/ui.mjs';
+import { btn, sectionHead, breadcrumbs, facts, ctaBand, logo, mark, eyebrow } from '../lib/ui.mjs';
 
 const crumbs = [['Start', '/'], ['Studio', '/studio/']];
 
@@ -40,14 +40,14 @@ export default {
       </div>
     </div>
     <aside class="profile reveal" style="--d:1" aria-label="Unternehmensprofil">
-      <div class="profile__head">${logoMark()}<div><strong>${SITE.name}</strong><span>Software · Apps · Digitale Produkte</span></div></div>
+      <div class="profile__head">${mark(52)}<div><strong>${SITE.name}</strong><span>Software · Apps · Digitale Produkte</span></div></div>
       ${facts([
         ['Inhaber', SITE.owner],
         ['Sitz', `${SITE.address.city}, ${SITE.address.country}`],
         ['Unternehmensform', 'Einzelunternehmen'],
         ['Schwerpunkt', 'Mobile Apps & Produktentwicklung'],
-        ['Veröffentlicht', '2 Apps bei Google Play'],
-        ['In Entwicklung', 'ScootKompass'],
+        ['Apps', 'BauRechner DE · VerbrauchsMonitor DE'],
+        ['Vertrieb', 'Google Play'],
       ])}
     </aside>
   </div>
@@ -77,9 +77,12 @@ export default {
 </section>
 
 <section class="section" aria-label="Leitsatz">
-  <div class="wrap">
-    <p class="motto reveal">Ideas <span>drive</span><br>progress.</p>
-    <p class="lead reveal" style="margin-top:28px">Gute Produkte entstehen dort, wo klare Ideen, konsequente Entwicklung und echter Nutzwert zusammenkommen.</p>
+  <div class="wrap motto-grid">
+    <div>
+      <p class="motto reveal">Ideas <span>drive</span><br>progress.</p>
+      <p class="lead reveal" style="margin-top:28px">Gute Produkte entstehen dort, wo klare Ideen, konsequente Entwicklung und echter Nutzwert zusammenkommen.</p>
+    </div>
+    <div class="motto-grid__logo reveal" style="--d:1">${logo(340, 'logo--xl')}</div>
   </div>
 </section>
 

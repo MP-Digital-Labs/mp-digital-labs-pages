@@ -11,6 +11,7 @@
     "build": "node scripts/build.mjs",
     "preview": "node scripts/build.mjs && node scripts/serve.mjs",
     "serve": "node scripts/serve.mjs",
+    "images": "node scripts/process-images.mjs",
     "assets": "node scripts/render-assets.mjs"
   }
 }

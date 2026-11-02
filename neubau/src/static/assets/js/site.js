@@ -253,4 +253,74 @@
       btn.setAttribute('aria-busy', 'true');
     });
   });
+  /* ---------- Screenshot-Galerie & Lightbox ---------- */
+  const galleries = $$('[data-gallery]');
+  if (galleries.length) {
+    let box, img, cap, count, items = [], index = 0, opener = null;
+    const ico = (d) => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg>`;
+    const build = () => {
+      box = document.createElement('dialog');
+      box.className = 'lightbox';
+      box.setAttribute('aria-label', 'Screenshot-Ansicht');
+      box.innerHTML = `<div class="lightbox__top"><span data-count></span><button type="button" data-close aria-label="Schließen">${ico('M6 6l12 12M18 6 6 18')}</button></div>
+        <div class="lightbox__stage">
+          <button class="lightbox__prev" type="button" aria-label="Vorheriger Screenshot">${ico('m15 6-6 6 6 6')}</button>
+          <img class="lightbox__img" alt="">
+          <button class="lightbox__next" type="button" aria-label="Nächster Screenshot">${ico('m9 6 6 6-6 6')}</button>
+        </div>
+        <p class="lightbox__cap" aria-live="polite"></p>`;
+      document.body.append(box);
+      img = $('.lightbox__img', box); cap = $('.lightbox__cap', box); count = $('[data-count]', box);
+      $('[data-close]', box).addEventListener('click', () => box.close());
+      $('.lightbox__prev', box).addEventListener('click', () => show(index - 1));
+      $('.lightbox__next', box).addEventListener('click', () => show(index + 1));
+      box.addEventListener('click', (e) => { if (e.target === box || e.target.classList.contains('lightbox__stage')) box.close(); });
+      box.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+      });
+      box.addEventListener('close', () => { document.body.classList.remove('is-locked'); opener?.focus(); });
+      // Wischen auf Touch-Geräten
+      let x0 = null;
+      box.addEventListener('touchstart', (e) => (x0 = e.touches[0].clientX), { passive: true });
+      box.addEventListener('touchend', (e) => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+        x0 = null;
+      });
+    };
+    const show = (i) => {
+      index = (i + items.length) % items.length;
+      const b = items[index];
+      const thumb = $('img', b);
+      img.src = b.dataset.full;
+      img.alt = thumb.alt;
+      cap.textContent = b.dataset.caption;
+      count.textContent = `${String(index + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
+      const nxt = items[(index + 1) % items.length];
+      new Image().src = nxt.dataset.full; // nächstes Bild vorladen
+    };
+    galleries.forEach((g) => {
+      const track = $('.gallery__track', g);
+      const btns = $$('.gallery__btn', g);
+      btns.forEach((b, i) => b.addEventListener('click', () => {
+        if (!box) build();
+        items = btns; opener = b;
+        show(i);
+        box.showModal();
+        document.body.classList.add('is-locked');
+      }));
+      const arrows = $$('.gallery__arrow', g);
+      const step = () => (btns[0]?.closest('li').offsetWidth || 250) + 20;
+      arrows.forEach((a) => a.addEventListener('click', () => track.scrollBy({ left: step() * Number(a.dataset.dir) * 2, behavior: reduced ? 'auto' : 'smooth' })));
+      const sync = () => {
+        arrows[0].disabled = track.scrollLeft < 4;
+        arrows[1].disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      };
+      track.addEventListener('scroll', sync, { passive: true });
+      addEventListener('resize', sync);
+      sync();
+    });
+  }
 })();

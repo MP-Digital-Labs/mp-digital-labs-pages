@@ -19,18 +19,21 @@ npm run preview      # baut nach dist/ und startet http://localhost:4173
 | `npm run build` | Build nach `dist/` inkl. Prüfung aller internen Links, Anker und Bestands-URLs |
 | `npm run serve` | Vorschau-Server für `dist/` (verhält sich wie GitHub Pages) |
 | `npm run preview` | beides nacheinander |
-| `npm run assets` | rendert OG-Bild, Touch-Icon, Logo-PNG und `favicon.ico` neu (benötigt lokal Chrome/Edge) |
+| `npm run images` | lädt die Originalbilder aus Google Play und erzeugt alle Logo- und App-Bildvarianten, Favicon und Touch-Icon (benötigt lokal Chrome/Edge) |
+| `npm run assets` | rendert das OG-Bild neu (benötigt lokal Chrome/Edge) |
 
 ## Struktur
 
 ```
 neubau/
 ├── KONZEPT.md             Gesamtkonzept, Designsystem, IA, SEO, Barrierefreiheit
+├── brand-src/            offizielles Firmenlogo (Original)
 ├── deploy/pages.yml       Workflow-Vorlage für den Go-live (inaktiv)
 ├── scripts/
 │   ├── build.mjs          Static-Site-Generator + Link-Checker + Sitemap
 │   ├── serve.mjs          lokaler Vorschau-Server
-│   └── render-assets.mjs  Raster-Assets per Headless-Browser
+│   ├── process-images.mjs Store-Bilder + Logo-Varianten (Originalquellen)
+│   └── render-assets.mjs  OG-Bild per Headless-Browser
 └── src/
     ├── lib/
     │   ├── site.mjs       ★ Firmen- und Produktdaten (einzige Quelle)
@@ -47,7 +50,8 @@ neubau/
 - **Texte einer Seite:** die passende Datei in `src/pages/`
 - **Rechtstexte:** `src/legal/*.html`. Die HTML-Fragmente werden 1:1 eingebettet; die erste Zeile enthält den Stand
 - **Neue Seite:** neue Datei in `src/pages/` mit `export default { path, title, description, body }`
-- **Neue App:** Eintrag in `APPS` (site.mjs), Icon nach `src/static/assets/img/`, Produktseite nach Vorlage einer bestehenden
+- **Neue Store-Bilder:** Bild-IDs in `scripts/process-images.mjs` aktualisieren, `.cache/` löschen, `npm run images`, Titel der Screenshots in `site.mjs` anpassen
+- **Neue App** (erst nach Veröffentlichung): Eintrag in `APPS` (site.mjs), Bild-IDs in `process-images.mjs`, Produktseite nach Vorlage einer bestehenden
 
 ## Go-live (nur nach ausdrücklicher Freigabe)
 

@@ -54,7 +54,7 @@ export default [
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         ${field({ name: 'name', label: 'Name', autocomplete: 'name', maxlength: 100, placeholder: 'Ihr Name' })}
         ${field({ name: 'email', label: 'E-Mail', type: 'email', autocomplete: 'email', maxlength: 180, placeholder: 'ihre@email.de' })}
-        ${field({ name: 'thema', label: 'Thema', type: 'select', options: ['Projektanfrage', 'Kooperation', 'Produktfeedback', 'ScootKompass – Updates', 'Sonstiges'], full: true })}
+        ${field({ name: 'thema', label: 'Thema', type: 'select', options: ['Projektanfrage', 'Kooperation', 'Produktfeedback', 'Sonstiges'], full: true })}
         ${field({ name: 'subject', label: 'Betreff', maxlength: 180, placeholder: 'Worum geht es?', full: true })}
         ${field({ name: 'message', label: 'Nachricht', type: 'textarea', maxlength: 5000, rows: 6, placeholder: 'Ihre Nachricht an MP Digital Labs', full: true })}
         <p class="form__status" role="status" aria-live="polite"></p>

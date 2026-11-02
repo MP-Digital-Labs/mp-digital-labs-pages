@@ -1,5 +1,5 @@
 import { SITE, APPS } from '../lib/site.mjs';
-import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput } from '../lib/ui.mjs';
+import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery } from '../lib/ui.mjs';
 
 const app = APPS.verbrauchsmonitor;
 const crumbs = [['Start', '/'], ['Apps', '/apps/'], [app.name, app.path]];
@@ -59,7 +59,7 @@ function demo() {
         <div class="demo__kpi" style="grid-column:1/-1"><span>Hochrechnung auf ein Jahr (Schätzung)</span><strong><span data-out="jahr">–</span><small>€</small></strong></div>
       </div>
       <p class="demo__note" data-gas-note hidden>${icon('flame')}<span>Gas wird mit Beispielwerten von m³ in kWh umgerechnet (Brennwert 11,2 × Zustandszahl 0,95). In der App hinterlegen Sie die Werte Ihres Versorgers.</span></p>
-      <p class="demo__note">${icon('sparkle')}<span>Vereinfachte Web-Demo ohne Grundpreis. Die App arbeitet mit Tarifen inklusive Gültigkeitszeitraum und weist Kosten stets als Schätzung aus.</span></p>
+      <p class="demo__note">${icon('sparkle')}<span>Vereinfachte Web-Demo ohne Grundpreis – keine Abbildung der App-Oberfläche. Die App arbeitet mit Tarifen inklusive Gültigkeitszeitraum und weist Kosten stets als Schätzung aus.</span></p>
     </div>
   </div>`;
 }
@@ -72,6 +72,7 @@ export default {
   theme: 'verbrauchsmonitor',
   priority: 0.9,
   breadcrumbs: crumbs,
+  ogImage: { src: '/assets/img/apps/vm-feature.jpg', w: 1024, h: 500, alt: 'VerbrauchsMonitor DE – Vorstellungsgrafik' },
   jsonld: [
     {
       '@type': 'MobileApplication',
@@ -83,6 +84,8 @@ export default {
       downloadUrl: app.play,
       installUrl: app.play,
       inLanguage: 'de',
+      image: `${SITE.url}${app.icon}`,
+      screenshot: app.screenshots.map((_, i) => `${SITE.url}/assets/img/apps/vm-shot-${i + 1}-941.webp`),
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
       publisher: { '@id': `${SITE.url}/#organization` },
     },
@@ -99,13 +102,15 @@ export default {
         <p class="lead"><strong style="color:var(--ink);font-weight:600">${app.name}</strong>: Zählerstände für Strom, Gas, Wasser und Wärme erfassen, Verbrauch nachvollziehen und Kosten übersichtlich im Blick behalten.</p>
         <div class="actions">${playButton(app, { size: 'lg' })}${btn(app.support, 'Hilfe & Support', { variant: 'secondary', size: 'lg' })}</div>
       </div>
-      <aside aria-label="Produktinformationen">
-        <div class="facts">
-          <div class="facts-card__head"><span>Produktinfo</span><span>${app.short}</span></div>
-          ${facts(app.facts)}
+      <figure class="pshots">
+        <div class="pshots__stage">
+          <div class="pshots__phone pshots__phone--a">${shot(app, 0, { sizes: '(max-width: 960px) 44vw, 250px', lazy: false })}</div>
+          <div class="pshots__phone pshots__phone--b">${shot(app, 2, { sizes: '(max-width: 960px) 44vw, 250px', lazy: false })}</div>
         </div>
-      </aside>
+        <figcaption>${icon('play', 'ico--fill')}Original-Screenshots aus Google Play</figcaption>
+      </figure>
     </div>
+    <div class="factstrip" aria-label="Produktinformationen">${facts(app.facts)}</div>
   </div>
 </section>
 
@@ -122,10 +127,23 @@ export default {
   </div>
 </section>
 
-<section class="section section--alt" aria-labelledby="demo-title">
+<section class="section section--alt" aria-labelledby="einblicke">
   <div class="wrap">
     ${sectionHead({
       index: '02',
+      label: 'Einblicke',
+      id: 'einblicke',
+      title: 'So sieht die App aus.',
+      lead: 'Die offiziellen Screenshots aus dem Google-Play-Eintrag. Zum Vergrößern einfach antippen – mit den Pfeiltasten blättern Sie durch alle Bilder.',
+    })}
+  </div>
+  <div class="wrap wrap--bleed">${gallery(app)}</div>
+</section>
+
+<section class="section section--line" aria-labelledby="demo-title">
+  <div class="wrap">
+    ${sectionHead({
+      index: '03',
       label: 'Ausprobieren',
       id: 'demo-title',
       title: 'Zwei Zählerstände. Ein klares Bild.',
@@ -135,10 +153,10 @@ export default {
   </div>
 </section>
 
-<section class="section" aria-labelledby="ablauf">
+<section class="section section--alt" aria-labelledby="ablauf">
   <div class="wrap">
     ${sectionHead({
-      index: '03',
+      index: '04',
       label: 'So funktioniert es',
       id: 'ablauf',
       title: 'In wenigen Schritten zum eigenen Verlauf.',
@@ -151,7 +169,7 @@ export default {
 <section class="section section--line" aria-labelledby="preise">
   <div class="wrap">
     ${sectionHead({
-      index: '04',
+      index: '05',
       label: 'Free & Pro',
       id: 'preise',
       title: 'Einfach starten, bei Bedarf erweitern.',
@@ -177,7 +195,7 @@ export default {
 <section class="section section--alt" aria-labelledby="daten">
   <div class="wrap split">
     <div class="reveal">
-      ${sectionHead({ index: '05', label: 'Datenschutz', id: 'daten', title: 'Die Verbrauchsdaten bleiben bei Ihnen.', cls: 'shead--stack' })}
+      ${sectionHead({ index: '06', label: 'Datenschutz', id: 'daten', title: 'Die Verbrauchsdaten bleiben bei Ihnen.', cls: 'shead--stack' })}
       <div class="body-copy">
         <p>VerbrauchsMonitor DE ist <strong>offline-first</strong> aufgebaut. Für die Kernfunktionen ist kein MP-Digital-Labs-Konto und kein eigener Cloud-Dienst erforderlich.</p>
         <p class="note">${icon('shield')}<span>Die App erzeugt aus fehlenden Messwerten keine künstlichen Messpunkte. Hochrechnungen und Kostenschätzungen werden als solche gekennzeichnet.</span></p>

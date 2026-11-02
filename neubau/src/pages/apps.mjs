@@ -16,7 +16,7 @@ export default {
   path: '/apps/',
   title: 'Apps',
   description:
-    'Alle Apps von MP Digital Labs im Überblick: BauRechner DE und VerbrauchsMonitor DE bei Google Play sowie ScootKompass in Entwicklung.',
+    'Alle Apps von MP Digital Labs im Überblick: BauRechner DE und VerbrauchsMonitor DE – kostenlos bei Google Play, offline-first und ohne Benutzerkonto.',
   priority: 0.9,
   breadcrumbs: crumbs,
   jsonld: [
@@ -33,13 +33,13 @@ export default {
     ${breadcrumbs(crumbs)}
     <p class="eyebrow"><span>Produktportfolio</span></p>
     <h1 id="page-title" class="phero__title">Klare Werkzeuge für konkrete Aufgaben.</h1>
-    <p class="lead">Ohne unnötige Komplexität und mit einem Fokus auf verlässliche, verständliche Nutzung. Zwei Apps sind bei Google Play verfügbar, eine weitere ist in Entwicklung.</p>
+    <p class="lead">Ohne unnötige Komplexität und mit einem Fokus auf verlässliche, verständliche Nutzung. Beide Apps sind kostenlos bei Google Play erhältlich.</p>
   </div>
 </section>
 
 <section class="section section--line" style="padding-top:clamp(48px,6vw,80px)" aria-label="Alle Apps">
   <div class="wrap">
-    <div class="agrid">${allApps().map((a) => appCard(a, { headingLevel: 2 })).join('')}</div>
+    <div class="agrid agrid--2">${allApps().map((a) => appCard(a, { headingLevel: 2 })).join('')}</div>
   </div>
 </section>
 

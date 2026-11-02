@@ -1,6 +1,7 @@
 // Zentrale Unternehmens- und Produktdaten.
 // Alle Inhalte stammen aus dem bisherigen Webauftritt (Impressum, Produktseiten,
-// Datenschutzerklärungen). Änderungen an Fakten bitte ausschließlich hier pflegen.
+// Datenschutzerklärungen, Google-Play-Einträge). Änderungen an Fakten bitte
+// ausschließlich hier pflegen. Öffentlich gezeigt werden nur veröffentlichte Apps.
 
 export const SITE = {
   url: 'https://mp-digital-labs.de',
@@ -34,7 +35,20 @@ export const APPS = {
     support: '/support/#baurechner',
     play: 'https://play.google.com/store/apps/details?id=de.mpdigitallabs.baurechner',
     packageId: 'de.mpdigitallabs.baurechner',
-    icon: '/assets/img/baurechner-icon.svg',
+    icon: '/assets/img/apps/br-icon-192.webp',
+    img: 'br',
+    storeName: 'BauRechner DE – Projektplaner',
+    // Reihenfolge und Titel wie im Google-Play-Eintrag
+    screenshots: [
+      'Bauprojekte besser planen',
+      'Viele praktische Rechner',
+      'Aufmaß einfach erfassen',
+      'Projekte übersichtlich verwalten',
+      'Kosten & Kalkulation im Blick',
+      'Material & Einkauf clever verwalten',
+      'Fotos & Dokumentation direkt beim Projekt',
+      'Auch offline nutzbar',
+    ],
     status: 'live',
     category: 'Bau & Handwerk',
     tagline: 'Vom Aufmaß bis zur Projektdokumentation.',
@@ -57,7 +71,16 @@ export const APPS = {
     support: '/support/#verbrauchsmonitor',
     play: 'https://play.google.com/store/apps/details?id=de.mpdigitallabs.verbrauchsmonitorde',
     packageId: 'de.mpdigitallabs.verbrauchsmonitorde',
-    icon: '/assets/img/verbrauchsmonitor-icon.svg',
+    icon: '/assets/img/apps/vm-icon-192.webp',
+    img: 'vm',
+    storeName: 'VerbrauchsMonitor DE',
+    screenshots: [
+      'Alles auf einen Blick',
+      'Zähler einfach verwalten',
+      'Verbrauch besser verstehen',
+      'Daten sicher verwalten',
+      'Schnell startklar',
+    ],
     status: 'live',
     category: 'Haushalt & Verbrauch',
     tagline: 'Verbrauch verstehen, ohne Tabellenchaos.',
@@ -70,16 +93,6 @@ export const APPS = {
       ['Daten', 'lokal auf dem Gerät'],
       ['Konto', 'nicht erforderlich'],
     ],
-  },
-  scootkompass: {
-    key: 'scootkompass',
-    name: 'ScootKompass',
-    short: 'ScootKompass',
-    status: 'dev',
-    category: 'Mobilität & Navigation',
-    tagline: 'Navigation, gedacht für E-Scooter.',
-    summary:
-      'Spezialisierte Navigation rund um E-Scooter, alltagstaugliche Routen und passende Streckenpräferenzen.',
   },
 };
 
