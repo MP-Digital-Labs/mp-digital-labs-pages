@@ -1,11 +1,16 @@
 # Veröffentlicht ausschließlich die gebaute Website aus neubau/dist auf GitHub Pages.
 #
 # Voraussetzung: Settings → Pages → Build and deployment → Source = "GitHub Actions".
-# Ist dort noch "Deploy from a branch" eingestellt, bricht der Workflow ab, damit
+# Ist dort noch "Deploy from a branch" eingestellt, bricht der Deploy-Job ab, damit
 # nicht zwei Mechanismen um die Live-Seite konkurrieren (siehe neubau/GO-LIVE.md).
 #
-# Der Workflow verändert das Repository nicht: nur Leserechte auf den Inhalt,
-# keine Commits, keine Pushes, keine Textersetzungen im Quellcode.
+# Der Workflow verändert das Repository nicht: keine Commits, keine Pushes,
+# keine Textersetzungen im Quellcode.
+#
+# Veröffentlicht wird nur von main:
+# - automatisch nach jedem Push auf main,
+# - manuell (Run workflow) nur, wenn "Veröffentlichen" ausdrücklich angehakt ist.
+#   Ohne Haken ist ein manueller Start ein Probelauf: Build und Prüfungen, keine Veröffentlichung.
 
 name: Deploy MP Digital Labs to GitHub Pages
 
@@ -13,11 +18,14 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      publish:
+        description: "Veröffentlichen (nur auf main). Ohne Haken: Probelauf ohne Veröffentlichung."
+        type: boolean
+        default: false
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# Standard: keine Rechte. Jeder Job erhält nur die Rechte, die er selbst braucht.
+permissions: {}
 
 concurrency:
   group: "pages"
@@ -26,6 +34,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Checkout
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -54,6 +64,22 @@ jobs:
             echo "::error::Ausgabe enthält noch FormSubmit-Verweise"; exit 1
           fi
 
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: neubau/dist
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || inputs.publish)
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write # Pages-Quelle lesen (GET /pages) und Deployment anlegen
+      id-token: write # OIDC-Nachweis für deploy-pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Pages-Quelle prüfen
         shell: bash
         env:
@@ -66,22 +92,6 @@ jobs:
             exit 1
           fi
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v6
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: neubau/dist
-
-  deploy:
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v5
