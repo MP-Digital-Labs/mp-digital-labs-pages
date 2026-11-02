@@ -1,5 +1,5 @@
 import { SITE, APPS } from '../lib/site.mjs';
-import { icon, btn, sectionHead, breadcrumbs, appIcon, faq, field } from '../lib/ui.mjs';
+import { icon, btn, sectionHead, breadcrumbs, appIcon, faq, mailto, mailCard } from '../lib/ui.mjs';
 
 const crumbs = [['Start', '/'], ['Support', '/support/']];
 const br = APPS.baurechner;
@@ -26,6 +26,13 @@ const cards = [
   },
 ];
 
+// Vorlage für Support-E-Mails: die drei Angaben aus „Vor dem Schreiben“
+const supportMail = (appName = '') => ({
+  subject: appName ? `Support: ${appName}` : 'Support-Anfrage – MP Digital Labs',
+  // Zeilenumbrüche als CRLF (RFC 6068), damit alle Mailprogramme sie übernehmen
+  body: ['App: ' + appName, 'App-Version: ', 'Android-Version und Gerät: ', '', 'Was ist passiert?', ''].join('\r\n'),
+});
+
 const tips = [
   ['phone', 'Welche App?', 'BauRechner DE oder VerbrauchsMonitor DE – und wenn möglich die installierte Version.'],
   ['flow', 'Was ist passiert?', 'Kurze Reihenfolge der Schritte: Was haben Sie gemacht, was erwartet und was ist stattdessen passiert?'],
@@ -35,7 +42,7 @@ const tips = [
 export default {
   path: '/support/',
   title: 'Support',
-  description: 'Hilfe, häufige Fragen, Datenschutz und direkter Kontakt für BauRechner DE und VerbrauchsMonitor DE von MP Digital Labs.',
+  description: 'Hilfe, häufige Fragen, Datenschutz und direkter E-Mail-Kontakt für BauRechner DE und VerbrauchsMonitor DE von MP Digital Labs.',
   priority: 0.7,
   breadcrumbs: crumbs,
   jsonld: [
@@ -69,7 +76,7 @@ export default {
         ${btn(app.path, 'Produktseite', { variant: 'secondary', size: 'sm' })}
         ${btn(app.privacy, 'Datenschutz', { variant: 'secondary', size: 'sm', iconName: 'shield' })}
         ${btn(app.play, 'Google Play', { variant: 'secondary', size: 'sm' })}
-        ${btn(`#anfrage`, 'Frage stellen', { variant: 'primary', size: 'sm', iconName: 'message', cls: 'js-prefill' }).replace('href="#anfrage"', `href="?app=${encodeURIComponent(app.short)}#anfrage"`)}
+        <a class="btn btn--primary btn--sm" href="${mailto(SITE.email, supportMail(app.name))}"><span>Frage per E-Mail</span>${icon('mail')}</a>
       </div>
     </article>`
       )
@@ -106,29 +113,19 @@ export default {
       ${sectionHead({ index: '02', label: 'Direkter Kontakt', id: 'anfrage', title: 'Problem nicht gefunden?', cls: 'shead--stack' })}
       <p class="lead" style="font-size:1.0625rem">Schreiben Sie kurz, um welche App es geht und was genau passiert. Wir antworten per E-Mail.</p>
       <div class="contact-list" style="margin-top:32px">
-        <a class="contact-item" href="mailto:${SITE.email}">${icon('mail')}<div><span>Support per E-Mail</span><strong>${SITE.email}</strong></div></a>
+        ${[br, vm]
+          .map((a) => `<a class="contact-item" href="${mailto(SITE.email, supportMail(a.name))}">${appIcon(a, 44)}<div><span>E-Mail mit Vorlage</span><strong>Support ${a.name}</strong></div></a>`)
+          .join('')}
       </div>
     </div>
-    <div class="formcard reveal" style="--d:1">
-      <form class="form" data-form data-next="/kontakt/danke/" action="${SITE.formEndpoint}" method="POST" accept-charset="UTF-8">
-        <input type="hidden" name="_subject" value="Support-Anfrage – MP Digital Labs">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="">
-        <input type="hidden" name="_url" value="">
-        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-        ${field({ name: 'app', label: 'App', type: 'select', options: ['BauRechner DE', 'VerbrauchsMonitor DE', 'Andere / Allgemein'], full: true })}
-        ${field({ name: 'name', label: 'Name', autocomplete: 'name', maxlength: 100 })}
-        ${field({ name: 'email', label: 'E-Mail', type: 'email', autocomplete: 'email', maxlength: 180 })}
-        ${field({ name: 'version', label: 'App- und Android-Version', required: false, maxlength: 120, placeholder: 'z. B. App 1.0 · Android 15', full: true })}
-        ${field({ name: 'subject', label: 'Betreff', maxlength: 180, full: true })}
-        ${field({ name: 'message', label: 'Nachricht', type: 'textarea', maxlength: 5000, rows: 6, full: true })}
-        <p class="form__status" role="status" aria-live="polite"></p>
-        <div class="form__foot">
-          <p class="form__legal">Mit dem Absenden werden die eingegebenen Daten über FormSubmit an MP Digital Labs übermittelt. Details stehen in der <a href="/datenschutz.html">Datenschutzerklärung</a>.</p>
-          <button class="btn btn--primary btn--lg" type="submit"><span>Anfrage senden</span>${icon('arrow')}</button>
-        </div>
-      </form>
+    <div class="reveal" style="--d:1">
+      ${mailCard({
+        email: SITE.email,
+        id: 'support',
+        title: 'Support per E-Mail',
+        text: 'Der Button öffnet eine E-Mail mit einer kurzen Vorlage für App, Version und Gerät – so sind die wichtigsten Angaben gleich dabei.',
+        ...supportMail(),
+      })}
     </div>
   </div>
 </section>

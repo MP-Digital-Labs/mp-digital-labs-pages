@@ -1,4 +1,6 @@
-// Rechtliche Seiten. Die Texte liegen unverändert unter src/legal/ und
+// Rechtliche Seiten. Die Texte liegen unter src/legal/ (Impressum und App-Datenschutz-
+// erklärungen unverändert aus der bisherigen Website; Website-Datenschutzerklärung am
+// 2. November 2026 nach Entfernung der Kontaktformulare angepasst) und
 // werden nur in das neue Layout eingebettet. URLs bleiben exakt erhalten.
 
 import { breadcrumbs } from '../lib/ui.mjs';

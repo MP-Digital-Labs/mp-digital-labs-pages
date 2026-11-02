@@ -33,7 +33,7 @@ const process = [
     title: 'Prüfen',
     text: 'Funktionen werden an realistischen Nutzungsszenarien getestet. Plausibilitätsprüfungen sorgen dafür, dass Ergebnisse nachvollziehbar bleiben.',
     who: vm,
-    example: 'Unplausible Folgestände werden nicht still als korrekt übernommen, und Backup-Dateien werden vor der Wiederherstellung unter anderem per Prüfsumme auf Integrität geprüft.',
+    example: 'Ein Zählerstand unter dem vorherigen wird nicht übernommen, und Backup-Dateien werden vor der Wiederherstellung unter anderem per Prüfsumme auf Integrität geprüft.',
   },
   {
     id: 'pflegen',
@@ -125,7 +125,7 @@ export default {
 ${ctaBand({
   title: 'Rückmeldungen machen unsere Apps besser.',
   text: 'Sie nutzen BauRechner DE oder VerbrauchsMonitor DE und haben eine Idee oder einen Hinweis? Schreiben Sie uns.',
-  actions: `${btn('/kontakt/?thema=Produktfeedback', 'Feedback senden', { variant: 'primary', size: 'lg' })}${btn('/apps/', 'Apps ansehen', { variant: 'secondary', size: 'lg' })}`,
+  actions: `${btn('/kontakt/', 'Feedback senden', { variant: 'primary', size: 'lg' })}${btn('/apps/', 'Apps ansehen', { variant: 'secondary', size: 'lg' })}`,
 })}
 `,
 };

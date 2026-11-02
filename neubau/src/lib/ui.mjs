@@ -43,6 +43,7 @@ const ICONS = {
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/>',
   message: '<path d="M4 5.5h16v11H9l-5 4z"/>',
   code: '<path d="m8.5 7-5 5 5 5M15.5 7l5 5-5 5"/>',
+  copy: '<rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/>',
 };
 
 export function icon(name, cls = '') {
@@ -266,27 +267,28 @@ export function numInput({ name, label, min, max, step, value, unit, range = tru
   </div>`;
 }
 
-// Formularfeld-Helfer
-export function field({ name, label, type = 'text', required = true, autocomplete, placeholder, maxlength, rows, options, value, hint, full }) {
-  const id = `f-${name}`;
-  const req = required ? ' required' : '';
-  const ac = autocomplete ? ` autocomplete="${autocomplete}"` : '';
-  const ph = placeholder ? ` placeholder="${esc(placeholder)}"` : '';
-  const ml = maxlength ? ` maxlength="${maxlength}"` : '';
-  let control;
-  if (type === 'textarea') {
-    control = `<textarea id="${id}" name="${name}" rows="${rows || 6}"${req}${ph}${ml}></textarea>`;
-  } else if (type === 'select') {
-    control = `<div class="select"><select id="${id}" name="${name}"${req}><option value="">Bitte auswählen</option>${options
-      .map((o) => `<option${o === value ? ' selected' : ''}>${o}</option>`)
-      .join('')}</select>${icon('chevron')}</div>`;
-  } else {
-    control = `<input id="${id}" name="${name}" type="${type}"${req}${ac}${ph}${ml}>`;
-  }
-  return `<div class="field${full ? ' field--full' : ''}">
-    <label for="${id}">${label}${required ? '' : ' <span class="field__opt">optional</span>'}</label>
-    ${control}
-    ${hint ? `<p class="field__hint">${hint}</p>` : ''}
-    <p class="field__err" id="${id}-err" hidden></p>
+// mailto-Link mit vorbelegtem Betreff und optionaler Textvorlage
+export function mailto(email, { subject = '', body = '' } = {}) {
+  const q = [subject && `subject=${encodeURIComponent(subject)}`, body && `body=${encodeURIComponent(body)}`].filter(Boolean).join('&');
+  return esc(`mailto:${email}${q ? `?${q}` : ''}`);
+}
+
+// E-Mail-Karte: Adresse als markierbarer Text, mailto-Button und Kopier-Button.
+// Der Kopier-Button erscheint nur mit JavaScript; ohne JS bleibt die Adresse markierbar.
+export function mailCard({ email, title, text, subject = '', body = '', id = 'mail', cls = '' }) {
+  return `<div class="mailcard ${cls}">
+    <h2 class="h3 mailcard__title">${title}</h2>
+    ${text ? `<p class="mailcard__text">${text}</p>` : ''}
+    <div class="mailcard__addr">
+      ${icon('mail')}
+      <span class="mailcard__value" id="${id}-addr">${email.split('@').map((part, i) => `<span class="nowrap">${i ? '@' : ''}${part}</span>`).join('<wbr>')}</span>
+    </div>
+    <div class="mailcard__actions">
+      <a class="btn btn--primary btn--lg" href="${mailto(email, { subject, body })}"><span>E-Mail schreiben</span>${icon('arrow')}</a>
+      <button class="btn btn--secondary btn--lg" type="button" data-copy="${email}" data-copy-target="${id}-addr" aria-describedby="${id}-status"><span>Adresse kopieren</span>${icon('copy')}</button>
+    </div>
+    <p class="mailcard__status" id="${id}-status" role="status" aria-live="polite"></p>
+    <p class="mailcard__hint">Kein E-Mail-Programm eingerichtet? Kopieren Sie die Adresse und schreiben Sie uns aus Ihrem Webmail-Postfach.</p>
+    <p class="mailcard__legal">Wie wir mit Ihrer E-Mail umgehen, steht in der <a href="/datenschutz.html#kontakt">Datenschutzerklärung</a>.</p>
   </div>`;
 }

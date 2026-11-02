@@ -199,60 +199,54 @@
     update();
   });
 
-  /* ---------- Formulare (FormSubmit) ---------- */
-  const params = new URLSearchParams(location.search);
-  $$('form[data-form]').forEach((form) => {
-    const next = $('[name="_next"]', form);
-    if (next) next.value = new URL(form.dataset.next || '/kontakt/danke/', location.origin).href;
-    const url = $('[name="_url"]', form);
-    if (url) url.value = location.href.split('?')[0];
-
-    // Vorauswahl über ?thema= bzw. ?app=
-    const pre = params.get('thema') || params.get('app');
-    if (pre) {
-      const sel = $('select', form);
-      const opt = sel && [...sel.options].find((o) => o.text.toLowerCase().includes(pre.toLowerCase()));
-      if (opt) sel.value = opt.value || opt.text;
+  /* ---------- E-Mail-Adresse kopieren ---------- */
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      // Fallback für Browser ohne Clipboard-API bzw. ohne sicheren Kontext
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+      document.body.append(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch { ok = false; }
+      ta.remove();
+      return ok;
     }
-
-    const msg = (field, text) => {
-      const err = $(`#${field.id}-err`, form);
-      field.setAttribute('aria-invalid', text ? 'true' : 'false');
-      if (err) {
-        err.textContent = text;
-        err.hidden = !text;
-        if (text) field.setAttribute('aria-describedby', err.id);
+  };
+  $$('[data-copy]').forEach((b) => {
+    const status = $(`#${b.getAttribute('aria-describedby')}`);
+    const target = $(`#${b.dataset.copyTarget}`);
+    const label = $('span', b);
+    let timer;
+    b.addEventListener('click', async () => {
+      const ok = await copyText(b.dataset.copy);
+      clearTimeout(timer);
+      if (ok) {
+        label.textContent = 'Kopiert';
+        b.classList.add('is-done');
+        if (status) status.textContent = 'E-Mail-Adresse in die Zwischenablage kopiert.';
+      } else if (target) {
+        // Kopieren nicht möglich: Adresse markieren, damit sie manuell kopiert werden kann
+        const range = document.createRange();
+        range.selectNodeContents(target);
+        const sel = getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        if (status) status.textContent = 'Adresse markiert – bitte mit Strg+C bzw. „Kopieren“ übernehmen.';
       }
-    };
-    const check = (field) => {
-      const v = field.validity;
-      if (v.valid) return msg(field, ''), true;
-      if (v.valueMissing) msg(field, 'Bitte füllen Sie dieses Feld aus.');
-      else if (v.typeMismatch) msg(field, 'Bitte geben Sie eine gültige E-Mail-Adresse ein.');
-      else msg(field, 'Bitte prüfen Sie Ihre Eingabe.');
-      return false;
-    };
-    const fields = $$('input:not([type="hidden"]):not(.hp), select, textarea', form);
-    fields.forEach((f) => f.addEventListener('blur', () => f.value && check(f)));
-    fields.forEach((f) => f.addEventListener('input', () => f.getAttribute('aria-invalid') === 'true' && check(f)));
-    form.setAttribute('novalidate', '');
-    form.addEventListener('submit', (e) => {
-      const invalid = fields.filter((f) => !check(f));
-      const status = $('.form__status', form);
-      if (invalid.length) {
-        e.preventDefault();
-        status.textContent = 'Bitte prüfen Sie die markierten Felder.';
-        status.classList.add('is-error');
-        invalid[0].focus();
-        return;
-      }
-      status.classList.remove('is-error');
-      status.textContent = 'Nachricht wird übermittelt …';
-      const btn = $('button[type="submit"]', form);
-      btn.disabled = true;
-      btn.setAttribute('aria-busy', 'true');
+      timer = setTimeout(() => {
+        label.textContent = 'Adresse kopieren';
+        b.classList.remove('is-done');
+        if (status) status.textContent = '';
+      }, 4000);
     });
   });
+
   /* ---------- Screenshot-Galerie & Lightbox ---------- */
   const galleries = $$('[data-gallery]');
   if (galleries.length) {

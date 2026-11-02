@@ -3,7 +3,7 @@
 Vollständiger Neubau der Unternehmenswebsite **mp-digital-labs.de**. Das gestalterische und inhaltliche Konzept steht in [KONZEPT.md](KONZEPT.md).
 
 > **Status:** lokaler Entwicklungsstand auf `feature/website-neubau`. Nicht veröffentlicht.
-> Die bisherige Website im Repository-Root und ihr Deployment sind unverändert.
+> Die bisherige Website im Repository-Root ist unverändert. Der Workflow `.github/workflows/pages.yml` ist in diesem Branch bereits auf den Neubau umgestellt und wird erst mit dem Merge nach `main` aktiv.
 
 ## Schnellstart
 
@@ -28,7 +28,8 @@ npm run preview      # baut nach dist/ und startet http://localhost:4173
 neubau/
 ├── KONZEPT.md             Gesamtkonzept, Designsystem, IA, SEO, Barrierefreiheit
 ├── brand-src/            offizielles Firmenlogo (Original)
-├── deploy/pages.yml       Workflow-Vorlage für den Go-live (inaktiv)
+├── GO-LIVE.md             Go-live- und Rollback-Plan
+├── AUDIT-2026-11-02.md    Audit vor Veröffentlichung inkl. Nachtrag
 ├── scripts/
 │   ├── build.mjs          Static-Site-Generator + Link-Checker + Sitemap
 │   ├── serve.mjs          lokaler Vorschau-Server
@@ -38,9 +39,9 @@ neubau/
     ├── lib/
     │   ├── site.mjs       ★ Firmen- und Produktdaten (einzige Quelle)
     │   ├── layout.mjs     <head>, Header/Navigation, Footer, JSON-LD
-    │   └── ui.mjs         Komponenten (Buttons, Karten, FAQ, Formularfelder …)
+    │   └── ui.mjs         Komponenten (Buttons, Karten, FAQ, E-Mail-Karte …)
     ├── pages/             eine Datei pro Seite bzw. Seitengruppe
-    ├── legal/             Rechtstexte, unverändert aus der bisherigen Website
+    ├── legal/             Rechtstexte (Website-Datenschutz am 2.11.2026 angepasst, Rest unverändert)
     └── static/            CSS, JS, Schriften, Bilder, CNAME, robots.txt, Favicons
 ```
 
@@ -55,13 +56,6 @@ neubau/
 
 ## Go-live (nur nach ausdrücklicher Freigabe)
 
-1. Branch prüfen und in `main` übernehmen (Pull Request).
-2. `.github/workflows/pages.yml` durch `neubau/deploy/pages.yml` ersetzen. Wichtig: Der bisherige Workflow patcht die alte `index.html` und pusht selbst auf `main`. Er muss vollständig ersetzt werden.
-3. Nach dem ersten Deployment prüfen:
-   - alle Bestands-URLs (`/apps/…`, `/support/#…`, `/datenschutz-*.html`, `/impressum/`)
-   - Preise und Pro-Umfang erneut mit Google Play abgleichen
-   - die in der Google Play Console hinterlegten Datenschutz-URLs
-   - Kontaktformular: einen echten Testversand durchführen und prüfen, ob die Weiterleitung auf `/kontakt/danke/` funktioniert
-4. Optional danach: die alten Root-Dateien (`index.html`, `site.css`, `site.js`, …) entfernen. Sie werden mit dem neuen Workflow nicht mehr ausgeliefert.
+Der vollständige, verbindliche Ablauf mit GitHub-Einstellungen, Freigaben, Abnahme und Rollback steht in **[GO-LIVE.md](GO-LIVE.md)**.
 
-Rollback: den Workflow auf den alten Stand zurücksetzen. Die Root-Dateien bleiben bis Schritt 4 vollständig erhalten.
+Kurzfassung: Der Workflow `.github/workflows/pages.yml` in diesem Branch ersetzt den alten Workflow. Er veröffentlicht nur `neubau/dist`, ändert das Repository nicht und bricht ab, solange *Settings → Pages → Source* nicht auf „GitHub Actions“ steht. **Der Merge nach `main` ist der Go-live.**

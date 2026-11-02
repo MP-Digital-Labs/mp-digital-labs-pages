@@ -21,8 +21,6 @@ export const SITE = {
     countryCode: 'DE',
   },
   email: 'contact@mp-digital-labs.de',
-  // Bestehender, bereits aktivierter FormSubmit-Endpunkt (siehe Datenschutzerklärung Abschnitt 4).
-  formEndpoint: 'https://formsubmit.co/mpdigitallabs.contact@gmail.com',
 };
 
 export const APPS = {
@@ -55,6 +53,7 @@ export const APPS = {
     summary:
       'Aufmaß, Berechnungen, Material, Einkauf, Kosten und Projektdokumentation in einer kompakten Baustellen-App – für Handwerk, Renovierung und Bauprojekte.',
     // Geprüft am 2. November 2026 gegen Google-Play-Eintrag (Version 1.0.0-rc14) und App-Code
+    // (BauRechner-DE-RC14-Clean, versionName 1.0.0-rc14: CalculatorCatalog, ProjectProTools, ProScreen)
     pricing: {
       proPrice: '14,99 €',
       free: [
@@ -105,7 +104,9 @@ export const APPS = {
     tagline: 'Verbrauch verstehen, ohne Tabellenchaos.',
     summary:
       'Zählerstände für Strom, Gas, Wasser und Wärme erfassen und die Verbrauchsentwicklung übersichtlich im Blick behalten.',
-    // Geprüft am 2. November 2026 gegen Google-Play-Eintrag (Version 1.0.1) und App-Code
+    // Geprüft am 2. November 2026 gegen Google-Play-Eintrag (Version 1.0.1) und App-Code.
+    // Lokal lag nur der Stand 1.0.0+12 vor (MeterLimitPolicy, AnalysisScreen, AddTariffScreen);
+    // Abweichungen in 1.0.1 sind daher nicht ausgeschlossen.
     pricing: {
       proPrice: '9,99 €',
       free: [

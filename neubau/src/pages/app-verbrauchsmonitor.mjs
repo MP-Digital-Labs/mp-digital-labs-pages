@@ -6,7 +6,7 @@ const crumbs = [['Start', '/'], ['Apps', '/apps/'], [app.name, app.path]];
 
 const features = [
   ['gauge', 'Zähler verwalten', 'Strom, Gas, Wasser und Wärme getrennt anlegen. Bis zu zwei Zähler sind kostenlos, mit Pro beliebig viele.'],
-  ['calendar', 'Zählerstände', 'Messwerte mit Datum und optionaler Notiz erfassen. Unplausible Folgestände werden nicht still als korrekt übernommen.'],
+  ['calendar', 'Zählerstände', 'Messwerte mit Datum und optionaler Notiz erfassen. Ein Stand unter dem vorherigen wird nicht übernommen – für einen Zählerwechsel gibt es einen eigenen Ablauf.'],
   ['bell', 'Erinnerungen', 'Individuelle, lokale Ableseerinnerungen – damit regelmäßige Zählerstände nicht untergehen.'],
   ['chart', `Auswertungen${proTag()}`, 'Verbrauchsentwicklung nach Monaten und Jahren, Jahresvergleich, Trends und Hochrechnungen.'],
   ['euro', `Tarife & Kosten${proTag()}`, 'Grund- und Arbeitspreise hinterlegen und daraus klar gekennzeichnete Kostenschätzungen ableiten – ohne eine Versorgerabrechnung vorzutäuschen.'],
@@ -188,7 +188,7 @@ export default {
       ${sectionHead({ index: '06', label: 'Datenschutz', id: 'daten', title: 'Die Verbrauchsdaten bleiben bei Ihnen.', cls: 'shead--stack' })}
       <div class="body-copy">
         <p>VerbrauchsMonitor DE ist <strong>offline-first</strong> aufgebaut. Für die Kernfunktionen ist kein MP-Digital-Labs-Konto und kein eigener Cloud-Dienst erforderlich.</p>
-        <p class="note">${icon('shield')}<span>Die App erzeugt aus fehlenden Messwerten keine künstlichen Messpunkte. Hochrechnungen und Kostenschätzungen (Pro) werden als solche gekennzeichnet.</span></p>
+        <p class="note">${icon('shield')}<span>Liegen Ablesungen nicht genau auf Monats- oder Tarifgrenzen, verteilt die App den Verbrauch zeitanteilig und kennzeichnet diese Werte als geschätzt. Hochrechnungen und Kostenschätzungen (Pro) werden ebenfalls als Schätzung ausgewiesen.</span></p>
       </div>
       <div class="actions" style="margin-top:28px">${link(app.privacy, 'Datenschutzerklärung VerbrauchsMonitor DE')}</div>
     </div>

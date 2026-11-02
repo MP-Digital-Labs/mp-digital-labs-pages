@@ -11,7 +11,7 @@ Stand: 2. November 2026 · Branch `feature/website-neubau` · Status: Vorschau, 
 | Domain | `mp-digital-labs.de` über `CNAME` |
 | Bisherige Startseite | eine einzelne `index.html` mit 1,8 MB (eingebettete Bilddaten), dunkles Design, Inhalte teilweise per Workflow-Skript nachträglich gepatcht |
 | Unterseiten | `/apps/`, zwei Produktseiten, `/support/`, `/impressum/`, drei Datenschutzerklärungen (`*.html`) |
-| Formulare | FormSubmit (`formsubmit.co`), in der Datenschutzerklärung dokumentiert |
+| Formulare | FormSubmit (`formsubmit.co`) – im Neubau entfernt, Kontakt nur noch per E-Mail |
 
 Die bisherige Website diente ausschließlich als Quelle für Inhalte, Unternehmensdaten und Produkte.
 
@@ -107,8 +107,8 @@ Beide Schriften sind variabel, lokal gehostet und stehen unter der SIL Open Font
 │   └── /apps/verbrauchsmonitor-de/ Produktseite + Screenshot-Galerie + Web-Demo „Verbrauch & Kosten“
 ├── /arbeitsweise/              Wie eigene Produkte entstehen: Prozess, Qualitätsstandards, Praxisbeispiele
 ├── /studio/                    Über das Unternehmen, Haltung, Profil
-├── /support/                   Hilfe je App (#baurechner, #verbrauchsmonitor), FAQ, Formular
-├── /kontakt/                   Kontaktformular, E-Mail, Themen  →  /kontakt/danke/
+├── /support/                   Hilfe je App (#baurechner, #verbrauchsmonitor), FAQ, E-Mail mit Vorlage
+├── /kontakt/                   E-Mail-Kontakt mit Kopierfunktion, Themen mit vorbelegtem Betreff
 ├── /impressum/
 ├── /datenschutz.html
 ├── /datenschutz-baurechner.html
@@ -156,7 +156,7 @@ Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originale
 - **Single Source of Truth** für Firmendaten und Produkte: `src/lib/site.mjs`.
 - **Qualitätssicherung im Build**: Prüfung aller internen Links und Anker sowie aller bisherigen URLs. Bei Fehlern bricht der Build ab.
 - **Ausgabe**: rund 4 MB inklusive aller Bildvarianten. Pro Seite werden dank responsiver Bilder und Lazy Loading nur die sichtbaren Screenshots geladen; es gibt keine Frameworks und keine Drittanbieter-Requests.
-- **Hosting** bleibt GitHub Pages. Die Workflow-Vorlage liegt unter `deploy/pages.yml`.
+- **Hosting** bleibt GitHub Pages. Veröffentlichung über `.github/workflows/pages.yml` (nur `neubau/dist`), Ablauf in `GO-LIVE.md`.
 
 ## 10. SEO
 
@@ -169,7 +169,7 @@ Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originale
 
 - Skip-Link, Landmarks, `aria-current`, beschriftete Navigationen und sichtbare Fokus-Indikatoren
 - Kontraste: Text auf Papier ≥ 4,5 : 1; Produktfarben haben je eine textsichere Variante
-- Formulare mit Labels, Inline-Fehlermeldungen (`aria-invalid`, `aria-describedby`) und Statusmeldungen über `aria-live`
+- E-Mail-Kontakt: Adresse als markierbarer Text, Kopier-Button mit Statusmeldung über `aria-live` und Fallback (Adresse wird markiert), ohne JavaScript bleibt die Adresse kopierbar
 - Mega-Menü und Mobilmenü sind vollständig per Tastatur bedienbar (Escape, Fokusfalle)
 - `prefers-reduced-motion` schaltet alle Animationen ab. Ohne JavaScript bleiben alle Inhalte sichtbar
 - Dekorative Illustrationen sind `aria-hidden`, Inhalte stehen immer zusätzlich als Text da
@@ -178,5 +178,5 @@ Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originale
 
 - Keine Cookies, kein Tracking, keine externen Schriften, CDNs oder Einbettungen
 - Die Mini-Demos rechnen ausschließlich im Browser
-- Kontakt- und Supportformulare nutzen weiterhin den bestehenden FormSubmit-Endpunkt (bereits in der Datenschutzerklärung beschrieben). Kein `localStorage`
+- Keine Formulare und kein Formulardienst: Kontakt ausschließlich per E-Mail (`mailto:`), Kopieren erfolgt lokal im Browser. Kein `localStorage`
 - Alle Bilder werden von der eigenen Domain ausgeliefert, nicht von Google-Servern
