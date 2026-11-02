@@ -2,7 +2,7 @@
 #
 # Voraussetzung: Settings → Pages → Build and deployment → Source = "GitHub Actions".
 # Ist dort noch "Deploy from a branch" eingestellt, bricht der Deploy-Job ab, damit
-# nicht zwei Mechanismen um die Live-Seite konkurrieren (siehe neubau/GO-LIVE.md).
+# nicht zwei Mechanismen um die Live-Seite konkurrieren.
 #
 # Der Workflow verändert das Repository nicht: keine Commits, keine Pushes,
 # keine Textersetzungen im Quellcode.

@@ -156,7 +156,7 @@ Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originale
 - **Single Source of Truth** für Firmendaten und Produkte: `src/lib/site.mjs`.
 - **Qualitätssicherung im Build**: Prüfung aller internen Links und Anker sowie aller bisherigen URLs. Bei Fehlern bricht der Build ab.
 - **Ausgabe**: rund 4 MB inklusive aller Bildvarianten. Pro Seite werden dank responsiver Bilder und Lazy Loading nur die sichtbaren Screenshots geladen; es gibt keine Frameworks und keine Drittanbieter-Requests.
-- **Hosting** bleibt GitHub Pages. Veröffentlichung über `.github/workflows/pages.yml` (nur `neubau/dist`), Ablauf in `GO-LIVE.md`.
+- **Hosting** bleibt GitHub Pages. Veröffentlichung über `.github/workflows/pages.yml` (nur `neubau/dist`).
 
 ## 10. SEO
 

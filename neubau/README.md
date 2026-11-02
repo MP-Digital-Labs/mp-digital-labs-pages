@@ -28,8 +28,6 @@ npm run preview      # baut nach dist/ und startet http://localhost:4173
 neubau/
 ├── KONZEPT.md             Gesamtkonzept, Designsystem, IA, SEO, Barrierefreiheit
 ├── brand-src/            offizielles Firmenlogo (Original)
-├── GO-LIVE.md             Go-live- und Rollback-Plan
-├── AUDIT-2026-11-02.md    Audit vor Veröffentlichung inkl. Nachtrag
 ├── scripts/
 │   ├── build.mjs          Static-Site-Generator + Link-Checker + Sitemap
 │   ├── serve.mjs          lokaler Vorschau-Server
@@ -56,6 +54,6 @@ neubau/
 
 ## Go-live (nur nach ausdrücklicher Freigabe)
 
-Der vollständige, verbindliche Ablauf mit GitHub-Einstellungen, Freigaben, Abnahme und Rollback steht in **[GO-LIVE.md](GO-LIVE.md)**.
+Der verbindliche Ablauf mit GitHub-Einstellungen, Freigaben, Abnahme und Rollback wird intern geführt.
 
 Kurzfassung: Der Workflow `.github/workflows/pages.yml` in diesem Branch ersetzt den alten Workflow. Er veröffentlicht nur `neubau/dist`, ändert das Repository nicht und bricht ab, solange *Settings → Pages → Source* nicht auf „GitHub Actions“ steht. **Der Merge nach `main` ist der Go-live.**
