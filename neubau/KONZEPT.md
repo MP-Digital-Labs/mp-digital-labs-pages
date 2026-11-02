@@ -17,59 +17,62 @@ Die bisherige Website diente ausschließlich als Quelle für Inhalte, Unternehme
 
 ## 2. Positionierung
 
-**MP Digital Labs ist ein unabhängiges, inhabergeführtes Softwarestudio aus Bielefeld, das Werkzeuge mit klarem Zweck baut.**
+**MP Digital Labs ist ein unabhängiges, inhabergeführtes Softwarestudio aus Bielefeld, das ausschließlich eigene Softwareprodukte entwickelt und vertreibt.** Es werden keine Entwicklungs- oder Beratungsdienstleistungen für Dritte angeboten. Die Website enthält deshalb keine Projektanfragen oder Leistungsangebote.
 
-Die Website muss drei Zielgruppen gleichzeitig bedienen:
+Zielgruppen:
 
-1. **App-Nutzer** (Handwerk, Haushalte): Produktverständnis, Vertrauen, Download, Support, Datenschutz.
-2. **Potenzielle Auftraggeber und Partner**: Kompetenz, Arbeitsweise, Ansprechpartner, Kontakt.
+1. **App-Nutzer** (Handwerk, Haushalte): Produktverständnis, Vertrauen, Download, Support, Datenschutz, transparente Preise.
+2. **Geschäftliche Kontakte und Presse**: wer hinter den Apps steht, Haltung, Kontakt.
 3. **Google Play und Behörden**: stabile, auffindbare Rechtstexte unter den bekannten URLs.
 
-Kernbotschaft: *Software mit klarem Zweck. Gebaut für den Alltag.* Belegt wird sie ausschließlich durch echte Produkteigenschaften: offline-first, kein Konto, Einmalkauf statt Abo, lokale Datenspeicherung.
+Kernbotschaft: *Software mit klarem Zweck. Gebaut für den Alltag.* Belegt wird sie ausschließlich durch geprüfte Produkteigenschaften: offline nutzbar, kein Konto, kostenloser Einstieg, Pro als Einmalkauf ohne Abo.
 
 Öffentlich gezeigt und verlinkt werden **nur veröffentlichte Apps** (BauRechner DE, VerbrauchsMonitor DE).
 
-## 3. Referenzanalyse
+## 3. Qualitätsmaßstab
 
-Untersucht wurden Auftritte etablierter Softwareunternehmen und unabhängiger Produktstudios. Übernommen wurden nur die Prinzipien, nicht die Gestaltung:
+Als Referenz dienten etablierte Software-Marken. Übernommen wurden Prinzipien, keine Gestaltung:
 
-| Referenz | Prinzip, das übernommen wurde |
+| Referenz | Übernommenes Prinzip |
 |---|---|
-| Linear, Vercel | präzise Typografie, ruhige Flächen, hohe Informationsdichte ohne Lärm |
-| Stripe | Produkte erklären sich über interaktive, echte Rechenbeispiele |
-| Cultured Code (Things), Panic | kleines Studio mit Haltung und Produktstolz statt aufgeblasener Agentursprache |
-| Raycast | klare Produktseiten mit Funktionsraster, FAQ und starkem Abschluss-CTA |
-| Teenage Engineering | technisch-ästhetische Details wie Messraster, Mono-Labels und Bemaßungen |
+| Apple, Linear | dunkle, ruhige Bühnen für Produktbilder, leichte große Typografie, viel Weißraum |
+| Stripe | Produkte über echte Inhalte erklären, klare Preis- und Funktionsübersichten |
+| Things (Cultured Code), Panic | kleines Studio mit Haltung und Produktstolz statt Agentursprache |
+| Raycast | Produktseiten: Funktionsraster, Galerie, FAQ, ruhiger Abschluss |
 
-## 4. Gestaltungsidee „Präzision“
+## 4. Gestaltung „Midnight & Silver“
 
-Beide veröffentlichten Apps **messen und rechnen**: Aufmaß und Material bei BauRechner, Zählerstände und Verbrauch beim VerbrauchsMonitor. Daraus leitet sich die visuelle Sprache ab:
+Die Gestaltung leitet sich direkt aus dem offiziellen Kreislogo ab: tiefes Nachtblau, Silber (das „M“) und leuchtendes Blau (das „P“ und der Ring).
 
-- **Messraster** als feiner Hintergrund in Hero-Bereichen, zu den Rändern hin ausgeblendet
-- **Bemaßungslinien und Mono-Labels** (Geist Mono) für Kennzeichnungen, Indizes und Daten
-- **Papier und Tinte**: warmes Off-White `#f4f3ee`, tiefe Tinte `#0d0f12`, Haarlinien statt Schatten
-- **Eine Signalfarbe**: das Blau aus dem offiziellen Logo (`#1769e0`). Jede Produktseite übernimmt die Farbe ihres App-Icons (BauRechner Orange, VerbrauchsMonitor Blau)
-- **Nur Originalbilder**: App-Icons, Screenshots und Vorstellungsgrafiken stammen unverändert aus den öffentlichen Google-Play-Einträgen und sind als solche gekennzeichnet. Es gibt keine nachgebauten App-Oberflächen. Die interaktiven Rechenbeispiele sind ausdrücklich als Web-Demo gekennzeichnet
+- **Rhythmus aus Nacht und Tag**: Header, Seiten-Heros, Studio-Band, Screenshot-Galerien und Footer liegen auf Nachtblau `#060a12`, die Inhaltsbereiche auf Weiß und kühlem Grau `#f4f6fa`. Logo und App-Screenshots wirken auf der dunklen Bühne wie im Store.
+- **Markenmotiv Ring**: Konzentrische, feine Ringe mit einem blauen Lichtbogen greifen den Logo-Ring auf, hinter den Screenshots, dem Logo und im Abschluss-Panel. Weiche blaue Leuchtflächen ersetzen harte Effekte.
+- **Silberverlauf**: Nur ein Schlüsselsatz pro Seite trägt den Verlauf Silber → Blau, analog zu „M“ und „P“ im Logo.
+- **Produktfarben**: BauRechner Orange und VerbrauchsMonitor Blau, beide aus den App-Icons, als Akzent auf den jeweiligen Produktseiten.
 
-### Designsystem (Tokens in `src/static/assets/css/site.css`)
+### Typografie
 
-| Token | Hell | Dunkel |
+| Rolle | Schrift | Schnitte |
 |---|---|---|
-| `--paper` | `#f4f3ee` | `#0b0c0e` |
-| `--surface` | `#ffffff` | `#14161a` |
-| `--ink` / `--ink-2` / `--ink-3` | `#0d0f12` / `#3b4048` / `#636a74` | `#f1f0eb` / `#c0c4cb` / `#8e959f` |
-| `--signal` | `#1769e0` | `#4fb0ff` |
-| BauRechner | `#c2410c` (Text), `#f05a18` (Fläche) | `#ff8a52` |
-| VerbrauchsMonitor | `#0a6fb5` (Text), `#2f9ae4` (Fläche) | `#5cb8f5` |
+| Überschriften, Kennzahlen, Wortmarke | **Sora** (geometrisch, verwandt mit dem Logo-Schriftzug) | 200–400; große Überschriften in 300 |
+| Fließtext, Bedienelemente | **Inter** | 400–600 |
 
-- **Typografie**: Geist (variabel, 100–900) und Geist Mono, lokal gehostet (OFL-Lizenz). Display mit −0,048 em Laufweite, Fließtext 17 px / 1,6.
-- **Raster**: maximal 1240 px, Rand 16–40 px fluid, Sektionsabstand 80–148 px fluid.
-- **Formen**: Radien 10 / 16 / 24 px, 1-px-Haarlinien, Schatten nur bei Hover.
-- **Logo**: ausschließlich das offizielle, kreisförmige MP-Digital-Labs-Logo (Quelle: `brand-src/mpdl-logo-original.webp`). Daraus erzeugt `scripts/process-images.mjs` zwei weboptimierte Varianten:
-  - *Vollversion* (Kreis mit transparenten Ecken, 320/640/512 px) für Footer, Startseite (Studio), Studio-Seite, OG-Bild und strukturierte Daten
-  - *Kompaktversion* für kleine Größen wie Header (40 px), Favicon, Touch-Icon und Web-App-Icons. Sie besteht aus dem Original-Ring und dem Original-Monogramm ohne die Schriftzeilen, die unter 100 px unlesbar wären. Daneben steht im Header der Firmenname in der Schreibweise des Logos (**MP** DIGITAL LABS)
-  - Es wird nichts neu gezeichnet oder umgefärbt, nur zugeschnitten und skaliert
-- **Dark Mode**: automatisch über `prefers-color-scheme`, ohne Umschalter. So wird nichts im Browser gespeichert, und die Datenschutzerklärung bleibt unverändert zutreffend.
+Beide Schriften sind variabel, lokal gehostet und stehen unter der SIL Open Font License. Bewusst leichte Schnitte und eine maßvolle Laufweite (−0,03 em) sorgen für Eleganz statt Wucht. Die Hierarchie entsteht über Größe und Weißraum, nicht über Fettung.
+
+### Tokens (`src/static/assets/css/site.css`)
+
+| Token | Hell | Dunkel / Nachtbereiche |
+|---|---|---|
+| Nacht | `#060a12` | – |
+| Fläche | `#ffffff` / `#f4f6fa` | `#070c16` / `#0b1322` |
+| Text | `#0a1020` / `#414b5f` / `#69738a` | `#f2f5fa` / 74 % / 54 % |
+| Markenblau | `#1c6df2` | `#5cb5ff` |
+| BauRechner | `#c2410c` / `#f26a21` | `#ff9a5c` |
+| VerbrauchsMonitor | `#1060c8` / `#2f8cf0` | `#7cc0ff` |
+
+- **Formen**: Pillen-Buttons, Radien 18 / 28 / 32 px, Haarlinien, Schatten nur für Tiefe bei Produktbildern
+- **Raster**: maximal 1200 px, Rand 20–48 px, Sektionsabstand 88–144 px
+- **Logo**: ausschließlich das offizielle Kreislogo. Die Vollversion steht im Footer, im Studio-Band, auf der Studio-Seite und im OG-Bild; die Kompaktversion (Original-Ring und -Monogramm) im Header und als Favicon
+- **Dark Mode**: automatisch über `prefers-color-scheme`
 
 ## 5. Informationsarchitektur
 
@@ -78,7 +81,7 @@ Beide veröffentlichten Apps **messen und rechnen**: Aufmaß und Material bei Ba
 ├── /apps/                      Produktportfolio (Vorstellungsgrafiken) + Vergleich
 │   ├── /apps/baurechner-de/        Produktseite + Screenshot-Galerie + Web-Demo „Raum-Aufmaß“
 │   └── /apps/verbrauchsmonitor-de/ Produktseite + Screenshot-Galerie + Web-Demo „Verbrauch & Kosten“
-├── /leistungen/                Mobile Apps · Produktentwicklung · Praxisorientierte Software
+├── /arbeitsweise/              Wie eigene Produkte entstehen: Prozess, Qualitätsstandards, Praxisbeispiele
 ├── /studio/                    Über das Unternehmen, Haltung, Profil
 ├── /support/                   Hilfe je App (#baurechner, #verbrauchsmonitor), FAQ, Formular
 ├── /kontakt/                   Kontaktformular, E-Mail, Themen  →  /kontakt/danke/
@@ -90,7 +93,7 @@ Beide veröffentlichten Apps **messen und rechnen**: Aufmaß und Material bei Ba
 
 **Alle bisherigen URLs und Anker bleiben erhalten**, inklusive `/#kontakt` und `/support/#…`. Das prüft der Build bei jedem Lauf automatisch.
 
-Navigation: Header mit Mega-Menü „Apps“, Leistungen, Studio, Support und dem Kontakt-Button. Auf Mobilgeräten ein Vollbild-Menü mit Fokusfalle und Escape-Unterstützung. Der Footer ist in vier Spalten gegliedert (Apps, Unternehmen, Hilfe, Rechtliches).
+Navigation: Header mit Mega-Menü „Apps“, Arbeitsweise, Studio, Support und dem Kontakt-Button. Auf Mobilgeräten ein Vollbild-Menü mit Fokusfalle und Escape-Unterstützung. Der Footer ist in vier Spalten gegliedert (Apps, Unternehmen, Hilfe, Rechtliches).
 
 ## 6. Inhaltliche Leitplanken
 
@@ -100,7 +103,19 @@ Navigation: Header mit Mega-Menü „Apps“, Leistungen, Studio, Support und de
 - Rechtstexte sind **unverändert übernommen**. Der Wortvergleich mit den Originalen ist identisch.
 - Verwendet werden die aktuellen Daten aus der Impressum-Unterseite vom 12. Oktober 2026 mit USt-ID und `contact@mp-digital-labs.de`. Das ältere Overlay der alten Startseite ist veraltet.
 
-## 7. Bildquellen
+## 7. Geprüfte Produktangaben
+
+Alle Aussagen zu kostenlosen Funktionen, Pro und Preisen wurden am 2. November 2026 gegen die Google-Play-Einträge und den App-Code geprüft. Sie werden zentral in `src/lib/site.mjs` gepflegt (`pricing`, `PRICES_AS_OF`).
+
+| | BauRechner DE (1.0.0-rc14) | VerbrauchsMonitor DE (1.0.1) |
+|---|---|---|
+| Kostenlos | einmalig 1 Projekt + 1 Aufmaß (bleiben bearbeitbar), alle 15 Rechner, Materialplanung, Kalkulation, Fotos, Notizen, Backup | bis zu 2 Zähler, Zählerstände, Erinnerungen, lokale Backups |
+| Pro | unbegrenzte Projekte und Aufmaße, Projekt-PDF, Einkaufsliste teilen/CSV, Variantenvergleich, Budget und Ist-Ausgaben, Projektkopien, Ergebnisse teilen | unbegrenzt Zähler, Monats-/Jahresauswertungen, Jahresvergleich, Trends, Hochrechnungen, Tarife, Kostenanalysen |
+| Preis Pro | 14,99 € einmalig, kein Abo | 9,99 € einmalig, kein Abo |
+
+Korrigiert gegenüber dem vorherigen Stand: „bis zu zwei Projekte“ (BauRechner), „Kosten/Monats- und Jahresübersichten kostenlos“ und „CSV-Export“ (VerbrauchsMonitor).
+
+## 8. Bildquellen
 
 | Bild | Quelle | Verwendung |
 |---|---|---|
@@ -111,22 +126,22 @@ Navigation: Header mit Mega-Menü „Apps“, Leistungen, Studio, Support und de
 
 Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originalen überein, die bei MP Digital Labs liegen (Marketing- und Play-Store-Ordner). Ausgeliefert wird WebP in 480 px (Galerie) und 941 px (Originalbreite, Lightbox). Neu erzeugen mit `npm run images`.
 
-## 8. Technik
+## 9. Technik
 
 - **Statischer Build ohne Laufzeitabhängigkeiten** (Node ≥ 20, kein npm install nötig). Seiten sind JavaScript-Module mit Template-Literalen, Layout und Komponenten liegen zentral.
 - **Single Source of Truth** für Firmendaten und Produkte: `src/lib/site.mjs`.
 - **Qualitätssicherung im Build**: Prüfung aller internen Links und Anker sowie aller bisherigen URLs. Bei Fehlern bricht der Build ab.
-- **Ausgabe**: rund 550 KB inklusive Schriften und Bildern. Eine einzelne Seite liegt typischerweise unter 120 KB übertragen, ohne Frameworks und ohne Drittanbieter-Requests.
+- **Ausgabe**: rund 4 MB inklusive aller Bildvarianten. Pro Seite werden dank responsiver Bilder und Lazy Loading nur die sichtbaren Screenshots geladen; es gibt keine Frameworks und keine Drittanbieter-Requests.
 - **Hosting** bleibt GitHub Pages. Die Workflow-Vorlage liegt unter `deploy/pages.yml`.
 
-## 9. SEO
+## 10. SEO
 
 - Eigener `<title>`, eigene Description und Canonical pro Seite. Open Graph und Twitter Cards mit einem eigens gerendertem OG-Bild (1200 × 630).
 - Strukturierte Daten (JSON-LD): Organization, WebSite, MobileApplication je App, BreadcrumbList, ItemList, FAQPage, ContactPage.
 - `sitemap.xml` wird mit Prioritäten generiert. App-Datenschutzseiten bleiben `noindex, follow` wie bisher.
 - Semantisches HTML, genau eine H1 pro Seite, keine übersprungenen Überschriftenebenen (geprüft).
 
-## 10. Barrierefreiheit (Ziel: WCAG 2.2 AA)
+## 11. Barrierefreiheit (Ziel: WCAG 2.2 AA)
 
 - Skip-Link, Landmarks, `aria-current`, beschriftete Navigationen und sichtbare Fokus-Indikatoren
 - Kontraste: Text auf Papier ≥ 4,5 : 1; Produktfarben haben je eine textsichere Variante
@@ -135,7 +150,7 @@ Die heruntergeladenen Store-Dateien stimmen byte-genau mit den lokalen Originale
 - `prefers-reduced-motion` schaltet alle Animationen ab. Ohne JavaScript bleiben alle Inhalte sichtbar
 - Dekorative Illustrationen sind `aria-hidden`, Inhalte stehen immer zusätzlich als Text da
 
-## 11. Datenschutz
+## 12. Datenschutz
 
 - Keine Cookies, kein Tracking, keine externen Schriften, CDNs oder Einbettungen
 - Die Mini-Demos rechnen ausschließlich im Browser

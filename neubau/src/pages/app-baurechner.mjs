@@ -1,16 +1,16 @@
-import { SITE, APPS } from '../lib/site.mjs';
-import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery } from '../lib/ui.mjs';
+import { SITE, APPS, PRICES_AS_OF } from '../lib/site.mjs';
+import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery, plans } from '../lib/ui.mjs';
 
 const app = APPS.baurechner;
 const crumbs = [['Start', '/'], ['Apps', '/apps/'], [app.name, app.path]];
 
 const features = [
-  ['folder', 'Projekte & Baustellen', 'Mehrere Projekte als gemeinsame Arbeitsakte verwalten – mit Berechnungen, Material, Aufgaben, Notizen und Fotos.'],
+  ['folder', 'Projekte & Baustellen', 'Das Projekt als gemeinsame Arbeitsakte – mit Berechnungen, Material, Aufgaben, Notizen und Fotos. Beliebig viele Projekte mit Pro.'],
   ['ruler', 'Aufmaß', 'Räume und Wände strukturiert erfassen, Öffnungen berücksichtigen und gespeicherte Aufmaße in passenden Rechnern wiederverwenden.'],
-  ['calc', '15 Rechner & Werkzeuge', 'Unter anderem für Fläche, Volumen, Beton, Mauerwerk, Estrich, Putz, Pflaster, Fliesen, Trockenbau, Farbe, Dämmung, Gefälle und Treppen.'],
+  ['calc', '15 Rechner & Werkzeuge', 'Von Fläche & Volumen über Beton, Estrich und Mauerwerk bis Fliesen, Trockenbau, Holz, Dämmung und Treppen – alle in der kostenlosen Version.'],
   ['box', 'Materialplanung', 'Berechnungsergebnisse in konkrete Materialmengen überführen und benötigte Gebinde oder Mengen nachvollziehbar planen.'],
   ['euro', 'Kosten & Kalkulation', 'Arbeitszeit, weitere Kosten, Aufschlag und Mehrwertsteuer zusammenführen und den Projektstand nachvollziehbar kalkulieren.'],
-  ['doc', 'Dokumentation', 'Notizen, Aufgaben und lokale Baustellenfotos direkt am Projekt halten. Pro erweitert die Dokumentation um PDF- und CSV-Exporte.'],
+  ['doc', 'Dokumentation', 'Notizen, Aufgaben und lokale Baustellenfotos direkt am Projekt halten. Pro ergänzt das Projekt-PDF und den CSV-Export der Einkaufsliste.'],
 ];
 
 const flow = [
@@ -19,16 +19,18 @@ const flow = [
   ['Berechnen', 'Passenden Rechner wählen und die gespeicherten Maße direkt weiterverwenden.'],
   ['Material ableiten', 'Aus den Berechnungen Materialmengen und Gebinde ableiten und den Einkauf vorbereiten.'],
   ['Kosten kalkulieren', 'Material, Arbeitszeit und weitere Kosten zu einer nachvollziehbaren Projektkalkulation zusammenführen.'],
-  ['Dokumentieren', 'Notizen, Aufgaben und Fotos ergänzen; mit Pro zusätzlich strukturierte Exporte für die weitere Nutzung erzeugen.'],
+  ['Dokumentieren', 'Notizen, Aufgaben und Fotos ergänzen; mit Pro zusätzlich ein Projekt-PDF erzeugen und teilen.'],
 ];
 
-const calculators = ['Fläche', 'Volumen', 'Beton', 'Mauerwerk', 'Estrich', 'Putz', 'Pflaster', 'Fliesen', 'Trockenbau', 'Farbe', 'Dämmung', 'Gefälle', 'Treppen'];
+// Rechnerkatalog der App (CalculatorCatalog, Version 1.0.0-rc14)
+const calculators = ['Fläche & Volumen', 'Gefälle & Höhe', 'Treppen-Vorplanung', 'Mischungsverhältnis', 'Beton', 'Mauerwerk', 'Estrich', 'Mörtel', 'Putz', 'Pflaster', 'Fliesen', 'Trockenbau', 'Farbe', 'Holz', 'Dämmung'];
 
 const faqs = [
   ['Brauche ich ein Benutzerkonto?', 'Nein. Für die Nutzung der Kernfunktionen ist kein Benutzerkonto bei MP Digital Labs erforderlich.'],
   ['Funktioniert die App ohne Internet?', 'Die eigentliche Projektarbeit, Berechnungen und lokale Datenspeicherung funktionieren offline. Für Google-Play-Käufe und deren Prüfung kann eine Verbindung erforderlich sein.'],
   ['Was passiert mit meinen Baustellenfotos?', 'Ausgewählte Fotos werden lokal in den App-Bereich übernommen und nicht automatisch auf Server von MP Digital Labs hochgeladen.'],
-  ['Werden bestehende Projekte gesperrt, wenn ich das kostenlose Limit erreiche?', 'Nein. Das Limit betrifft das Anlegen weiterer Projekte. Bereits vorhandene Projekte bleiben weiter bearbeitbar.'],
+  ['Was ist in der kostenlosen Version enthalten?', 'Sie legen einmalig ein Projekt und ein Aufmaß an – beides bleibt dauerhaft bearbeitbar. Alle 15 Rechner, Materialplanung, Kalkulation, Fotos, Notizen sowie Backup und Wiederherstellung stehen ebenfalls zur Verfügung.'],
+  ['Ist BauRechner Pro ein Abo?', `Nein. Pro ist ein einmaliger Kauf über Google Play (derzeit ${app.pricing.proPrice}). Für die regelmäßige Bestätigung des Kaufs kann eine Verbindung zu Google Play erforderlich sein.`],
   ['Wo finde ich die Datenschutzerklärung?', `Die vollständige <a class="inline-link" href="${app.privacy}">Datenschutzerklärung für BauRechner DE</a> ist jederzeit online abrufbar.`],
 ];
 
@@ -42,7 +44,7 @@ function demo() {
       <label class="toggle"><span>10 % Verschnitt einrechnen<small>z. B. für Fliesen oder Bodenbelag</small></span><input type="checkbox" name="verschnitt" checked><span class="toggle__ui" aria-hidden="true"></span></label>
     </div>
     <div class="demo__out">
-      <div class="grid-bg"></div>
+      <div class="aura" aria-hidden="true"></div>
       <div class="demo__fig" aria-hidden="true">
         <svg viewBox="0 0 360 190">
           <rect class="room" x="40" y="20" width="280" height="150" rx="2"/>
@@ -92,19 +94,20 @@ export default {
     },
   ],
   body: `
-<section class="phero prodhero" aria-labelledby="page-title">
-  <div class="grid-bg"></div>
+<section class="phero night prodhero" aria-labelledby="page-title">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
     <div class="prodhero__grid">
       <div>
         <div class="prodhero__id">${appIcon(app, 72)}<div><span class="prodhero__cat">${app.category}</span>${status('live')}</div></div>
         <h1 id="page-title" class="phero__title">Vom Aufmaß bis zur Dokumentation.</h1>
-        <p class="lead"><strong style="color:var(--ink);font-weight:600">${app.name}</strong> bündelt Aufmaß, Berechnungen, Material, Einkauf, Kalkulation und Projektdokumentation in einer App – für Handwerk, Renovierung und Bauprojekte.</p>
+        <p class="lead"><strong>${app.name}</strong> bündelt Aufmaß, Berechnungen, Material, Einkauf, Kalkulation und Projektdokumentation in einer App – für Handwerk, Renovierung und Bauprojekte.</p>
         <div class="actions">${playButton(app, { size: 'lg' })}${btn(app.support, 'Hilfe & Support', { variant: 'secondary', size: 'lg' })}</div>
       </div>
       <figure class="pshots">
         <div class="pshots__stage">
+          <div class="rings" aria-hidden="true"></div>
           <div class="pshots__phone pshots__phone--a">${shot(app, 0, { sizes: '(max-width: 960px) 44vw, 250px', lazy: false })}</div>
           <div class="pshots__phone pshots__phone--b">${shot(app, 3, { sizes: '(max-width: 960px) 44vw, 250px', lazy: false })}</div>
         </div>
@@ -115,7 +118,7 @@ export default {
   </div>
 </section>
 
-<section class="section section--line" aria-labelledby="funktionen">
+<section class="section" aria-labelledby="funktionen">
   <div class="wrap">
     ${sectionHead({
       index: '01',
@@ -128,7 +131,8 @@ export default {
   </div>
 </section>
 
-<section class="section section--alt" aria-labelledby="einblicke">
+<section class="section night" aria-labelledby="einblicke">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap">
     ${sectionHead({
       index: '02',
@@ -141,7 +145,7 @@ export default {
   <div class="wrap wrap--bleed">${gallery(app)}</div>
 </section>
 
-<section class="section section--line" aria-labelledby="demo-title">
+<section class="section" aria-labelledby="demo-title">
   <div class="wrap">
     ${sectionHead({
       index: '03',
@@ -151,9 +155,9 @@ export default {
       lead: 'So fühlt sich das Prinzip an: Maße einmal eingeben, alle abgeleiteten Werte sofort sehen. Diese kleine Demo rechnet direkt in Ihrem Browser – es werden keine Daten übertragen.',
     })}
     ${demo()}
-    <div class="chips reveal" style="margin-top:32px" aria-label="Rechner in BauRechner DE (Auswahl)">
-      ${calculators.map((c) => `<span class="chip">${icon('calc')}${c}</span>`).join('')}
-      <span class="chip" style="border-style:dashed">u. a. – insgesamt 15 Rechner &amp; Werkzeuge</span>
+    <div class="reveal" style="margin-top:48px">
+      <p class="eyebrow">Alle 15 Rechner der App</p>
+      <ul class="chips">${calculators.map((c) => `<li class="chip">${icon('calc')}${c}</li>`).join('')}</ul>
     </div>
   </div>
 </section>
@@ -171,29 +175,16 @@ export default {
   </div>
 </section>
 
-<section class="section section--line" aria-labelledby="preise">
+<section class="section" aria-labelledby="preise">
   <div class="wrap">
     ${sectionHead({
       index: '05',
-      label: 'Free & Pro',
+      label: 'Kostenlos & Pro',
       id: 'preise',
-      title: 'Die Basis bleibt nutzbar. Pro ergänzt Komfort.',
-      lead: 'Die kostenlosen Kernfunktionen werden nicht künstlich unbrauchbar gemacht. Pro erweitert vor allem Vergleich, Export, Budget und Projektanzahl.',
+      title: 'Kostenlos starten. Pro bei Bedarf.',
+      lead: 'Die kostenlose Version enthält alle 15 Rechner, Materialplanung und Kalkulation für ein Projekt. Pro ergänzt unbegrenzte Projekte, Exporte und Budgetfunktionen – als einmaliger Kauf ohne Abo.',
     })}
-    <div class="compare">
-      <article class="plan reveal">
-        <p class="plan__label">Kostenlos</p>
-        <h3 class="plan__title">BauRechner DE</h3>
-        <p class="plan__price">Kostenlose Basis – ohne Konto, ohne Abo</p>
-        ${checklist(['alle Rechner und Werkzeuge', 'Aufmaß und Materialplanung', 'Preisgedächtnis und normale Kalkulation', 'Fotos, Notizen und Aufgaben', 'Backup und Wiederherstellung', 'bis zu zwei Projekte'])}
-      </article>
-      <article class="plan plan--pro reveal" style="--d:1">
-        <p class="plan__label">Einmaliger Kauf</p>
-        <h3 class="plan__title">BauRechner Pro</h3>
-        <p class="plan__price">Einmaliger In-App-Kauf über Google Play</p>
-        ${checklist(['Berechnungsvarianten vergleichen', 'Zielbudget, Planung und Ist-Ausgaben verfolgen', 'Einkaufsliste teilen und als CSV exportieren', 'Projekt-PDF erzeugen', 'Berechnungsergebnisse teilen', 'Projekte als Varianten kopieren', 'unbegrenzt neue Projekte anlegen'])}
-      </article>
-    </div>
+    ${plans(app, PRICES_AS_OF)}
   </div>
 </section>
 
@@ -216,7 +207,7 @@ export default {
 
 ${ctaBand({
   title: 'Bereit für die nächste Baustelle?',
-  text: 'BauRechner DE ist kostenlos bei Google Play erhältlich. Fragen beantworten wir gern im Support-Bereich.',
+  text: 'BauRechner DE ist kostenlos bei Google Play erhältlich – Pro schalten Sie bei Bedarf einmalig frei. Fragen beantworten wir gern im Support-Bereich.',
   actions: `${playButton(app, { size: 'lg' })}${btn(app.support, 'Zum Support', { variant: 'secondary', size: 'lg' })}`,
 })}
 `,

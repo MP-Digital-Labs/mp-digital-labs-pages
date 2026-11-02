@@ -12,7 +12,7 @@ const cards = [
     faqs: [
       ['Brauche ich ein Benutzerkonto?', 'Nein. Für die Nutzung der Kernfunktionen ist kein Benutzerkonto bei MP Digital Labs erforderlich.'],
       ['Funktioniert die App ohne Internet?', 'Projektarbeit, Berechnungen und lokale Datenspeicherung funktionieren offline. Für Google-Play-Käufe und deren Prüfung kann eine Verbindung erforderlich sein.'],
-      ['Was passiert, wenn ich das kostenlose Projektlimit erreiche?', 'Das Limit betrifft nur das Anlegen weiterer Projekte. Bereits vorhandene Projekte bleiben weiter bearbeitbar.'],
+      ['Wie viele Projekte kann ich kostenlos anlegen?', 'Kostenlos legen Sie einmalig ein Projekt und ein Aufmaß an; beides bleibt dauerhaft bearbeitbar. Weitere Projekte und Aufmaße sind mit BauRechner Pro möglich.'],
     ],
   },
   {
@@ -20,7 +20,7 @@ const cards = [
     text: 'Fragen zu Zählern, Messwerten, Kosten, Erinnerungen, Pro-Funktionen oder Datensicherung.',
     faqs: [
       ['Welche Zähler kann ich verwalten?', 'Strom, Gas, Wasser sowie Wärme beziehungsweise Heizung. In der kostenlosen Basis sind bis zu zwei Zähler möglich.'],
-      ['Sind die Kostenwerte eine exakte Abrechnung?', 'Nein. Die App berechnet nachvollziehbare Kostenschätzungen auf Basis Ihrer Eingaben und ersetzt keine Abrechnung des Versorgers.'],
+      ['Sind die Kostenwerte eine exakte Abrechnung?', 'Nein. Die Kostenanalyse (Pro) berechnet nachvollziehbare Schätzungen auf Basis Ihrer Eingaben und ersetzt keine Abrechnung des Versorgers.'],
       ['Wie sichere ich meine Daten?', 'Über die lokale Backup-Funktion. Speicherort und Datei wählen Sie selbst über den Dateidialog des Systems.'],
     ],
   },
@@ -47,8 +47,8 @@ export default {
     },
   ],
   body: `
-<section class="phero" aria-labelledby="page-title">
-  <div class="grid-bg"></div>
+<section class="phero night" aria-labelledby="page-title">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
     <p class="eyebrow"><span>Hilfe &amp; Kontakt</span></p>

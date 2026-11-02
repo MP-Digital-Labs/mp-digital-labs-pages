@@ -86,8 +86,12 @@ export function playButton(app, { variant = 'primary', size = '' } = {}) {
   return `<a class="btn btn--${variant}${size ? ` btn--${size}` : ''} btn--play" href="${app.play}" target="_blank" rel="noopener noreferrer">${icon('play', 'ico--fill')}<span><small>Jetzt bei</small>Google Play</span><span class="sr-only"> – ${esc(app.name)} (öffnet in neuem Tab)</span></a>`;
 }
 
-export function eyebrow(index, label) {
-  return `<p class="eyebrow">${index ? `<span class="eyebrow__idx">${index}</span>` : ''}<span>${label}</span></p>`;
+export function eyebrow(_index, label) {
+  return `<p class="eyebrow">${label}</p>`;
+}
+
+export function proTag() {
+  return '<span class="pro-tag">Pro</span>';
 }
 
 export function sectionHead({ index, label, title, lead, cls = '', id }) {
@@ -222,12 +226,32 @@ export function appCard(app, { headingLevel = 3 } = {}) {
       <p class="acard__cat">${app.category}</p>
       <${h} class="acard__title"><a href="${app.path}">${app.name}</a></${h}>
       <p class="acard__text">${app.summary}</p>
+      <p class="acard__price">Kostenlos laden · <strong>Pro einmalig ${app.pricing.proPrice}</strong> · kein Abo</p>
       <div class="acard__links">${link(app.path, 'Mehr erfahren')}${link(app.play, 'Google Play', 'tlink tlink--muted')}</div>
     </div>
   </article>`;
 }
 
 export const allApps = () => Object.values(APPS).filter((a) => a.status === 'live');
+
+// Kostenlos & Pro – Inhalte aus APPS[x].pricing (geprüft gegen Google Play und App)
+export function plans(app, asOf) {
+  return `<div class="compare">
+      <article class="plan reveal">
+        <p class="plan__label">Kostenlos</p>
+        <h3 class="plan__title">${app.name}</h3>
+        <p class="plan__price"><b>0 €</b>Kostenlos bei Google Play – ohne Konto</p>
+        ${checklist(app.pricing.free)}
+      </article>
+      <article class="plan plan--pro night reveal" style="--d:1">
+        <p class="plan__label">Einmaliger Kauf · kein Abo</p>
+        <h3 class="plan__title">${app.short} Pro</h3>
+        <p class="plan__price"><b>${app.pricing.proPrice}</b>einmalig als In-App-Kauf über Google Play</p>
+        ${checklist(app.pricing.pro)}
+        <p class="plan__note">Preis laut Google Play, Stand ${asOf}. Die Abrechnung erfolgt über Google Play.</p>
+      </article>
+    </div>`;
+}
 
 // Zahleneingabe mit optionalem Schieberegler (Mini-Demos)
 export function numInput({ name, label, min, max, step, value, unit, range = true, dataUnit = false }) {

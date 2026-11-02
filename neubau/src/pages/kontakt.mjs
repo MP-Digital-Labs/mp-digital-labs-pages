@@ -4,9 +4,9 @@ import { icon, btn, breadcrumbs, field, eyebrow } from '../lib/ui.mjs';
 const crumbs = [['Start', '/'], ['Kontakt', '/kontakt/']];
 
 const topics = [
-  ['flow', 'Projektanfragen', 'Sie planen eine App oder ein digitales Produkt.'],
-  ['layers', 'Kooperationen', 'Sie möchten gemeinsam etwas entwickeln oder anbieten.'],
-  ['message', 'Produktfeedback', 'Sie nutzen eine unserer Apps und haben Ideen oder Hinweise.'],
+  ['message', 'Produktfeedback & Ideen', 'Sie nutzen eine unserer Apps und haben Vorschläge oder Hinweise.'],
+  ['phone', 'Fragen zu einer App', 'Antworten und Hilfe finden Sie auch direkt im Support-Bereich.'],
+  ['mail', 'Geschäftliche Anliegen', 'Alle weiteren Themen rund um MP Digital Labs.'],
 ];
 
 export default [
@@ -14,18 +14,18 @@ export default [
     path: '/kontakt/',
     title: 'Kontakt',
     description:
-      'Kontakt zu MP Digital Labs in Bielefeld: für Projektanfragen, Kooperationen, Produktfeedback und geschäftliche Anliegen – per Formular oder E-Mail.',
+      'Kontakt zu MP Digital Labs in Bielefeld: Feedback, Fragen zu unseren Apps und geschäftliche Anliegen – per Formular oder E-Mail.',
     priority: 0.8,
     breadcrumbs: crumbs,
     jsonld: [{ '@type': 'ContactPage', name: 'Kontakt – MP Digital Labs', url: `${SITE.url}/kontakt/` }],
     body: `
-<section class="phero" aria-labelledby="page-title" style="padding-bottom:clamp(40px,5vw,64px)">
-  <div class="grid-bg"></div>
+<section class="phero night" aria-labelledby="page-title" style="padding-bottom:clamp(40px,5vw,64px)">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
     <p class="eyebrow"><span>Kontakt</span></p>
-    <h1 id="page-title" class="phero__title">Lassen Sie uns sprechen.</h1>
-    <p class="lead">Für Projektanfragen, Kooperationen, Produktfeedback oder geschäftliche Anliegen können Sie uns direkt über das Formular schreiben.</p>
+    <h1 id="page-title" class="phero__title">Schreiben Sie uns.</h1>
+    <p class="lead">Feedback, Fragen zu unseren Apps oder geschäftliche Anliegen – schreiben Sie uns direkt über das Formular oder per E-Mail.</p>
   </div>
 </section>
 
@@ -54,7 +54,7 @@ export default [
         <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         ${field({ name: 'name', label: 'Name', autocomplete: 'name', maxlength: 100, placeholder: 'Ihr Name' })}
         ${field({ name: 'email', label: 'E-Mail', type: 'email', autocomplete: 'email', maxlength: 180, placeholder: 'ihre@email.de' })}
-        ${field({ name: 'thema', label: 'Thema', type: 'select', options: ['Projektanfrage', 'Kooperation', 'Produktfeedback', 'Sonstiges'], full: true })}
+        ${field({ name: 'thema', label: 'Thema', type: 'select', options: ['Produktfeedback', 'Frage zu einer App', 'Geschäftliches Anliegen', 'Sonstiges'], full: true })}
         ${field({ name: 'subject', label: 'Betreff', maxlength: 180, placeholder: 'Worum geht es?', full: true })}
         ${field({ name: 'message', label: 'Nachricht', type: 'textarea', maxlength: 5000, rows: 6, placeholder: 'Ihre Nachricht an MP Digital Labs', full: true })}
         <p class="form__status" role="status" aria-live="polite"></p>
@@ -74,8 +74,8 @@ export default [
     description: 'Ihre Nachricht an MP Digital Labs wurde übermittelt.',
     noindex: true,
     body: `
-<section class="phero err" aria-labelledby="page-title">
-  <div class="grid-bg"></div>
+<section class="phero night err" aria-labelledby="page-title">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     <span class="err__code">${icon('check')} Nachricht übermittelt</span>
     <h1 id="page-title" class="phero__title">Vielen Dank für Ihre Nachricht.</h1>

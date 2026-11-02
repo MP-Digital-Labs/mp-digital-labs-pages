@@ -1,4 +1,4 @@
-import { APPS } from '../lib/site.mjs';
+import { APPS, PRICES_AS_OF } from '../lib/site.mjs';
 import { icon, btn, sectionHead, breadcrumbs, appCard, allApps, ctaBand } from '../lib/ui.mjs';
 
 const crumbs = [['Start', '/'], ['Apps', '/apps/']];
@@ -27,8 +27,8 @@ export default {
     },
   ],
   body: `
-<section class="phero" aria-labelledby="page-title">
-  <div class="grid-bg"></div>
+<section class="phero night" aria-labelledby="page-title">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
     <p class="eyebrow"><span>Produktportfolio</span></p>
@@ -50,7 +50,7 @@ export default {
       label: 'Auf einen Blick',
       id: 'vergleich',
       title: 'Gleiche Haltung, unterschiedliche Aufgaben.',
-      lead: 'Beide veröffentlichten Apps folgen denselben Grundsätzen: lokale Daten, kein Konto und ein fairer Einmalkauf für Pro-Funktionen.',
+      lead: 'Beide Apps folgen denselben Grundsätzen: lokale Daten, kein Konto, kostenloser Einstieg und ein einmaliger Kauf für Pro – ohne Abo.',
     })}
     <div class="table-wrap reveal">
       <table class="table">
@@ -59,16 +59,18 @@ export default {
           <tr><td></td><th scope="col">${br.name}<small>${br.category}</small></th><th scope="col">${vm.name}<small>${vm.category}</small></th></tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Wofür</th><td>Aufmaß, Berechnungen, Material, Kosten und Projektdokumentation</td><td>Zählerstände, Verbrauch und Kostenschätzungen für Strom, Gas, Wasser und Wärme</td></tr>
+          <tr><th scope="row">Wofür</th><td>Aufmaß, Berechnungen, Material, Kalkulation und Projektdokumentation</td><td>Zählerstände und Verbrauchsentwicklung für Strom, Gas, Wasser und Wärme</td></tr>
           <tr><th scope="row">Plattform</th><td>Android · Google Play</td><td>Android · Google Play</td></tr>
           <tr><th scope="row">Datenspeicherung</th><td>${ok('lokal auf dem Gerät')}</td><td>${ok('lokal auf dem Gerät')}</td></tr>
           <tr><th scope="row">Benutzerkonto</th><td>${ok('nicht erforderlich')}</td><td>${ok('nicht erforderlich')}</td></tr>
-          <tr><th scope="row">Kostenlose Basis</th><td>alle Rechner, bis zu zwei Projekte</td><td>bis zu zwei Zähler</td></tr>
-          <tr><th scope="row">Pro</th><td>einmaliger In-App-Kauf</td><td>einmaliger Kauf – kein Abo</td></tr>
+          <tr><th scope="row">Kostenlos</th><td>ein Projekt und ein Aufmaß, alle 15 Rechner, Materialplanung, Kalkulation, Backup</td><td>bis zu 2 Zähler, Zählerstände, Erinnerungen, Backup</td></tr>
+          <tr><th scope="row">Pro</th><td>einmalig ${br.pricing.proPrice} · unbegrenzte Projekte, PDF, CSV, Varianten, Budget</td><td>einmalig ${vm.pricing.proPrice} · unbegrenzt Zähler, Auswertungen, Tarife &amp; Kosten</td></tr>
+          <tr><th scope="row">Abo</th><td>${ok('kein Abo')}</td><td>${ok('kein Abo')}</td></tr>
           <tr><th scope="row">Mehr</th><td><a class="tlink" href="${br.path}">Zur Produktseite${icon('arrow')}</a></td><td><a class="tlink" href="${vm.path}">Zur Produktseite${icon('arrow')}</a></td></tr>
         </tbody>
       </table>
     </div>
+    <p class="table-note">Preise laut Google Play, Stand ${PRICES_AS_OF}. Die Abrechnung erfolgt über Google Play.</p>
   </div>
 </section>
 

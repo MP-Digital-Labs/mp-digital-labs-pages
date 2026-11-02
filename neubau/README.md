@@ -46,7 +46,7 @@ neubau/
 
 ## Inhalte pflegen
 
-- **Firmendaten, App-Links, Status:** `src/lib/site.mjs`
+- **Firmendaten, App-Links, Preise und Kostenlos-/Pro-Umfang:** `src/lib/site.mjs` (bei Preisänderungen auch `PRICES_AS_OF` anpassen)
 - **Texte einer Seite:** die passende Datei in `src/pages/`
 - **Rechtstexte:** `src/legal/*.html`. Die HTML-Fragmente werden 1:1 eingebettet; die erste Zeile enthält den Stand
 - **Neue Seite:** neue Datei in `src/pages/` mit `export default { path, title, description, body }`
@@ -59,6 +59,7 @@ neubau/
 2. `.github/workflows/pages.yml` durch `neubau/deploy/pages.yml` ersetzen. Wichtig: Der bisherige Workflow patcht die alte `index.html` und pusht selbst auf `main`. Er muss vollständig ersetzt werden.
 3. Nach dem ersten Deployment prüfen:
    - alle Bestands-URLs (`/apps/…`, `/support/#…`, `/datenschutz-*.html`, `/impressum/`)
+   - Preise und Pro-Umfang erneut mit Google Play abgleichen
    - die in der Google Play Console hinterlegten Datenschutz-URLs
    - Kontaktformular: einen echten Testversand durchführen und prüfen, ob die Weiterleitung auf `/kontakt/danke/` funktioniert
 4. Optional danach: die alten Root-Dateien (`index.html`, `site.css`, `site.js`, …) entfernen. Sie werden mit dem neuen Workflow nicht mehr ausgeliefert.

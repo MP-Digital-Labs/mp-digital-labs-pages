@@ -18,8 +18,8 @@ export default {
   priority: 0.7,
   breadcrumbs: crumbs,
   body: `
-<section class="phero" aria-labelledby="page-title">
-  <div class="grid-bg"></div>
+<section class="phero night" aria-labelledby="page-title">
+  <div class="aura" aria-hidden="true"></div>
   <div class="wrap phero__inner">
     ${breadcrumbs(crumbs)}
     <p class="eyebrow"><span>Über uns</span></p>
@@ -34,9 +34,9 @@ export default {
       ${eyebrow('01', 'Wer wir sind')}
       <h2 id="wer" class="h2" style="margin-bottom:28px">Inhabergeführt.<br>Aus Bielefeld.</h2>
       <div class="body-copy">
-        <p>MP Digital Labs ist ein unabhängiges Softwareunternehmen von <strong>${SITE.owner}</strong> mit Sitz in Bielefeld. Der Schwerpunkt liegt auf der Konzeption und Entwicklung digitaler Produkte mit klar definiertem Anwendungsnutzen.</p>
+        <p>MP Digital Labs ist ein unabhängiges Softwareunternehmen von <strong>${SITE.owner}</strong> mit Sitz in Bielefeld. Das Unternehmen konzipiert, entwickelt und vertreibt ausschließlich eigene Softwareprodukte mit klar definiertem Anwendungsnutzen.</p>
         <p>Neue Funktionen entstehen nicht als Selbstzweck. Sie werden priorisiert, getestet und an realistischen Nutzungsszenarien ausgerichtet – mit dem Ziel, verständliche, zuverlässige und langfristig nutzbare Produkte zu schaffen.</p>
-        <p>Die eigenen Apps sind dabei Produkt und Werkstatt zugleich: Was sich im Alltag von Handwerk und Haushalt bewährt, prägt auch jedes weitere Projekt.</p>
+        <p>Die eigenen Apps sind dabei Produkt und Werkstatt zugleich: Was sich im Alltag von Handwerk und Haushalt bewährt, prägt auch jedes weitere Produkt.</p>
       </div>
     </div>
     <aside class="profile reveal" style="--d:1" aria-label="Unternehmensprofil">
@@ -45,7 +45,7 @@ export default {
         ['Inhaber', SITE.owner],
         ['Sitz', `${SITE.address.city}, ${SITE.address.country}`],
         ['Unternehmensform', 'Einzelunternehmen'],
-        ['Schwerpunkt', 'Mobile Apps & Produktentwicklung'],
+        ['Geschäftsmodell', 'Eigene Softwareprodukte'],
         ['Apps', 'BauRechner DE · VerbrauchsMonitor DE'],
         ['Vertrieb', 'Google Play'],
       ])}
@@ -88,8 +88,8 @@ export default {
 
 ${ctaBand({
   title: 'Lernen wir uns kennen.',
-  text: 'Ob Projektanfrage, Kooperation oder Feedback zu unseren Apps – wir freuen uns über Ihre Nachricht.',
-  actions: `${btn('/kontakt/', 'Kontakt aufnehmen', { variant: 'primary', size: 'lg' })}${btn('/leistungen/', 'Leistungen ansehen', { variant: 'secondary', size: 'lg' })}`,
+  text: 'Ob Frage, Idee oder Feedback zu unseren Apps – wir freuen uns über Ihre Nachricht.',
+  actions: `${btn('/kontakt/', 'Kontakt aufnehmen', { variant: 'primary', size: 'lg' })}${btn('/arbeitsweise/', 'Unsere Arbeitsweise', { variant: 'secondary', size: 'lg' })}`,
 })}
 `,
 };

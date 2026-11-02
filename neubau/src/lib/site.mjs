@@ -8,7 +8,7 @@ export const SITE = {
   name: 'MP Digital Labs',
   claim: 'Software mit klarem Zweck.',
   description:
-    'Unabhängiges Softwarestudio aus Bielefeld: Wir entwickeln Apps und digitale Produkte mit klarem Nutzen – offline-first, ohne Konto und ohne Abo.',
+    'MP Digital Labs aus Bielefeld entwickelt und vertreibt eigene Apps mit klarem Zweck – offline nutzbar, ohne Benutzerkonto und mit Einmalkauf statt Abo.',
   locale: 'de_DE',
   year: 2026,
   owner: 'Manuel Petersson',
@@ -54,12 +54,31 @@ export const APPS = {
     tagline: 'Vom Aufmaß bis zur Projektdokumentation.',
     summary:
       'Aufmaß, Berechnungen, Material, Einkauf, Kosten und Projektdokumentation in einer kompakten Baustellen-App – für Handwerk, Renovierung und Bauprojekte.',
+    // Geprüft am 2. November 2026 gegen Google-Play-Eintrag (Version 1.0.0-rc14) und App-Code
+    pricing: {
+      proPrice: '14,99 €',
+      free: [
+        'einmalig ein Projekt und ein Aufmaß – dauerhaft bearbeitbar',
+        'alle 15 Rechner und Werkzeuge',
+        'Materialplanung und Kalkulation',
+        'Fotos und Notizen zum Projekt',
+        'Backup und Wiederherstellung',
+      ],
+      pro: [
+        'unbegrenzte Projekte und Aufmaße',
+        'Projekt-PDF erzeugen und teilen',
+        'Einkaufslisten teilen und als CSV exportieren',
+        'Berechnungsvarianten vergleichen',
+        'Budget und Ist-Ausgaben verfolgen',
+        'Projekte kopieren und Ergebnisse teilen',
+      ],
+    },
     facts: [
-      ['Status', 'Veröffentlicht'],
-      ['Plattform', 'Android'],
+      ['Plattform', 'Android · Google Play'],
+      ['Download', 'kostenlos'],
+      ['Pro', 'einmalig 14,99 € · kein Abo'],
       ['Daten', 'lokal auf dem Gerät'],
       ['Konto', 'nicht erforderlich'],
-      ['Pro', 'einmaliger In-App-Kauf'],
     ],
   },
   verbrauchsmonitor: {
@@ -85,20 +104,42 @@ export const APPS = {
     category: 'Haushalt & Verbrauch',
     tagline: 'Verbrauch verstehen, ohne Tabellenchaos.',
     summary:
-      'Zählerstände für Strom, Gas, Wasser und Wärme erfassen, Verbrauch nachvollziehen und Kosten übersichtlich im Blick behalten.',
+      'Zählerstände für Strom, Gas, Wasser und Wärme erfassen und die Verbrauchsentwicklung übersichtlich im Blick behalten.',
+    // Geprüft am 2. November 2026 gegen Google-Play-Eintrag (Version 1.0.1) und App-Code
+    pricing: {
+      proPrice: '9,99 €',
+      free: [
+        'bis zu 2 Zähler verwalten',
+        'Strom, Gas, Wasser und Wärme',
+        'Zählerstände schnell erfassen',
+        'individuelle Ableseerinnerungen',
+        'lokale Backups und Wiederherstellung',
+        'offline nutzbar, kein Konto',
+      ],
+      pro: [
+        'unbegrenzt viele Zähler',
+        'Monats- und Jahresauswertungen',
+        'Jahresvergleich, Trends und Hochrechnungen',
+        'Tarife mit Grund- und Arbeitspreis',
+        'Kostenanalysen und Kostenschätzungen',
+      ],
+    },
     facts: [
-      ['Status', 'Veröffentlicht'],
-      ['Plattform', 'Android'],
+      ['Plattform', 'Android · Google Play'],
+      ['Download', 'kostenlos'],
+      ['Pro', 'einmalig 9,99 € · kein Abo'],
       ['Erfassung', 'Strom · Gas · Wasser · Wärme'],
-      ['Daten', 'lokal auf dem Gerät'],
       ['Konto', 'nicht erforderlich'],
     ],
   },
 };
 
+// Preisangaben laut Google Play (Abrechnung über Google, Stand siehe PRICES_AS_OF)
+export const PRICES_AS_OF = 'November 2026';
+
 export const NAV = [
   { label: 'Apps', href: '/apps/', menu: true },
-  { label: 'Leistungen', href: '/leistungen/' },
+  { label: 'Arbeitsweise', href: '/arbeitsweise/' },
   { label: 'Studio', href: '/studio/' },
   { label: 'Support', href: '/support/' },
 ];

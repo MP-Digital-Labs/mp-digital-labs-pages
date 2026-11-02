@@ -38,7 +38,7 @@ function megaMenu() {
       </div>
       <div class="mega__aside">
         <p class="mega__label">Produktportfolio</p>
-        <p>Werkzeuge für konkrete Aufgaben – offline-first, ohne Benutzerkonto und bei Google Play verfügbar.</p>
+        <p>Eigene Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo.</p>
         <a class="tlink" href="/apps/">Alle Apps ansehen${icon('arrow')}</a>
       </div>
     </div>
@@ -66,22 +66,22 @@ function header(path) {
       </ul>
       <p class="mnav__label">Unternehmen</p>
       <ul class="mnav__list">
-        <li><a href="/leistungen/"${current('/leistungen/')}>Leistungen</a></li>
+        <li><a href="/arbeitsweise/"${current('/arbeitsweise/')}>Arbeitsweise</a></li>
         <li><a href="/studio/"${current('/studio/')}>Studio</a></li>
         <li><a href="/support/"${current('/support/')}>Support</a></li>
         <li><a href="/kontakt/"${current('/kontakt/')}>Kontakt</a></li>
       </ul>
-      <a class="btn btn--primary btn--block" href="/kontakt/"><span>Projekt anfragen</span>${icon('arrow')}</a>
+      <a class="btn btn--primary btn--block" href="/kontakt/"><span>Kontakt aufnehmen</span>${icon('arrow')}</a>
     </nav>
   </div>`;
 
   return `<a class="skip" href="#main">Zum Inhalt springen</a>
-<header class="hdr" data-hdr>
+<header class="hdr night" data-hdr>
   <div class="wrap hdr__row">
     ${brand()}
     <nav class="nav" aria-label="Hauptnavigation"><ul class="nav__list">${items}</ul></nav>
     <div class="hdr__actions">
-      <a class="btn btn--primary btn--sm hdr__cta" href="/kontakt/"${current('/kontakt/')}><span>Kontakt</span></a>
+      <a class="btn btn--secondary btn--sm hdr__cta" href="/kontakt/"${current('/kontakt/')}><span>Kontakt</span></a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menü öffnen"><span></span><span></span></button>
     </div>
   </div>
@@ -94,12 +94,12 @@ function footer() {
     `<div class="ftr__col"><p class="ftr__title">${title}</p><ul>${links
       .map(([l, h]) => `<li><a href="${h}">${l}</a></li>`)
       .join('')}</ul></div>`;
-  return `<footer class="ftr">
+  return `<footer class="ftr night">
   <div class="wrap">
     <div class="ftr__top">
       <div class="ftr__brand">
         ${logo(132, 'ftr__logo')}
-        <p>Unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln digitale Produkte mit klarem Zweck.</p>
+        <p>Unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln und vertreiben eigene Apps mit klarem Zweck.</p>
         <a class="ftr__mail" href="mailto:${SITE.email}">${icon('mail')}${SITE.email}</a>
       </div>
       <div class="ftr__cols">
@@ -109,7 +109,7 @@ function footer() {
           ['Alle Apps', '/apps/'],
         ])}
         ${col('Unternehmen', [
-          ['Leistungen', '/leistungen/'],
+          ['Arbeitsweise', '/arbeitsweise/'],
           ['Studio', '/studio/'],
           ['Kontakt', '/kontakt/'],
         ])}
@@ -175,8 +175,7 @@ export function layout({
 ${noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robots" content="index, follow">'}
 <link rel="canonical" href="${canonical}">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f4f3ee" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0c0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#060a12">
 <meta property="og:type" content="${ogType}">
 <meta property="og:locale" content="${SITE.locale}">
 <meta property="og:site_name" content="${SITE.name}">
@@ -192,7 +191,8 @@ ${noindex ? '<meta name="robots" content="noindex, follow">' : '<meta name="robo
 <link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" href="/assets/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Sora-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Inter-Variable-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/site.css${v}">
 <script src="/assets/js/site.js${v}" defer></script>
 <script type="application/ld+json">${ld}</script>
