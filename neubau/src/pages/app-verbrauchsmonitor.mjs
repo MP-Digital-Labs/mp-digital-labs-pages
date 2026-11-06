@@ -8,7 +8,7 @@ const features = [
   ['gauge', 'Zähler verwalten', 'Strom, Gas, Wasser und Wärme getrennt anlegen. Bis zu zwei Zähler sind kostenlos, mit Pro beliebig viele.'],
   ['calendar', 'Zählerstände', 'Messwerte mit Datum und optionaler Notiz erfassen. Ein Stand unter dem vorherigen wird nicht übernommen – für einen Zählerwechsel gibt es einen eigenen Ablauf.'],
   ['bell', 'Erinnerungen', 'Individuelle, lokale Ableseerinnerungen – damit regelmäßige Zählerstände nicht untergehen.'],
-  ['chart', `Auswertungen${proTag()}`, 'Verbrauchsentwicklung nach Monaten und Jahren, Jahresvergleich, Trends und Hochrechnungen.'],
+  ['chart', `Auswertungen${proTag()}`, 'Monats- und Jahresauswertungen, Jahresvergleich und Verbrauchstrends. Zeitanteilig geschätzte Werte werden entsprechend gekennzeichnet.'],
   ['euro', `Tarife & Kosten${proTag()}`, 'Grund- und Arbeitspreise hinterlegen und daraus klar gekennzeichnete Kostenschätzungen ableiten – ohne eine Versorgerabrechnung vorzutäuschen.'],
   ['backup', 'Backup', 'Lokale Sicherung als Datei an einem selbst gewählten Ort – mit Integritätsprüfung vor der Wiederherstellung.'],
 ];
@@ -17,7 +17,7 @@ const flow = [
   ['Zähler anlegen', 'Typ, Name, Einheit und bei Bedarf Zählernummer oder Startwert hinterlegen.'],
   ['Erinnerung einrichten', 'Ableseintervall, Tag und Uhrzeit festlegen – die App erinnert lokal an die nächste Ablesung.'],
   ['Zählerstand eintragen', 'Datum und Messwert erfassen und bei Bedarf eine Notiz ergänzen.'],
-  ['Verlauf auswerten', 'Mit Pro Monats- und Jahresauswertungen, Trends und Hochrechnungen betrachten.'],
+  ['Verlauf auswerten', 'Mit Pro Monats- und Jahresauswertungen, Jahresvergleich und Verbrauchstrends betrachten.'],
   ['Kosten einschätzen', 'Mit Pro Tarife mit Gültigkeitsbeginn hinterlegen und eine klar als Schätzung ausgewiesene Kostenentwicklung sehen.'],
   ['Verlauf sichern', 'Lokales Backup nutzen und vorhandene Daten bei Bedarf wiederherstellen.'],
 ];
@@ -56,10 +56,11 @@ function demo() {
         <div class="demo__kpi demo__kpi--main" aria-live="polite"><span>Verbrauch im Zeitraum</span><strong><span data-out="verbrauch">252</span><small data-unit>kWh</small></strong></div>
         <div class="demo__kpi"><span>Ø pro Tag</span><strong><span data-out="tag">–</span><small data-unit>kWh</small></strong></div>
         <div class="demo__kpi"><span>Kosten (Schätzung)</span><strong><span data-out="kosten">–</span><small>€</small></strong></div>
-        <div class="demo__kpi" style="grid-column:1/-1"><span>Hochrechnung auf ein Jahr (Schätzung)</span><strong><span data-out="jahr">–</span><small>€</small></strong></div>
+        <div class="demo__kpi" style="grid-column:1/-1"><span>Hochrechnung auf ein Jahr (nur Web-Demo, Schätzung)</span><strong><span data-out="jahr">–</span><small>€</small></strong></div>
       </div>
       <p class="demo__note" data-gas-note hidden>${icon('flame')}<span>Gas wird mit Beispielwerten von m³ in kWh umgerechnet (Brennwert 11,2 × Zustandszahl 0,95). In der App hinterlegen Sie die Werte Ihres Versorgers.</span></p>
       <p class="demo__note">${icon('sparkle')}<span>Vereinfachte Web-Demo ohne Grundpreis – keine Abbildung der App-Oberfläche. In der App (Pro) gelten Tarife mit Gültigkeitszeitraum, Kosten werden stets als Schätzung ausgewiesen.</span></p>
+      <p class="demo__note">${icon('sparkle')}<span>Die Hochrechnung auf ein Jahr gehört nur zu dieser Browser-Demo. Sie ist nicht Bestandteil der aktuellen App-Version.</span></p>
     </div>
   </div>`;
 }
@@ -188,7 +189,7 @@ export default {
       ${sectionHead({ index: '06', label: 'Datenschutz', id: 'daten', title: 'Die Verbrauchsdaten bleiben bei Ihnen.', cls: 'shead--stack' })}
       <div class="body-copy">
         <p>VerbrauchsMonitor DE ist <strong>offline-first</strong> aufgebaut. Für die Kernfunktionen ist kein MP-Digital-Labs-Konto und kein eigener Cloud-Dienst erforderlich.</p>
-        <p class="note">${icon('shield')}<span>Liegen Ablesungen nicht genau auf Monats- oder Tarifgrenzen, verteilt die App den Verbrauch zeitanteilig und kennzeichnet diese Werte als geschätzt. Hochrechnungen und Kostenschätzungen (Pro) werden ebenfalls als Schätzung ausgewiesen.</span></p>
+        <p class="note">${icon('shield')}<span>Liegen Ablesungen nicht genau auf Monats- oder Tarifgrenzen, verteilt die App den Verbrauch zeitanteilig und kennzeichnet diese Werte als geschätzt. Kostenschätzungen (Pro) werden ebenfalls als Schätzung ausgewiesen.</span></p>
       </div>
       <div class="actions" style="margin-top:28px">${link(app.privacy, 'Datenschutzerklärung VerbrauchsMonitor DE')}</div>
     </div>

@@ -1,4 +1,4 @@
-<!-- Quelle: /datenschutz-verbrauchsmonitor.html (Inhalt unverändert übernommen) | Stand: 23. September 2026 -->
+<!-- Datenschutzerklärung VerbrauchsMonitor DE, ergänzt für Version 1.0.3 | Stand: 6. November 2026 -->
 <h2>1. Verantwortlicher</h2>
   <div class="card">
     <strong>MP Digital Labs</strong><br>
@@ -20,6 +20,9 @@
     Auswertung von Verbrauchs- und Zählerdaten für Strom, Gas, Wasser und Wärme.
     Für die Nutzung der App ist kein Benutzerkonto bei MP Digital Labs erforderlich.
   </p>
+  <p>
+    Diese Fassung beschreibt den Funktionsumfang ab Version 1.0.3.
+  </p>
   <p class="note">
     Die vom Nutzer eingegebenen Verbrauchs-, Zähler- und Tarifdaten werden grundsätzlich
     lokal auf dem verwendeten Gerät gespeichert. MP Digital Labs betreibt für diese Daten
@@ -39,6 +42,8 @@
     <li>Gültigkeitszeiträume von Tarifen und verwendete Währung,</li>
     <li>bei Gaszählern Brennwert und Zustandszahl,</li>
     <li>Einstellungen für Ableseerinnerungen, einschließlich Intervall, Tag und Uhrzeit,</li>
+    <li>der Stand der letzten Datensicherung und die Einstellungen der Backup-Erinnerung,</li>
+    <li>interne Sicherheitskopien vor einer Wiederherstellung und vor dem endgültigen Löschen eines Zählers,</li>
     <li>lokaler Pro- bzw. Kaufstatus.</li>
   </ul>
   <p>
@@ -75,7 +80,7 @@
     Diese Daten werden lokal verarbeitet und nicht zu diesem Zweck an MP Digital Labs übertragen.
   </p>
 
-  <h2>6. Backup und Wiederherstellung</h2>
+  <h2>6. Backup, Wiederherstellung, Sicherheitskopien und CSV-Import</h2>
   <p>
     VerbrauchsMonitor DE bietet eine lokale Backup- und Wiederherstellungsfunktion. Ein Backup
     kann insbesondere Zähler, Zähler- und Seriennummern, Messserien, Zählerstände und Ablesedaten,
@@ -95,13 +100,86 @@
   </p>
   <p>
     Vor dem Ersetzen bestehender Daten legt die App zusätzlich eine interne Sicherheitskopie an.
-    Diese Sicherheitskopie wird lokal auf dem Gerät gespeichert.
+    Diese Sicherheitskopie wird lokal auf dem Gerät gespeichert. Aufbewahrt werden die drei
+    neuesten dieser Kopien; ältere werden nach einer erfolgreichen Wiederherstellung automatisch
+    entfernt.
   </p>
   <p>
     Wenn der Nutzer selbst einen externen oder cloudbasierten Speicherort auswählt, kann die Datei
     durch den jeweiligen Drittanbieter verarbeitet werden. Für diese Verarbeitung gelten die
     Datenschutzbestimmungen des vom Nutzer gewählten Anbieters. MP Digital Labs erhält durch die
     Backup- oder Wiederherstellungsfunktion keinen Zugriff auf die Backup-Dateien.
+  </p>
+
+  <h3>Sicherheitskopien beim Löschen von Zählern</h3>
+  <p>
+    Bevor ein Zähler endgültig gelöscht wird, legt die App eine interne Sicherheitskopie an. Gelingt
+    das nicht, wird der Zähler nicht gelöscht. Die Sicherheitskopie enthält den vollständigen
+    Datenstand der App unmittelbar vor dem Löschen, also nicht nur den gelöschten Zähler, sondern
+    alle zu diesem Zeitpunkt gespeicherten Zähler und Daten im Umfang eines Backups. Zusätzlich
+    speichert die App Begleitangaben zum gelöschten Zähler: interne Kennung, Name, Art und Einheit,
+    ob er archiviert war, die Anzahl seiner Ablesungen, Messserien, Tarife und
+    Gas-Umrechnungsprofile, ob eine Erinnerung eingerichtet war, sowie den Zeitpunkt der Löschung.
+  </p>
+  <p>
+    Diese Kopien werden im internen, nur für die App zugänglichen Speicherbereich auf dem Gerät
+    abgelegt und nicht an MP Digital Labs übertragen. Sie dienen dazu, einen gelöschten Zähler
+    über die Einstellungen einzeln zurückzuholen; die übrigen Daten bleiben dabei unverändert.
+  </p>
+  <p>
+    Aufbewahrt werden die Kopien der letzten zehn Löschungen. Bei jeder weiteren Löschung wird die
+    jeweils älteste Kopie automatisch entfernt. Eine feste zeitliche Aufbewahrungsfrist gibt es
+    nicht: Solange weniger als zehn weitere Löschungen erfolgen, bleibt eine Kopie erhalten – auch
+    nachdem der betreffende Zähler zurückgeholt wurde. Eine manuelle Löschung einzelner
+    Sicherheitskopien ist in der App derzeit nicht vorgesehen. Mit der Deinstallation der App oder
+    dem Löschen der App-Daten über die Android-Einstellungen werden auch diese Kopien entfernt.
+  </p>
+
+  <h3>Backup-Status und Backup-Erinnerung</h3>
+  <p>
+    Damit die App an eine fällige Datensicherung erinnern kann, speichert sie im internen
+    App-Speicher eine kleine Statusdatei (<code>backup_status.json</code>). Sie enthält
+    ausschließlich:
+  </p>
+  <ul>
+    <li>den Zeitpunkt des letzten erfolgreich gespeicherten Backups,</li>
+    <li>die Anzahl der Ablesungen zu diesem Zeitpunkt,</li>
+    <li>die technischen Kennungen (IDs) der Ablesungen, die im letzten Backup bzw. in einer aus einer
+      Backup-Datei wiederhergestellten Sicherung enthalten sind – keine Zählerstände oder Verbrauchswerte,</li>
+    <li>den Zeitpunkt dieses gesicherten Stands (letztes Backup oder Wiederherstellung aus einer Datei),</li>
+    <li>ob die Backup-Erinnerung eingeschaltet ist,</li>
+    <li>bis wann die Erinnerung nach „Später“ ausgeblendet bleibt.</li>
+  </ul>
+  <p>
+    Aus diesen Angaben ermittelt die App lokal, ob seit dem letzten gesicherten Stand – ohne
+    bisheriges Backup seit dem Anlegen des ersten Zählers – mindestens 20 neue Ablesungen
+    hinzugekommen oder mindestens 90 Tage vergangen sind. In diesem Fall zeigt
+    sie in der Übersicht einen Hinweis an. „Später“ blendet den Hinweis für 14 Tage aus; die
+    Erinnerung lässt sich in den Einstellungen ausschalten. Die Statusdatei verbleibt auf dem Gerät,
+    wird nicht an MP Digital Labs übertragen und mit der Deinstallation der App oder dem Löschen der
+    App-Daten entfernt.
+  </p>
+
+  <h3>CSV-Import von Zählerständen</h3>
+  <p>
+    Zählerstände können für einen Zähler aus einer CSV-Datei importiert werden. Die Datei wählt der
+    Nutzer selbst über den Dateiauswahldialog des Betriebssystems aus; die App greift nur auf die
+    ausgewählte Datei zu. Dateien über 2 MB werden nicht verarbeitet.
+  </p>
+  <p>
+    Die Datei wird ausschließlich lokal auf dem Gerät gelesen. Ausgewertet werden die Spalten für
+    Datum und Zählerstand. Vor dem Import zeigt die App eine Vorschau; erst nach Bestätigung werden
+    die Zählerstände in die lokale Datenbank der App übernommen. Dabei kann sich der Beginn der
+    betreffenden Messserie auf das früheste importierte Datum verschieben. Die Inhalte der Datei
+    werden nicht an MP Digital Labs oder Dritte übertragen.
+  </p>
+  <p>
+    Das von der App verwendete Android-Dateiauswahlverfahren legt eine temporäre Kopie der
+    ausgewählten Datei im Cache-Verzeichnis der App ab. Das gilt ebenso für die Auswahl einer
+    Backup-Datei zur Wiederherstellung. Die App löscht diese temporären Kopien derzeit nicht gezielt;
+    sie verbleiben im internen App-Speicher, bis Android den Cache bereinigt, der Cache der App über
+    die Android-Einstellungen geleert oder die App deinstalliert wird. Die ursprüngliche Datei am
+    gewählten Speicherort bleibt unverändert.
   </p>
 
   <h2>7. Google Play und VerbrauchsMonitor Pro</h2>
@@ -191,6 +269,11 @@
     zuvor selbst als Backup an einem externen Speicherort gespeichert hat.
   </p>
   <p>
+    Beim Löschen eines Zählers bleiben dessen Daten in den internen Sicherheitskopien enthalten, bis
+    die betreffende Kopie nach zehn weiteren Löschungen automatisch entfernt wird oder die App-Daten
+    gelöscht werden (siehe Abschnitt 6).
+  </p>
+  <p>
     MP Digital Labs hat keinen Zugriff auf lokal oder extern vom Nutzer gespeicherte Backup-Dateien
     und kann diese deshalb nicht für den Nutzer löschen.
   </p>
@@ -220,8 +303,8 @@
 
   <h3>Dateiauswahl</h3>
   <p>
-    Für Backup und Wiederherstellung verwendet die App den vom Betriebssystem bereitgestellten
-    Dateiauswahldialog. Der Nutzer entscheidet selbst, welche Datei geöffnet beziehungsweise an
+    Für Backup, Wiederherstellung und den CSV-Import verwendet die App den vom Betriebssystem
+    bereitgestellten Dateiauswahldialog. Der Nutzer entscheidet selbst, welche Datei geöffnet beziehungsweise an
     welchem Ort eine Backup-Datei gespeichert wird.
   </p>
 

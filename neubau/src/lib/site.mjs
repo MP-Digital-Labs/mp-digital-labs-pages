@@ -107,6 +107,9 @@ export const APPS = {
     // Geprüft am 2. November 2026 gegen Google-Play-Eintrag (Version 1.0.1) und App-Code.
     // Lokal lag nur der Stand 1.0.0+12 vor (MeterLimitPolicy, AnalysisScreen, AddTariffScreen);
     // Abweichungen in 1.0.1 sind daher nicht ausgeschlossen.
+    // 6. November 2026: Pro-Auswertungen gegen Version 1.0.3+15 geprüft – keine
+    // Jahreshochrechnung in der App, nur Monats-/Jahresauswertungen, Jahresvergleich,
+    // Verbrauchstrends und zeitanteilig gekennzeichnete Schätzungen.
     pricing: {
       proPrice: '9,99 €',
       free: [
@@ -120,7 +123,7 @@ export const APPS = {
       pro: [
         'unbegrenzt viele Zähler',
         'Monats- und Jahresauswertungen',
-        'Jahresvergleich, Trends und Hochrechnungen',
+        'Jahresvergleich und Verbrauchstrends',
         'Tarife mit Grund- und Arbeitspreis',
         'Kostenanalysen und Kostenschätzungen',
       ],
