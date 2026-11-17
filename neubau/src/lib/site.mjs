@@ -8,7 +8,7 @@ export const SITE = {
   name: 'MP Digital Labs',
   claim: 'Software mit klarem Zweck.',
   description:
-    'MP Digital Labs aus Bielefeld entwickelt und vertreibt eigene Apps mit klarem Zweck – offline nutzbar, ohne Benutzerkonto und mit Einmalkauf statt Abo.',
+    'MP Digital Labs ist ein unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln und vertreiben eigene Softwareprodukte, die konkrete Aufgaben zuverlässig lösen.',
   locale: 'de_DE',
   year: 2026,
   owner: 'Manuel Petersson',

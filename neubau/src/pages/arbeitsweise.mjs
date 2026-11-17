@@ -10,7 +10,7 @@ const process = [
   {
     id: 'beobachten',
     title: 'Beobachten',
-    text: 'Jede App beginnt bei einem konkreten Ablauf: dem Aufmaß auf der Baustelle, der Ablesung am Zähler. Wir verstehen erst die Aufgabe, dann die Technik.',
+    text: 'Jedes Produkt beginnt bei einem konkreten Ablauf – bei unseren aktuellen Apps etwa beim Aufmaß auf der Baustelle oder der Ablesung am Zähler. Wir verstehen erst die Aufgabe, dann die Technik.',
     who: br,
     example: 'Auf der Baustelle wird zuerst gemessen. Deshalb beginnt die Arbeit in BauRechner DE mit dem Aufmaß – die Werte fließen danach in Rechner, Material und Kalkulation.',
   },
@@ -24,9 +24,9 @@ const process = [
   {
     id: 'entwickeln',
     title: 'Entwickeln',
-    text: 'Offline-first, lokale Datenspeicherung und eine schlanke Architektur sind von Anfang an gesetzt – nicht nachträglich ergänzt.',
+    text: 'Die Architektur folgt der Aufgabe: Ob ein Produkt offline, online oder kombiniert arbeitet und wo seine Daten gespeichert werden, entscheiden wir nach dem tatsächlichen Nutzen – früh und bewusst, nicht nachträglich.',
     who: null,
-    example: 'Beide Apps speichern Projekt- und Verbrauchsdaten lokal auf dem Gerät und benötigen für ihre Kernfunktionen kein Benutzerkonto bei MP Digital Labs.',
+    example: 'Für BauRechner DE und VerbrauchsMonitor DE haben wir uns für Offline-Nutzung und lokale Datenspeicherung entschieden: Beide Apps speichern Projekt- und Verbrauchsdaten auf dem Gerät und benötigen für ihre Kernfunktionen kein Benutzerkonto bei MP Digital Labs.',
   },
   {
     id: 'pruefen',
@@ -45,19 +45,19 @@ const process = [
 ];
 
 const standards = [
-  ['offline', 'Offline nutzbar', 'Die Kernfunktionen arbeiten ohne dauerhafte Internetverbindung. Für Käufe über Google Play und deren Prüfung kann eine Verbindung nötig sein.'],
-  ['user', 'Kein Benutzerkonto', 'Keine Registrierung, kein Login, kein eigenes Cloud-Backend für Ihre Daten.'],
-  ['shield', 'Datensparsam', 'Projekt- und Verbrauchsdaten bleiben lokal auf dem Gerät. Kein eigenes Tracking, keine Werbe- oder Nutzungsprofile.'],
-  ['tag', 'Transparente Preise', 'Kostenlos starten. Pro ist ein einmaliger Kauf über Google Play – ohne Abo und ohne wiederkehrende Kosten.'],
-  ['target', 'Ehrliche Ergebnisse', 'Schätzungen und Hochrechnungen werden als solche gekennzeichnet. Unplausible Werte werden nicht still übernommen.'],
-  ['wrench', 'Wartbar gebaut', 'Schlanke Produkte bleiben stabil und lassen sich zuverlässig weiterentwickeln.'],
+  ['layers', 'Passende Technologie', 'Offline, online oder kombiniert – abhängig vom tatsächlichen Nutzen.'],
+  ['user', 'Einfache Bedienung', 'Keine unnötige Komplexität. Benutzerkonten nur, wenn sie für das jeweilige Produkt sinnvoll sind.'],
+  ['shield', 'Verantwortungsvoller Datenschutz', 'Datensparsamkeit, Sicherheit und Transparenz unabhängig von der eingesetzten Technologie.'],
+  ['tag', 'Transparente Preismodelle', 'Faire, nachvollziehbare Preise. Einmalkauf oder Abonnement entsprechend dem jeweiligen Produkt.'],
+  ['target', 'Nachvollziehbare Ergebnisse', 'Berechnungen, Schätzungen und automatisierte Ergebnisse werden verständlich dargestellt.'],
+  ['wrench', 'Langfristige Qualität', 'Wartbarkeit, Stabilität, Tests und kontinuierliche Verbesserung.'],
 ];
 
 export default {
   path: '/arbeitsweise/',
   title: 'Arbeitsweise',
   description:
-    'Wie MP Digital Labs eigene Apps entwickelt: vom konkreten Alltagsproblem über einen bewusst abgegrenzten Funktionsumfang bis zur laufenden Pflege – offline, ohne Konto, ohne Abo.',
+    'Wie MP Digital Labs eigene Software entwickelt: vom konkreten Alltagsproblem über einen bewusst abgegrenzten Funktionsumfang und die passende Technologie bis zur laufenden Pflege.',
   priority: 0.7,
   breadcrumbs: crumbs,
   body: `
@@ -68,7 +68,7 @@ export default {
       <div>
         <p class="eyebrow">Arbeitsweise</p>
         <h1 id="page-title" class="phero__title">Wie bei uns Software entsteht.</h1>
-        <p class="lead">MP Digital Labs entwickelt und vertreibt ausschließlich eigene Softwareprodukte. Jede App entsteht aus einem konkreten Alltagsproblem – und wird so lange verfeinert, bis sie es zuverlässig löst.</p>
+        <p class="lead">MP Digital Labs entwickelt und vertreibt ausschließlich eigene Softwareprodukte. Jedes Produkt entsteht aus einem konkreten Alltagsproblem – und wird so lange verfeinert, bis es dieses zuverlässig löst.</p>
       </div>
       <nav class="toc" aria-label="Die fünf Schritte">
         <p class="toc__label">Fünf Schritte</p>
@@ -105,7 +105,7 @@ export default {
     ${sectionHead({
       label: 'Qualitätsstandards',
       id: 'standards',
-      title: 'Was für jede unserer Apps gilt.',
+      title: 'Was für jedes unserer Produkte gilt.',
       lead: 'Diese Standards sind keine Zusatzfunktionen, sondern Grundlage jeder Produktentscheidung.',
     })}
     <div class="fgrid">

@@ -45,14 +45,14 @@ const principles = [
 ];
 
 const method = [
-  ['01', 'Beobachten', 'Jede App beginnt bei einem konkreten Ablauf aus Handwerk oder Haushalt – nicht bei einer Technologie.'],
+  ['01', 'Beobachten', 'Jedes Produkt beginnt bei einer konkreten Aufgabe aus dem Alltag – nicht bei einer Technologie.'],
   ['02', 'Reduzieren', 'Wir grenzen den Funktionsumfang bewusst ab, damit die Bedienung ohne Einarbeitung verständlich bleibt.'],
   ['03', 'Pflegen', 'Nach der Veröffentlichung geht die Arbeit weiter: Rückmeldungen auswerten, verbessern, stabil halten.'],
 ];
 
 export default {
   path: '/',
-  title: 'MP Digital Labs – Eigene Apps aus Bielefeld',
+  title: 'MP Digital Labs – Softwarestudio aus Bielefeld',
   description: SITE.description,
   priority: 1.0,
   jsonld: [
@@ -73,7 +73,7 @@ export default {
       <div class="hero__copy">
         <a class="hero__kicker" href="/apps/"><b>Google Play</b>Zwei Apps jetzt verfügbar${icon('arrow')}</a>
         <h1 id="hero-title" class="display hero__title">Software mit klarem Zweck. <em class="shine">Gebaut für den Alltag.</em></h1>
-        <p class="lead hero__lead">MP Digital Labs ist ein unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln und vertreiben eigene Apps, die konkrete Aufgaben zuverlässig lösen – offline nutzbar, ohne Benutzerkonto und mit Einmalkauf statt Abo.</p>
+        <p class="lead hero__lead">MP Digital Labs ist ein unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln und vertreiben eigene Softwareprodukte, die konkrete Aufgaben zuverlässig lösen. Unser Fokus liegt auf durchdachter Technologie, verständlicher Bedienung und echtem Mehrwert im Alltag.</p>
         <div class="actions">
           ${btn('/apps/', 'Unsere Apps entdecken', { variant: 'primary', size: 'lg' })}
           ${btn('/studio/', 'Über das Studio', { variant: 'secondary', size: 'lg' })}
@@ -104,10 +104,10 @@ export default {
 <section class="section section--alt" aria-labelledby="prinzipien">
   <div class="wrap lay-aside">
     ${sectionHead({
-      label: 'Prinzipien',
+      label: 'Aktuelle Apps',
       id: 'prinzipien',
-      title: 'Was alle unsere Apps gemeinsam haben.',
-      lead: 'Technologie ist dann gut, wenn sie sich selbstverständlich anfühlt. Diese Grundsätze gelten für jedes Produkt, das unser Studio veröffentlicht.',
+      title: 'Was unsere aktuellen Apps auszeichnet.',
+      lead: 'Technologie ist dann gut, wenn sie sich selbstverständlich anfühlt. Für BauRechner DE und VerbrauchsMonitor DE bedeutet das konkret:',
       cls: 'shead--stack lay-aside__head',
     })}
     <div class="principles principles--2">
@@ -130,7 +130,7 @@ export default {
       label: 'Arbeitsweise',
       id: 'arbeitsweise',
       title: 'Wie bei uns Software entsteht.',
-      lead: 'Wir entwickeln ausschließlich eigene Produkte. Das erlaubt uns, sorgfältig zu priorisieren – und jede App so lange zu verfeinern, bis sie im Alltag wirklich trägt.',
+      lead: 'Wir entwickeln ausschließlich eigene Produkte. Das erlaubt uns, sorgfältig zu priorisieren – und jedes Produkt so lange zu verfeinern, bis es im Alltag wirklich trägt.',
     })}
     <div class="svc">
       ${method
@@ -155,7 +155,7 @@ export default {
       ${eyebrow('', 'Studio')}
       <h2 id="studio" class="h2" style="margin-bottom:22px">Ein unabhängiges Softwarestudio aus Bielefeld.</h2>
       <div class="body-copy">
-        <p>MP Digital Labs ist das Softwareunternehmen von <strong>${SITE.owner}</strong>. Wir konzipieren, entwickeln und vertreiben eigene Apps mit klar definiertem Anwendungsnutzen.</p>
+        <p>MP Digital Labs ist das Softwareunternehmen von <strong>${SITE.owner}</strong>. Wir konzipieren, entwickeln und vertreiben eigene Softwareprodukte mit klar definiertem Anwendungsnutzen.</p>
         <p>Neue Funktionen entstehen nicht als Selbstzweck. Sie werden priorisiert, getestet und an realistischen Nutzungsszenarien ausgerichtet – für Produkte, die verständlich, zuverlässig und langfristig nutzbar sind.</p>
       </div>
       <div class="actions" style="margin-top:30px">${btn('/studio/', 'Mehr über das Studio', { variant: 'secondary' })}</div>

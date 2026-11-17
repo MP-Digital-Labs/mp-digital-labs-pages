@@ -25,7 +25,7 @@ Zielgruppen:
 2. **Geschäftliche Kontakte und Presse**: wer hinter den Apps steht, Haltung, Kontakt.
 3. **Google Play und Behörden**: stabile, auffindbare Rechtstexte unter den bekannten URLs.
 
-Kernbotschaft: *Software mit klarem Zweck. Gebaut für den Alltag.* Belegt wird sie ausschließlich durch geprüfte Produkteigenschaften: offline nutzbar, kein Konto, kostenloser Einstieg, Pro als Einmalkauf ohne Abo.
+Kernbotschaft: *Software mit klarem Zweck. Gebaut für den Alltag.* Die Positionierung ist zukunftsoffen (Stand 17. November 2026): Das Unternehmen ist nicht auf Offline-Apps, Android, kontolose Nutzung oder Einmalkäufe festgelegt. Technologie (offline, online oder kombiniert), Plattform, Benutzerkonten und Preismodell (Einmalkauf oder Abonnement) richten sich nach dem jeweiligen Produkt. Angaben wie „offline nutzbar“, „kein Konto“, „Google Play“ und „Pro als Einmalkauf ohne Abo“ beschreiben ausdrücklich das **aktuelle Portfolio** und stehen nicht als dauerhafte Unternehmensgrundsätze. Nicht angebotene Produkte (etwa Desktop-, Cloud- oder KI-Software) werden nicht behauptet.
 
 Öffentlich gezeigt und verlinkt werden **nur veröffentlichte Apps** (BauRechner DE, VerbrauchsMonitor DE).
 
