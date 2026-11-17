@@ -1,4 +1,4 @@
-import { SITE, APPS } from '../lib/site.mjs';
+import { SITE, APPS, unavailableText } from '../lib/site.mjs';
 import { icon, btn, sectionHead, breadcrumbs, appIcon, faq, mailto, mailCard } from '../lib/ui.mjs';
 
 const crumbs = [['Start', '/'], ['Support', '/support/']];
@@ -70,12 +70,12 @@ export default {
       .map(
         ({ app, text, faqs }) => `<article class="scard scard--${app.key}" id="${app.key}">
       <div class="scard__head">${appIcon(app, 52)}<div><p class="acard__cat" style="margin:0">${app.category}</p><h2 class="scard__title">${app.name}</h2></div></div>
-      <p>${text}</p>
+      <p>${text}${app.available ? '' : ` ${unavailableText(app)} Für Fragen zur bereits installierten App sind wir weiterhin erreichbar.`}</p>
       ${faq(faqs)}
       <div class="scard__links">
         ${btn(app.path, 'Produktseite', { variant: 'secondary', size: 'sm' })}
         ${btn(app.privacy, 'Datenschutz', { variant: 'secondary', size: 'sm', iconName: 'shield' })}
-        ${btn(app.play, 'Google Play', { variant: 'secondary', size: 'sm' })}
+        ${app.available ? btn(app.play, 'Google Play', { variant: 'secondary', size: 'sm' }) : ''}
         <a class="btn btn--primary btn--sm" href="${mailto(SITE.email, supportMail(app.name))}"><span>Frage per E-Mail</span>${icon('mail')}</a>
       </div>
     </article>`

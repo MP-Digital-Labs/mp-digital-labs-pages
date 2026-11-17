@@ -38,7 +38,10 @@ function megaMenu() {
       </div>
       <div class="mega__aside">
         <p class="mega__label">Produktportfolio</p>
-        <p>Unsere aktuellen Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo.</p>
+        <p>Unsere aktuellen Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo.${live
+          .filter((a) => !a.available)
+          .map((a) => ` ${a.name} ist vorübergehend nicht erhältlich.`)
+          .join('')}</p>
         <a class="tlink" href="/apps/">Alle Apps ansehen${icon('arrow')}</a>
       </div>
     </div>

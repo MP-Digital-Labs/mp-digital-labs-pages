@@ -39,7 +39,8 @@ const process = [
     id: 'pflegen',
     title: 'Pflegen',
     text: 'Nach der Veröffentlichung geht die Arbeit weiter: Rückmeldungen auswerten, Funktionen verbessern, Stabilität sichern.',
-    who: br,
+    // Beispiel-App muss bei Google Play erhältlich sein (Updates über Google Play)
+    who: br.available ? br : vm,
     example: 'Hinweise aus der Praxis erreichen uns über den Support. Verbesserungen erhalten Sie als Update direkt über Google Play.',
   },
 ];

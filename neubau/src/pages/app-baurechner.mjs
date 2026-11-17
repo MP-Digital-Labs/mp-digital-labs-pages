@@ -1,5 +1,5 @@
-import { SITE, APPS, PRICES_AS_OF } from '../lib/site.mjs';
-import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery, plans, mark } from '../lib/ui.mjs';
+import { SITE, APPS, PRICES_AS_OF, unavailableText } from '../lib/site.mjs';
+import { icon, btn, link, sectionHead, appIcon, status, facts, faq, checklist, featureGrid, steps, breadcrumbs, playButton, ctaBand, numInput, shot, gallery, plans, mark, appStatus, availabilityNote } from '../lib/ui.mjs';
 
 const app = APPS.baurechner;
 const crumbs = [['Start', '/'], ['Apps', '/apps/'], [app.name, app.path]];
@@ -84,12 +84,12 @@ export default {
       applicationCategory: 'BusinessApplication',
       description: app.summary,
       url: `${SITE.url}${app.path}`,
-      downloadUrl: app.play,
-      installUrl: app.play,
+      // Solange die App nicht bei Google Play erhältlich ist: kein Download-Link, Angebot nicht verfügbar
+      ...(app.available ? { downloadUrl: app.play, installUrl: app.play } : {}),
       inLanguage: 'de',
       image: `${SITE.url}${app.icon}`,
       screenshot: app.screenshots.map((_, i) => `${SITE.url}/assets/img/apps/br-shot-${i + 1}-941.webp`),
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR', ...(app.available ? {} : { availability: 'https://schema.org/OutOfStock' }) },
       publisher: { '@id': `${SITE.url}/#organization` },
     },
   ],
@@ -100,10 +100,11 @@ export default {
     ${breadcrumbs(crumbs)}
     <div class="prodhero__grid">
       <div>
-        <div class="prodhero__id">${appIcon(app, 72)}<div><span class="prodhero__cat">${app.category}</span>${status('live')}</div></div>
+        <div class="prodhero__id">${appIcon(app, 72)}<div><span class="prodhero__cat">${app.category}</span>${appStatus(app)}</div></div>
         <h1 id="page-title" class="phero__title">Vom Aufmaß bis zur Dokumentation.</h1>
         <p class="lead"><strong>${app.name}</strong> bündelt Aufmaß, Berechnungen, Material, Einkauf, Kalkulation und Projektdokumentation in einer App – für Handwerk, Renovierung und Bauprojekte.</p>
-        <div class="actions">${playButton(app, { size: 'lg' })}${btn(app.support, 'Hilfe & Support', { variant: 'secondary', size: 'lg' })}</div>
+        ${availabilityNote(app, { style: 'margin-top:22px' })}
+        <div class="actions">${app.available ? playButton(app, { size: 'lg' }) : ''}${btn(app.support, 'Hilfe & Support', { variant: 'secondary', size: 'lg' })}</div>
         <p class="maker">${mark(26)}<span>Eine App von <a href="/studio/">MP Digital Labs</a> aus Bielefeld</span></p>
       </div>
       <figure class="pshots">
@@ -115,7 +116,7 @@ export default {
         <figcaption>${icon('play', 'ico--fill')}Original-Screenshots aus Google Play</figcaption>
       </figure>
     </div>
-    <div class="factstrip" aria-label="Produktinformationen">${facts(app.facts)}</div>
+    <div class="factstrip" aria-label="Produktinformationen">${facts(app.available ? app.facts : app.facts.map(([k, v]) => (k === 'Download' ? [k, 'vorübergehend nicht erhältlich'] : [k, v])))}</div>
   </div>
 </section>
 
@@ -183,7 +184,7 @@ export default {
       label: 'Kostenlos & Pro',
       id: 'preise',
       title: 'Kostenlos starten. Pro bei Bedarf.',
-      lead: 'Die kostenlose Version enthält alle 15 Rechner, Materialplanung und Kalkulation für ein Projekt. Pro ergänzt unbegrenzte Projekte, Exporte und Budgetfunktionen – als einmaliger Kauf ohne Abo.',
+      lead: `Die kostenlose Version enthält alle 15 Rechner, Materialplanung und Kalkulation für ein Projekt. Pro ergänzt unbegrenzte Projekte, Exporte und Budgetfunktionen – als einmaliger Kauf ohne Abo.${app.available ? '' : ` ${unavailableText(app)}`}`,
     })}
     ${plans(app, PRICES_AS_OF)}
   </div>
@@ -206,10 +207,16 @@ export default {
   </div>
 </section>
 
-${ctaBand({
-  title: 'Bereit für die nächste Baustelle?',
-  text: 'BauRechner DE ist kostenlos bei Google Play erhältlich – Pro schalten Sie bei Bedarf einmalig frei. Fragen beantworten wir gern im Support-Bereich.',
-  actions: `${playButton(app, { size: 'lg' })}${btn(app.support, 'Zum Support', { variant: 'secondary', size: 'lg' })}`,
-})}
+${app.available
+  ? ctaBand({
+      title: 'Bereit für die nächste Baustelle?',
+      text: 'BauRechner DE ist kostenlos bei Google Play erhältlich – Pro schalten Sie bei Bedarf einmalig frei. Fragen beantworten wir gern im Support-Bereich.',
+      actions: `${playButton(app, { size: 'lg' })}${btn(app.support, 'Zum Support', { variant: 'secondary', size: 'lg' })}`,
+    })
+  : ctaBand({
+      title: 'Fragen zu BauRechner DE?',
+      text: `${unavailableText(app)} Fragen zur App und Hinweise aus der Praxis nehmen wir weiterhin gern entgegen.`,
+      actions: `${btn(app.support, 'Zum Support', { variant: 'primary', size: 'lg' })}${btn('/kontakt/', 'Kontakt aufnehmen', { variant: 'secondary', size: 'lg' })}`,
+    })}
 `,
 };

@@ -10,11 +10,25 @@ const values = [
   ['Langfristig wartbar', 'Schlanke Produkte sind stabiler und lassen sich zuverlässig weiterentwickeln. Qualität entsteht durch Verzicht auf Unnötiges.'],
 ];
 
+// Aussage zum aktuellen Portfolio – berücksichtigt vorübergehend nicht erhältliche Apps
+function portfolioLead() {
+  const apps = [APPS.baurechner, APPS.verbrauchsmonitor];
+  const paused = apps.filter((a) => !a.available);
+  const live = apps.filter((a) => a.available);
+  const tail = 'Was sich im Alltag bewährt, prägt jede weitere Produktentscheidung.';
+  if (!paused.length) {
+    return 'Unser aktuelles Portfolio umfasst zwei Android-Apps, erhältlich bei Google Play. Was sich dort im Alltag bewährt, prägt jede weitere Produktentscheidung.';
+  }
+  const liveText = live.length ? `${live.map((a) => a.name).join(' und ')} ist bei Google Play erhältlich, ` : '';
+  const pausedText = paused.map((a) => a.name).join(' und ');
+  return `Unser aktuelles Portfolio umfasst zwei Android-Apps: ${liveText}${pausedText} wird derzeit überarbeitet und ist vorübergehend nicht erhältlich. ${tail}`;
+}
+
 const keyfacts = [
   ['user', `Inhabergeführt von ${SITE.owner}`],
   ['pin', `Sitz in ${SITE.address.city}`],
   ['layers', 'Ausschließlich eigene Softwareprodukte'],
-  ['play', 'Aktuelle Apps bei Google Play'],
+  ['play', 'Aktueller Vertrieb über Google Play'],
   ['doc', 'Einzelunternehmen'],
 ];
 
@@ -46,7 +60,7 @@ export default {
       label: 'Aktuelles Portfolio',
       id: 'produkte',
       title: 'Werkzeuge für Handwerk und Haushalt.',
-      lead: 'Unser aktuelles Portfolio umfasst zwei Android-Apps, erhältlich bei Google Play. Was sich dort im Alltag bewährt, prägt jede weitere Produktentscheidung.',
+      lead: portfolioLead(),
     })}
     <div class="appline">
       ${[APPS.baurechner, APPS.verbrauchsmonitor]

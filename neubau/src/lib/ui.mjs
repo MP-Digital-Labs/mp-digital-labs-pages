@@ -1,6 +1,6 @@
 // Wiederverwendbare UI-Bausteine. Alle Funktionen liefern HTML-Strings.
 
-import { APPS } from './site.mjs';
+import { APPS, unavailableText } from './site.mjs';
 
 export const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -103,9 +103,22 @@ export function sectionHead({ index, label, title, lead, cls = '', id }) {
 }
 
 export function status(s) {
+  if (s === 'paused') {
+    // Vorübergehend nicht erhältlich: Punkt in Bernstein statt Grün (vorhandener Farbwert --pro)
+    return '<span class="status status--paused" style="--ok:var(--pro)"><span class="status__dot"></span>In Überarbeitung</span>';
+  }
   return s === 'live'
     ? '<span class="status status--live"><span class="status__dot"></span>Veröffentlicht</span>'
     : '<span class="status status--dev"><span class="status__dot"></span>In Entwicklung</span>';
+}
+
+// Status einer veröffentlichten App unter Berücksichtigung vorübergehender Nichtverfügbarkeit
+export const appStatus = (app) => status(app.available ? app.status : 'paused');
+
+// Hinweis „vorübergehend nicht erhältlich“ im vorhandenen Hinweis-Stil; leer, wenn verfügbar
+export function availabilityNote(app, { style = '' } = {}) {
+  if (app.available) return '';
+  return `<p class="note"${style ? ` style="${style}"` : ''}>${icon('wrench')}<span>${unavailableText(app)}</span></p>`;
 }
 
 export function appIcon(app, size = 56, { lazy = true } = {}) {
@@ -223,12 +236,14 @@ export function appCard(app, { headingLevel = 3 } = {}) {
   return `<article class="acard acard--${app.key} reveal">
     <div class="acard__media">${feature(app, { sizes: '(max-width: 760px) 100vw, 600px' })}</div>
     <div class="acard__body">
-      <div class="acard__top">${appIcon(app, 56)}${status(app.status)}</div>
+      <div class="acard__top">${appIcon(app, 56)}${appStatus(app)}</div>
       <p class="acard__cat">${app.category}</p>
       <${h} class="acard__title"><a href="${app.path}">${app.name}</a></${h}>
       <p class="acard__text">${app.summary}</p>
-      <p class="acard__price">Kostenlos laden · <strong>Pro einmalig ${app.pricing.proPrice}</strong> · kein Abo</p>
-      <div class="acard__links">${link(app.path, 'Mehr erfahren')}${link(app.play, 'Google Play', 'tlink tlink--muted')}</div>
+      ${app.available
+        ? `<p class="acard__price">Kostenlos laden · <strong>Pro einmalig ${app.pricing.proPrice}</strong> · kein Abo</p>`
+        : '<p class="acard__price"><strong>Wird derzeit überarbeitet</strong> · vorübergehend nicht bei Google Play erhältlich</p>'}
+      <div class="acard__links">${link(app.path, 'Mehr erfahren')}${app.available ? link(app.play, 'Google Play', 'tlink tlink--muted') : ''}</div>
     </div>
   </article>`;
 }

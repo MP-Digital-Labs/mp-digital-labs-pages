@@ -48,6 +48,10 @@ export const APPS = {
       'Auch offline nutzbar',
     ],
     status: 'live',
+    // Vorübergehend nicht bei Google Play erhältlich (Überarbeitung, Stand 17. November 2026).
+    // Nach erneuter Veröffentlichung auf true setzen: Alle Verfügbarkeitshinweise
+    // verschwinden, Google-Play-Buttons und -Links erscheinen wieder.
+    available: false,
     category: 'Bau & Handwerk',
     tagline: 'Vom Aufmaß bis zur Projektdokumentation.',
     summary:
@@ -100,6 +104,7 @@ export const APPS = {
       'Schnell startklar',
     ],
     status: 'live',
+    available: true,
     category: 'Haushalt & Verbrauch',
     tagline: 'Verbrauch verstehen, ohne Tabellenchaos.',
     summary:
@@ -137,6 +142,10 @@ export const APPS = {
     ],
   },
 };
+
+// Einheitlicher Hinweis für Apps mit available: false
+export const unavailableText = (app) =>
+  `${app.name} wird derzeit überarbeitet und ist vorübergehend nicht bei Google Play erhältlich.`;
 
 // Preisangaben laut Google Play (Abrechnung über Google, Stand siehe PRICES_AS_OF)
 export const PRICES_AS_OF = 'November 2026';

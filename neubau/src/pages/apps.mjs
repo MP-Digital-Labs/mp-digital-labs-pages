@@ -1,4 +1,4 @@
-import { APPS, PRICES_AS_OF } from '../lib/site.mjs';
+import { APPS, PRICES_AS_OF, unavailableText } from '../lib/site.mjs';
 import { icon, btn, sectionHead, breadcrumbs, appCard, allApps, ctaBand } from '../lib/ui.mjs';
 
 const crumbs = [['Start', '/'], ['Apps', '/apps/']];
@@ -16,7 +16,9 @@ export default {
   path: '/apps/',
   title: 'Apps',
   description:
-    'Alle Apps von MP Digital Labs im Überblick: BauRechner DE und VerbrauchsMonitor DE – kostenlos bei Google Play, offline-first und ohne Benutzerkonto.',
+    br.available && vm.available
+      ? 'Alle Apps von MP Digital Labs im Überblick: BauRechner DE und VerbrauchsMonitor DE – kostenlos bei Google Play, offline-first und ohne Benutzerkonto.'
+      : 'Alle Apps von MP Digital Labs im Überblick: BauRechner DE und VerbrauchsMonitor DE – offline-first, ohne Benutzerkonto und mit kostenlosem Einstieg.',
   priority: 0.9,
   breadcrumbs: crumbs,
   jsonld: [
@@ -33,7 +35,11 @@ export default {
     ${breadcrumbs(crumbs)}
     <p class="eyebrow"><span>Produktportfolio</span></p>
     <h1 id="page-title" class="phero__title">Klare Werkzeuge für konkrete Aufgaben.</h1>
-    <p class="lead">Ohne unnötige Komplexität und mit einem Fokus auf verlässliche, verständliche Nutzung. Beide Apps sind kostenlos bei Google Play erhältlich.</p>
+    <p class="lead">Ohne unnötige Komplexität und mit einem Fokus auf verlässliche, verständliche Nutzung. ${
+      br.available && vm.available
+        ? 'Beide Apps sind kostenlos bei Google Play erhältlich.'
+        : [br, vm].map((a) => (a.available ? `${a.name} ist kostenlos bei Google Play erhältlich.` : unavailableText(a))).join(' ')
+    }</p>
   </div>
 </section>
 
@@ -70,7 +76,10 @@ export default {
         </tbody>
       </table>
     </div>
-    <p class="table-note">Preise laut Google Play, Stand ${PRICES_AS_OF}. Die Abrechnung erfolgt über Google Play.</p>
+    <p class="table-note">Preise laut Google Play, Stand ${PRICES_AS_OF}. Die Abrechnung erfolgt über Google Play.${[br, vm]
+      .filter((a) => !a.available)
+      .map((a) => ` ${unavailableText(a)}`)
+      .join('')}</p>
   </div>
 </section>
 

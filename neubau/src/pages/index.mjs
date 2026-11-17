@@ -1,4 +1,4 @@
-import { SITE, APPS, PRICES_AS_OF } from '../lib/site.mjs';
+import { SITE, APPS, PRICES_AS_OF, unavailableText } from '../lib/site.mjs';
 import { icon, btn, link, sectionHead, appIcon, ctaBand, eyebrow, logo, shot } from '../lib/ui.mjs';
 
 const br = APPS.baurechner;
@@ -19,6 +19,18 @@ function heroVisual() {
 </figure>`;
 }
 
+// Hinweis über der Überschrift: nennt nur Apps, die tatsächlich bei Google Play erhältlich sind
+function kicker() {
+  const available = [br, vm].filter((a) => a.available);
+  if (available.length === 2) {
+    return `<a class="hero__kicker" href="/apps/"><b>Google Play</b>Zwei Apps jetzt verfügbar${icon('arrow')}</a>`;
+  }
+  if (available.length === 1) {
+    return `<a class="hero__kicker" href="${available[0].path}"><b>Google Play</b>${available[0].name} jetzt verfügbar${icon('arrow')}</a>`;
+  }
+  return '';
+}
+
 // Kompakte Produktkachel: Screenshots, Kurzinfo, Fakten im Kontext, Aktionen
 function tile(app, { shots, meta }) {
   return `<article class="tile tile--${app.key} reveal">
@@ -30,8 +42,10 @@ function tile(app, { shots, meta }) {
       <p class="tile__text">${app.summary}</p>
       <ul class="tile__meta">${meta.map(([ic, t]) => `<li>${icon(ic)}${t}</li>`).join('')}</ul>
       <div class="tile__foot">
-        <p class="tile__price">Kostenlos · <strong>Pro einmalig ${app.pricing.proPrice}</strong></p>
-        <div class="tile__links">${link(app.path, 'Zur App')}${link(app.play, 'Google Play', 'tlink tlink--muted')}</div>
+        ${app.available
+          ? `<p class="tile__price">Kostenlos · <strong>Pro einmalig ${app.pricing.proPrice}</strong></p>`
+          : '<p class="tile__price"><strong>In Überarbeitung</strong> · vorübergehend nicht erhältlich</p>'}
+        <div class="tile__links">${link(app.path, 'Zur App')}${app.available ? link(app.play, 'Google Play', 'tlink tlink--muted') : ''}</div>
       </div>
     </div>
   </article>`;
@@ -71,7 +85,7 @@ export default {
   <div class="wrap">
     <div class="hero__grid">
       <div class="hero__copy">
-        <a class="hero__kicker" href="/apps/"><b>Google Play</b>Zwei Apps jetzt verfügbar${icon('arrow')}</a>
+        ${kicker()}
         <h1 id="hero-title" class="display hero__title">Software mit klarem Zweck. <em class="shine">Gebaut für den Alltag.</em></h1>
         <p class="lead hero__lead">MP Digital Labs ist ein unabhängiges Softwarestudio aus Bielefeld. Wir entwickeln und vertreiben eigene Softwareprodukte, die konkrete Aufgaben zuverlässig lösen. Unser Fokus liegt auf durchdachter Technologie, verständlicher Bedienung und echtem Mehrwert im Alltag.</p>
         <div class="actions">
@@ -97,7 +111,10 @@ export default {
       ${tile(br, { shots: [1, 3], meta: [['calc', '15 Rechner'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
       ${tile(vm, { shots: [1, 2], meta: [['gauge', 'Strom · Gas · Wasser · Wärme'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
     </div>
-    <p class="duo-note">Kostenlos bei Google Play. Preise für Pro laut Google Play, Stand ${PRICES_AS_OF} – einmaliger Kauf, kein Abo.</p>
+    <p class="duo-note">Kostenlos bei Google Play. Preise für Pro laut Google Play, Stand ${PRICES_AS_OF} – einmaliger Kauf, kein Abo.${[br, vm]
+      .filter((a) => !a.available)
+      .map((a) => ` ${unavailableText(a)}`)
+      .join('')}</p>
   </div>
 </section>
 
