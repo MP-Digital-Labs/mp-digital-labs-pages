@@ -38,10 +38,13 @@ function megaMenu() {
       </div>
       <div class="mega__aside">
         <p class="mega__label">Produktportfolio</p>
-        <p>Unsere aktuellen Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo.${live
-          .filter((a) => !a.available)
-          .map((a) => ` ${a.name} ist vorübergehend nicht erhältlich.`)
-          .join('')}</p>
+        <p>${
+          live.every((a) => a.available)
+            ? 'Unsere aktuellen Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo.'
+            : `Unsere aktuellen Apps für konkrete Aufgaben: ${live
+                .map((a) => (a.available ? `${a.name} kostenlos bei Google Play` : `${a.name} vorübergehend nicht erhältlich`))
+                .join(', ')}. Pro jeweils als Einmalkauf ohne Abo.`
+        }</p>
         <a class="tlink" href="/apps/">Alle Apps ansehen${icon('arrow')}</a>
       </div>
     </div>

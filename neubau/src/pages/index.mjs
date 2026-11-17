@@ -54,7 +54,13 @@ function tile(app, { shots, meta }) {
 const principles = [
   ['offline', 'Offline nutzbar', 'Die Kernfunktionen arbeiten ohne dauerhafte Internetverbindung – auf der Baustelle genauso wie im Keller am Zähler.'],
   ['user', 'Kein Konto', 'Keine Registrierung, kein Login. Projekt- und Verbrauchsdaten bleiben lokal auf dem Gerät.'],
-  ['tag', 'Einmalkauf statt Abo', 'Starten Sie kostenlos. Erweiterte Funktionen gibt es mit Pro – als einmaliger Kauf über Google Play.'],
+  [
+    'tag',
+    'Einmalkauf statt Abo',
+    br.available && vm.available
+      ? 'Starten Sie kostenlos. Erweiterte Funktionen gibt es mit Pro – als einmaliger Kauf über Google Play.'
+      : 'Kostenloser Einstieg, erweiterte Funktionen mit Pro – als einmaliger Kauf über Google Play, ohne Abo.',
+  ],
   ['target', 'Klarer Zweck', 'Funktionen entstehen aus konkreten Abläufen – nicht aus einer möglichst langen Feature-Liste.'],
 ];
 
@@ -111,10 +117,11 @@ export default {
       ${tile(br, { shots: [1, 3], meta: [['calc', '15 Rechner'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
       ${tile(vm, { shots: [1, 2], meta: [['gauge', 'Strom · Gas · Wasser · Wärme'], ['offline', 'Offline nutzbar'], ['user', 'Ohne Konto']] })}
     </div>
-    <p class="duo-note">Kostenlos bei Google Play. Preise für Pro laut Google Play, Stand ${PRICES_AS_OF} – einmaliger Kauf, kein Abo.${[br, vm]
-      .filter((a) => !a.available)
-      .map((a) => ` ${unavailableText(a)}`)
-      .join('')}</p>
+    <p class="duo-note">${
+      br.available && vm.available
+        ? 'Kostenlos bei Google Play.'
+        : [br, vm].map((a) => (a.available ? `${a.name} ist kostenlos bei Google Play erhältlich.` : unavailableText(a))).join(' ')
+    } Preise für Pro laut Google Play, Stand ${PRICES_AS_OF} – einmaliger Kauf, kein Abo.</p>
   </div>
 </section>
 

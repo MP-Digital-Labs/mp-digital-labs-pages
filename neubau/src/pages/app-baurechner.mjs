@@ -183,8 +183,10 @@ export default {
       index: '05',
       label: 'Kostenlos & Pro',
       id: 'preise',
-      title: 'Kostenlos starten. Pro bei Bedarf.',
-      lead: `Die kostenlose Version enthält alle 15 Rechner, Materialplanung und Kalkulation für ein Projekt. Pro ergänzt unbegrenzte Projekte, Exporte und Budgetfunktionen – als einmaliger Kauf ohne Abo.${app.available ? '' : ` ${unavailableText(app)}`}`,
+      title: app.available ? 'Kostenlos starten. Pro bei Bedarf.' : 'Kostenlose Version und Pro im Überblick.',
+      lead: app.available
+        ? 'Die kostenlose Version enthält alle 15 Rechner, Materialplanung und Kalkulation für ein Projekt. Pro ergänzt unbegrenzte Projekte, Exporte und Budgetfunktionen – als einmaliger Kauf ohne Abo.'
+        : `${unavailableText(app)} Zur Orientierung: Die kostenlose Version enthält alle 15 Rechner, Materialplanung und Kalkulation für ein Projekt. Pro ergänzt unbegrenzte Projekte, Exporte und Budgetfunktionen – als einmaliger Kauf ohne Abo.`,
     })}
     ${plans(app, PRICES_AS_OF)}
   </div>

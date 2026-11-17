@@ -256,13 +256,13 @@ export function plans(app, asOf) {
       <article class="plan reveal">
         <p class="plan__label">Kostenlos</p>
         <h3 class="plan__title">${app.name}</h3>
-        <p class="plan__price"><b>0 €</b>Kostenlos bei Google Play – ohne Konto</p>
+        <p class="plan__price"><b>0 €</b>${app.available ? 'Kostenlos bei Google Play – ohne Konto' : 'Kostenlose Version, ohne Konto – derzeit vorübergehend nicht erhältlich'}</p>
         ${checklist(app.pricing.free)}
       </article>
       <article class="plan plan--pro night reveal" style="--d:1">
         <p class="plan__label">Einmaliger Kauf · kein Abo</p>
         <h3 class="plan__title">${app.short} Pro</h3>
-        <p class="plan__price"><b>${app.pricing.proPrice}</b>einmalig als In-App-Kauf über Google Play</p>
+        <p class="plan__price"><b>${app.pricing.proPrice}</b>${app.available ? 'einmalig als In-App-Kauf über Google Play' : 'einmalig als In-App-Kauf über Google Play – derzeit vorübergehend nicht erhältlich'}</p>
         ${checklist(app.pricing.pro)}
         <p class="plan__note">Preis laut Google Play, Stand ${asOf}. Die Abrechnung erfolgt über Google Play.</p>
       </article>

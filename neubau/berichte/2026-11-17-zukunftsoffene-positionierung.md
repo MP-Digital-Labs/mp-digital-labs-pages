@@ -4,7 +4,7 @@
 - **Branch:** `content/zukunftsoffene-positionierung` (von `origin/main` = `afa8928`, aktueller Live-Stand)
 - **Art:** Nur Textänderungen. Design, Layout, Navigation, Bilder, URLs, Sitemap, Produktseiten, Preise und Rechtstexte bleiben unverändert.
 - **Status:** Auf den Branch gepusht. Kein Merge nach `main`, kein Deployment.
-- **Commits:** `65d0862` Positionierung, danach Nachbesserung zur Verfügbarkeit von BauRechner DE (Abschnitt „Nachbesserung“ unten)
+- **Commits:** `65d0862` Positionierung, `4afc7c7` Nachbesserung zur Verfügbarkeit von BauRechner DE, danach zweite Nachbesserung zu Preisdarstellung und Google-Play-Aussagen (Abschnitte unten)
 
 ## Ziel
 
@@ -162,6 +162,36 @@ Es wird kein Veröffentlichungstermin genannt.
 | Nicht ausgewertete `${…}` im Output | keine |
 | Rücknahme-Test (`available: true`) | Stand wie vor der Nachbesserung (siehe oben) |
 | Desktop und Smartphone (375 px) | Startseite, Apps, BauRechner-Seite (Hero, Faktenleiste, Abschlussband), Support: kein Überlauf, keine Konsolenfehler |
+
+## Zweite Nachbesserung: Preisdarstellung und „Kostenlos bei Google Play“
+
+Anlass: Die Prüfung von `4afc7c7` ergab zwei Mängel:
+
+- `plans()` in `neubau/src/lib/ui.mjs` gab unabhängig von `available` „Kostenlos bei Google Play – ohne Konto“ aus.
+- Auf der Startseite und im Apps-Menü wurde die Nichtverfügbarkeit nur durch einen nachgeschobenen Satz deutlich.
+
+Die folgenden Zeilen ersetzen die entsprechenden Zeilen im Abschnitt „Nachbesserung“. Alle Texte hängen weiterhin nur am Schalter `available`.
+
+| Seite | Stelle | Vorher (`4afc7c7`) | Nachher bei `available: false` | Bei `available: true` |
+|---|---|---|---|---|
+| BauRechner DE | Preiskarte Kostenlos | 0 € · Kostenlos bei Google Play – ohne Konto | 0 € · Kostenlose Version, ohne Konto – derzeit vorübergehend nicht erhältlich | wie vorher |
+| BauRechner DE | Preiskarte Pro | 14,99 € · einmalig als In-App-Kauf über Google Play | 14,99 € · einmalig als In-App-Kauf über Google Play – derzeit vorübergehend nicht erhältlich | wie vorher |
+| BauRechner DE | Abschnitt Kostenlos & Pro, Überschrift | Kostenlos starten. Pro bei Bedarf. | Kostenlose Version und Pro im Überblick. | wie vorher |
+| BauRechner DE | Abschnitt Kostenlos & Pro, Einleitung | Die kostenlose Version enthält … – als einmaliger Kauf ohne Abo. BauRechner DE wird derzeit überarbeitet und ist vorübergehend nicht bei Google Play erhältlich. | BauRechner DE wird derzeit überarbeitet und ist vorübergehend nicht bei Google Play erhältlich. Zur Orientierung: Die kostenlose Version enthält … – als einmaliger Kauf ohne Abo. | ohne Hinweissatz, wie vor `4afc7c7` |
+| Startseite | Hinweis unter den Produktkacheln | Kostenlos bei Google Play. Preise für Pro … BauRechner DE wird derzeit überarbeitet … | BauRechner DE wird derzeit überarbeitet und ist vorübergehend nicht bei Google Play erhältlich. VerbrauchsMonitor DE ist kostenlos bei Google Play erhältlich. Preise für Pro laut Google Play, Stand November 2026 – einmaliger Kauf, kein Abo. | Kostenlos bei Google Play. Preise für Pro … |
+| Startseite | Merkmal „Einmalkauf statt Abo“ | Starten Sie kostenlos. Erweiterte Funktionen gibt es mit Pro – als einmaliger Kauf über Google Play. | Kostenloser Einstieg, erweiterte Funktionen mit Pro – als einmaliger Kauf über Google Play, ohne Abo. | wie vorher |
+| Alle Seiten | Apps-Menü, Hinweis | Unsere aktuellen Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo. BauRechner DE ist vorübergehend nicht erhältlich. | Unsere aktuellen Apps für konkrete Aufgaben: BauRechner DE vorübergehend nicht erhältlich, VerbrauchsMonitor DE kostenlos bei Google Play. Pro jeweils als Einmalkauf ohne Abo. | Unsere aktuellen Apps für konkrete Aufgaben – kostenlos bei Google Play, Pro als Einmalkauf ohne Abo. |
+
+Preise (0 €, 14,99 €, 9,99 €) und alle Listen zu kostenloser Version und Pro werden unverändert angezeigt. Die Preiskarten von VerbrauchsMonitor DE bleiben unverändert, weil `available: true`. Es gibt keine Design- oder CSS-Änderungen und keine neuen Bausteine.
+
+### Prüfungen der zweiten Nachbesserung
+
+| Prüfung | Ergebnis |
+|---|---|
+| Build (`available: false`) | 13 Seiten, alle internen Links, Anker und Bestands-URLs gültig |
+| `available: false` gegen `4afc7c7` | Nur die Stellen der Tabelle geändert. Die VerbrauchsMonitor-Seite ändert sich nur in der Menüzeile. Keine Links zu `id=de.mpdigitallabs.baurechner`. |
+| `available: true` gegen `65d0862` (Stand vor allen Verfügbarkeitshinweisen) | Identisch bis auf eine Leerzeile im Quelltext der BauRechner-Seite und das bewusst dauerhaft geänderte Studio-Eckdatum („Aktueller Vertrieb über Google Play“). Die BauRechner-Play-Links kehren auf Startseite, Apps-Übersicht, Produktseite und Support zurück. |
+| Desktop und Smartphone (375 px) | Preiskarten, Hinweis unter den Kacheln und Apps-Menü ohne Überlauf, keine Konsolenfehler |
 
 ## Hinweise zur Freigabe
 
