@@ -4,17 +4,31 @@ import { icon, btn, sectionHead, breadcrumbs, ctaBand, logo, eyebrow, appIcon } 
 const crumbs = [['Start', '/'], ['Studio', '/studio/']];
 
 const values = [
-  ['Zweck vor Umfang', 'Jede App bekommt einen klaren Zweck und einen bewusst abgegrenzten Funktionsumfang. Was nicht gebraucht wird, wird nicht gebaut.'],
-  ['Privacy by Design', 'Datenschutz ist von Anfang an mitgedacht: lokale Speicherung, kein Konto, kein eigenes Tracking.'],
-  ['Ehrliche Produkte', 'Kostenschätzungen werden als Schätzungen ausgewiesen, die kostenlose Version bleibt nutzbar, Pro gibt es ohne Abo.'],
+  ['Zweck vor Umfang', 'Jedes Produkt bekommt einen klaren Zweck und einen bewusst abgegrenzten Funktionsumfang. Was nicht gebraucht wird, wird nicht gebaut.'],
+  ['Privacy by Design', 'Datenschutz ist von Anfang an mitgedacht – unabhängig von der eingesetzten Technologie. Unsere aktuellen Apps speichern Daten lokal, benötigen kein Konto und verzichten auf eigenes Tracking.'],
+  ['Ehrliche Produkte', 'Schätzungen werden als Schätzungen ausgewiesen, Preise sind klar und nachvollziehbar. Bei unseren aktuellen Apps bleibt die kostenlose Version nutzbar, Pro gibt es als Einmalkauf ohne Abo.'],
   ['Langfristig wartbar', 'Schlanke Produkte sind stabiler und lassen sich zuverlässig weiterentwickeln. Qualität entsteht durch Verzicht auf Unnötiges.'],
 ];
+
+// Aussage zum aktuellen Portfolio – berücksichtigt vorübergehend nicht erhältliche Apps
+function portfolioLead() {
+  const apps = [APPS.baurechner, APPS.verbrauchsmonitor];
+  const paused = apps.filter((a) => !a.available);
+  const live = apps.filter((a) => a.available);
+  const tail = 'Was sich im Alltag bewährt, prägt jede weitere Produktentscheidung.';
+  if (!paused.length) {
+    return 'Unser aktuelles Portfolio umfasst zwei Android-Apps, erhältlich bei Google Play. Was sich dort im Alltag bewährt, prägt jede weitere Produktentscheidung.';
+  }
+  const liveText = live.length ? `${live.map((a) => a.name).join(' und ')} ist bei Google Play erhältlich, ` : '';
+  const pausedText = paused.map((a) => a.name).join(' und ');
+  return `Unser aktuelles Portfolio umfasst zwei Android-Apps: ${liveText}${pausedText} wird derzeit überarbeitet und ist vorübergehend nicht erhältlich. ${tail}`;
+}
 
 const keyfacts = [
   ['user', `Inhabergeführt von ${SITE.owner}`],
   ['pin', `Sitz in ${SITE.address.city}`],
   ['layers', 'Ausschließlich eigene Softwareprodukte'],
-  ['play', 'Vertrieb über Google Play'],
+  ['play', 'Aktueller Vertrieb über Google Play'],
   ['doc', 'Einzelunternehmen'],
 ];
 
@@ -22,7 +36,7 @@ export default {
   path: '/studio/',
   title: 'Studio',
   description:
-    'MP Digital Labs ist das inhabergeführte Softwarestudio von Manuel Petersson in Bielefeld. Wir entwickeln und vertreiben eigene Apps mit klar definiertem Nutzen.',
+    'MP Digital Labs ist das inhabergeführte Softwarestudio von Manuel Petersson in Bielefeld. Wir entwickeln und vertreiben eigene Softwareprodukte mit klar definiertem Nutzen.',
   priority: 0.7,
   breadcrumbs: crumbs,
   body: `
@@ -33,7 +47,7 @@ export default {
       <div>
         <p class="eyebrow">Studio</p>
         <h1 id="page-title" class="phero__title">Software mit klarem Zweck – entwickelt in Bielefeld.</h1>
-        <p class="lead">MP Digital Labs ist das inhabergeführte Softwarestudio von ${SITE.owner}. Wir entwickeln und vertreiben ausschließlich eigene Apps – mit dem Anspruch, dass sie im Alltag verständlich, zuverlässig und dauerhaft nutzbar sind.</p>
+        <p class="lead">MP Digital Labs ist das unabhängige, inhabergeführte Softwarestudio von ${SITE.owner}. Wir entwickeln und vertreiben ausschließlich eigene Softwareprodukte – mit dem Anspruch, dass sie im Alltag verständlich, zuverlässig und dauerhaft nutzbar sind. Technologie, Plattform und Preismodell richten sich nach der Aufgabe des jeweiligen Produkts.</p>
       </div>
       <div class="brandstage"><div class="rings" aria-hidden="true"></div>${logo(300, 'logo--xl', { lazy: false })}</div>
     </div>
@@ -43,10 +57,10 @@ export default {
 <section class="section" aria-labelledby="produkte">
   <div class="wrap">
     ${sectionHead({
-      label: 'Was wir entwickeln',
+      label: 'Aktuelles Portfolio',
       id: 'produkte',
       title: 'Werkzeuge für Handwerk und Haushalt.',
-      lead: 'Unsere Apps sind Produkt und Werkstatt zugleich: Was sich im Alltag bewährt, prägt jede weitere Entscheidung.',
+      lead: portfolioLead(),
     })}
     <div class="appline">
       ${[APPS.baurechner, APPS.verbrauchsmonitor]
@@ -89,7 +103,7 @@ export default {
       <h2 id="leitsatz" class="motto">Ideas drive<br><span class="shine">progress.</span></h2>
     </div>
     <div class="reveal" style="--d:1">
-      <p class="lead">Gute Produkte entstehen dort, wo klare Ideen, konsequente Entwicklung und echter Nutzwert zusammenkommen. Deshalb bleiben wir bewusst bei dem, was wir selbst verantworten können: unseren eigenen Apps.</p>
+      <p class="lead">Gute Produkte entstehen dort, wo klare Ideen, konsequente Entwicklung und echter Nutzwert zusammenkommen. Deshalb bleiben wir bewusst bei dem, was wir selbst verantworten können: unseren eigenen Produkten.</p>
       <ul class="facts-inline" aria-label="Eckdaten">${keyfacts.map(([ic, t]) => `<li>${icon(ic)}${t}</li>`).join('')}</ul>
     </div>
   </div>
