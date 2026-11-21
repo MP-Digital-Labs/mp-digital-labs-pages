@@ -19,7 +19,7 @@ const out = path.join(root, 'src', 'static');
 const cache = path.join(root, '.cache', 'play');
 mkdirSync(cache, { recursive: true });
 
-// Bild-IDs aus play.google.com/store/apps/details?id=… (Stand: 2. November 2026)
+// Bild-IDs aus play.google.com/store/apps/details?id=… (BauRechner: Stand 2. November 2026)
 const LH = 'https://play-lh.googleusercontent.com/';
 const PLAY = {
   'br-icon': 'cBTNMOjHGhUkUQqvLbUKiEKJadsrMYbF6ISs4hugtZZuJUnff3U1HmC_U9qC10zfznHGnxIhac03OI_4-tBXfQ',
@@ -32,13 +32,16 @@ const PLAY = {
   'br-shot-6': 'XbKxdfa4PuTf-1MeoWyCwVYFmiDRnq7R_JIqW7_VxPBsYQDXChmW2p4vJANBK_c9ao1Hw_vSXFuu4cVBZU-yTg',
   'br-shot-7': '3zooSNZpbD3fCHeEJBRdKMiNIEJHJh8c8QfOH5mtZ4W3yxOvGy_JYeIoSltccKwmKnZ72M864Ms1hpMdZKBJV5I',
   'br-shot-8': 'Zi-6e4Wq6vQXP_wkhPov3IMn2IcL1w1LlIGuYVC55Znl_Dclc88_1WcjaPQ4ZvuYJMA8OKH3F36zfKTckihUSg',
-  'vm-icon': 'Vmq0F5qizeRfaeDThbv_blh_On5HF1mQa-hat32oXH1B1edEkpPawEtWHprkT9-smCZwuiLweX5QhcodXXZ1Xsk',
-  'vm-feature': 'vDY7UXa6aqhFC08Mze5FawqodgzeAzC7BWkM8Pl7614KXqKD4DRjgR0OMtxOwv-1ZsWoreRUrCkm3xpogBh4RQ',
-  'vm-shot-1': 'uHyS8TkQ4SoJ2iWXm7k7dZBxu92p0BFuSgKC74vFWXotwxIQxRL1f5wq5zUMmrnGyC5Kx2_fWLPZB47mTg14NHQ',
-  'vm-shot-2': '34GY93dsXSiW-UNKL1oo7axji0ABrG6ZySGiGTqX2kbsWH8fIwXiBRZpMYHLH5X9feCK8Zg5daVeQl0Ja_SWoA',
-  'vm-shot-3': 'sAXZDabEMpAW9ohobjIDJBzZ_k1yR1lmFJl7i3V02of9_Cj-489SWWp8lW94PQ0o3bwKnkbc0atXe2Gkp9djKSw',
-  'vm-shot-4': 'WW7FlDve4BUz_11gXbiWzazBwkLaKUsDFiUsRPYz20d2-OBwpA2SgRan2Y4BqGF75dcFlTxqmEtNzI5r6dTkyw',
-  'vm-shot-5': 'S_CK9-UL2pz25dMwRr65liSRfRHESG3WBHXC5T3ul-q1wQL_F9ad8830z6LVfnSOyjpOgUoD2i6MqBgl50r6',
+  // VerbrauchsMonitor DE: Store-Grafiken von Version 1.0.4 (Stand 21. November 2026)
+  'vm-icon': 'CvQdnTUvviqcZkiEqSA1oSGED12DGgGYzAGjP8kinR-iQ9H-TTyJiY_1pZat_Ylq6YlGOxAreo5HrDkvVZzXLg',
+  'vm-feature': 'B_cYqMga4RVQFXqP-xQtv1vqcKEoIVFhZEwG7b0qFz4JmsyElcQW7f0h-zksdP9rIlY0DytNIMwb-qsqxxqosA',
+  'vm-shot-1': 'g8OCbvP08q6mWfSdH19PfcsxZsDyzjfNVOrzzHfLp8CbvARgmppXAxvQ0tK4-48XxzznHVhtNWcRRAuehKKUeg',
+  'vm-shot-2': 'GBLIn7eAURpefU2_JjMVZld-0BweKepIpozvzKOkzAGzfJ0gOOKsEyS1csqEoPhwrjPT2l8P7LKDx69FT_mAag',
+  'vm-shot-3': 'liVX3nwlCfHIm_a4X3CWAJmL0ImdfnvKCWwv70L2wpPQHbRsHPiS6zWqDLNS-_nhYVrnE_Ayt6kMa-agx0JBWjA',
+  'vm-shot-4': 'ou_OnDLcct3jdQ1-UUQyU2vEthyE7NKCDu6BHow-cYN7rui-Qj4gpM0Oz2ujayDbwDZf-3Jcn9A0twMFX559FA',
+  'vm-shot-5': 'VKqvV2oYZdevld_C1pMu4VtSM81LVmwjv2tJkltg_gac6GDL_oFVqpkEcKgTffSB3C0awxWV2h7taxU-9GgE',
+  'vm-shot-6': 'mErE0xOk0RDalM5GoiK2fjKHNF6oBMuGF724zHpNvtyM9qS_daV60L7DU4DATAIG1LCKE6OOb65dDwePkPO7WA',
+  'vm-shot-7': '57GjTC6SseZn6MTor5Lyn9bTG8HcFqa_E4P0Zs1_fqTlVmeO_vPfze7Bp_Lst2lY55NGGtKeKltzlPQkv8Hm',
 };
 
 const sources = { logo: path.join(root, 'brand-src', 'mpdl-logo-original.webp') };

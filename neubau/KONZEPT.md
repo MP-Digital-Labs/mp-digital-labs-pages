@@ -144,7 +144,7 @@ Korrigiert gegenüber dem vorherigen Stand: „bis zu zwei Projekte“ (BauRechn
 | Bild | Quelle | Verwendung |
 |---|---|---|
 | App-Icons (2) | Google-Play-Einträge (`=s0`, Originalauflösung 512 px) | Header-Menü, Karten, Produktseiten, Support |
-| Screenshots (BauRechner 8, VerbrauchsMonitor 5) | Google-Play-Einträge, Original 941 × 1672 px | Start (Hero, Showcase), Produktseiten (Hero, Galerie mit Lightbox) |
+| Screenshots (BauRechner 8, VerbrauchsMonitor 7) | Google-Play-Einträge; BauRechner Original 941 × 1672 px, VerbrauchsMonitor 1.0.4 Original 1080 × 1920 px (ausgeliefert in 941 px Breite) | Start (Hero, Showcase), Produktseiten (Hero, Galerie mit Lightbox) |
 | Vorstellungsgrafiken (2) | Google-Play-Einträge, 1024 × 500 px | App-Übersicht, OG-Bild der Produktseiten |
 | Firmenlogo | vom Auftraggeber bereitgestellt | siehe Abschnitt 4 |
 
