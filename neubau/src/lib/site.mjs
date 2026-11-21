@@ -96,12 +96,16 @@ export const APPS = {
     icon: '/assets/img/apps/vm-icon-192.webp',
     img: 'vm',
     storeName: 'VerbrauchsMonitor DE',
+    // Reihenfolge wie im Google-Play-Eintrag (Version 1.0.4, Stand 21. November 2026);
+    // Bildunterschriften im Stil der Website, inhaltlich nach den Store-Titeln
     screenshots: [
-      'Alles auf einen Blick',
-      'Zähler einfach verwalten',
-      'Verbrauch besser verstehen',
-      'Daten sicher verwalten',
-      'Schnell startklar',
+      'Alle Verbrauchskosten auf einen Blick',
+      'Zählerstände einfach erfassen',
+      'Verbrauch und Kosten verstehen',
+      'Kosten aus Tarifen berechnet',
+      'Verbrauchsentwicklung erkennen',
+      'Daten sichern und wiederherstellen',
+      'Verbrauchsdaten lokal gespeichert',
     ],
     status: 'live',
     available: true,
